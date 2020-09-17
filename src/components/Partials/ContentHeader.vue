@@ -54,7 +54,7 @@ export default {
       return this.videoUrl ? true : false;
     },
     getVideoUrl() {
-        return "http://www.youtube.com/embed/" + this.videoUrl + "?enablejsapi=1&origin=https://14trees.org";
+        return "https://www.youtube.com/embed/" + this.videoUrl + "?enablejsapi=1&origin=https://14trees.org";
     }
   }
 };
