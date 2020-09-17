@@ -1,0 +1,58 @@
+{
+  "headerNavigation": [
+    {
+      "name": "Home",
+      "link": "/",
+      "external": false
+    },
+    {
+      "name": "Mission",
+      "link": "/mission",
+      "external": false
+    },
+    {
+      "name": "Contribute",
+      "link": "/contribute",
+      "external": false
+    },
+    {
+      "name": "Campaigns",
+      "link": "#",
+      "children": [
+        {
+          "name": "IIT-Kanpur",
+          "link": "/iitk",
+          "external": false 
+        }
+      ]
+    },
+    {
+      "name": "About",
+      "link": "/about-us",
+      "external": false
+    },
+    {
+      "name": "More",
+      "link": "#",
+      "children": [
+        {
+          "name": "Theme",
+          "link": "https://www.github.com/jammeryhq/gridsome-starter-liebling",
+          "external": true
+        }
+      ]
+    }
+  ],
+  "footerNavigation": [
+    {
+      "name": "YouTube",
+      "link": "https://www.youtube.com/channel/UC_fpMdTWQEnaUE655wxFCAA",
+      "external" : false
+    },
+    {
+      "name": "Facebook",
+      "link": "https://www.facebook.com",
+      "external": true
+    }
+  ]
+}
