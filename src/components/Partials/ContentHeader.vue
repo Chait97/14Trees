@@ -9,11 +9,11 @@
                     <span>{{ sub }}</span>
                 </h2>
             </div>
-        
+
             <div class="col-span-1 self-center w-3/4 lg:place-self-end lg:col-span-3">
-                <vue-plyr>
-                    <div data-plyr-provider="youtube" :data-plyr-embed-id="videoUrl"></div>
-                </vue-plyr>
+                <div class="video-container">
+                    <iframe id="player" type="text/html" width="100%" height="100%" :src="getVideoUrl" frameborder="0"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +52,9 @@ export default {
   computed: {
     hasVideo() {
       return this.videoUrl ? true : false;
+    },
+    getVideoUrl() {
+        return "http://www.youtube.com/embed/" + this.videoUrl + "?enablejsapi=1&origin=https://14trees.org";
     }
   }
 };

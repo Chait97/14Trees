@@ -2,7 +2,6 @@
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
 import DefaultLayout from '~/layouts/Default.vue'
-import VuePlyr from 'vue-plyr'
 
 //import VTooltip from 'v-tooltip'
 import {
@@ -49,7 +48,6 @@ export default function (Vue, {
   Vue.component('font-awesome', FontAwesomeIcon)
 
   Vue.use(ClickOutside)
-  Vue.use(VuePlyr)
   
   if( isClient ) {
     VTooltip.options.defaultPlacement = 'top-end';

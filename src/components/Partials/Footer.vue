@@ -19,8 +19,8 @@
           </li>
         </ul>
       </div>
-      <div class="mb-4">
-        <ul class="list-reset flex justify-center">
+      <!-- <div class="mb-4"> -->
+        <!-- <ul class="list-reset flex justify-center">
           <li v-for="navItem in $static.metadata.footerNavigation" :key="navItem.name" class="px-4">
             <g-link
               :to="navItem.link"
@@ -34,8 +34,8 @@
               v-if="navItem.external==true"
             >{{ navItem.name}}</a>
           </li>
-        </ul>
-      </div>
+        </ul> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -59,12 +59,6 @@ query {
       name
       icon
       link
-    }
-  
-    footerNavigation {
-        name
-        link
-        external
     }
   }
 }

@@ -42,17 +42,5 @@
         }
       ]
     }
-  ],
-  "footerNavigation": [
-    {
-      "name": "YouTube",
-      "link": "https://www.youtube.com/channel/UC_fpMdTWQEnaUE655wxFCAA",
-      "external" : false
-    },
-    {
-      "name": "Facebook",
-      "link": "https://www.facebook.com",
-      "external": true
-    }
   ]
 }

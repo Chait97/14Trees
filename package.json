@@ -21,7 +21,6 @@
     "netlify-cms": "^2.10.58",
     "node-sass": "^4.14.1",
     "pluralize": "^8.0.0",
-    "plyr": "^3.6.2",
     "prism-themes": "^1.4.0",
     "remark-attr": "^0.11.1",
     "rfs": "^9.0.3",
@@ -31,7 +30,6 @@
     "v-tooltip": "^2.0.3",
     "vue-headroom": "^0.10.1",
     "vue-infinite-loading": "^2.4.5",
-    "vue-plyr": "^6.0.4",
     "vue-slick-carousel": "^1.0.6"
   },
   "devDependencies": {

@@ -17,6 +17,17 @@
             </div>
           </div>
         </div>
+
+        <div class="flex items-center justify-center m-6">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdIJ_uRwNtsLtIHlXcnEa450Gn-QxDlKLrP1c6popFhhc6oOg/viewform?embedded=true" 
+            height="1000" 
+            width="600" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+      Loading…
+          </iframe>
+        </div>
     </Layout>
 </template>
 
