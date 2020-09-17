@@ -9,7 +9,10 @@ module.exports = {
   siteDescription: "Sustainable carbon neutral ecosystems through reforestation (A non profit section-8 company)",
   plugins: [
     {
-      use: `gridsome-plugin-netlify-cms`
+      use: `gridsome-plugin-netlify-cms`,
+      options: {
+        publicPath: `/admin`
+      }
     },
     {
       use: 'gridsome-plugin-tailwindcss',
