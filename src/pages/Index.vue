@@ -7,8 +7,13 @@
           :videoUrl="'V-fZmDAyFVs'">
           </content-header>
         </div>
-        
-        <div class="bg-gray-200 dark:bg-gray-900">
+
+        <div class="flex items-center justify-center py-10">
+          <div class="self-center">
+            <g-image src="~/assets/images/logo-animated.gif" class="self-center"></g-image>
+          </div>    
+        </div>
+        <div class="bg-gray-100 dark:bg-gray-900">
           <div class="container sm:pxi-0 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="lg:mx-32 md:mx-16 px-4 mb-8">
               <section class="post-content container mx-auto relative dark:text-gray-400">
@@ -39,8 +44,6 @@ query {
 }
 </page-query>
 <script>
-import CardItem from "~/components/Content/CardItem.vue";
-import FeaturedCard from "~/components/Content/FeaturedCard.vue";
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 
 
@@ -49,8 +52,6 @@ export default {
     title: "Home"
   },
   components: {
-    CardItem,
-    FeaturedCard,
     ContentHeader
   }
 };

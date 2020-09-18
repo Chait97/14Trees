@@ -2,11 +2,16 @@
     <nav
       class="hidden md:block lg:block xl:block flex items-center justify-between flex-wrap container mx-auto py-3 z-20 dark:text-gray-400"
     >
-      <div class="block flex-grow flex items-center w-auto mx-4">
-        <div class="flex items-center flex-shrink-0 mr-6">
-          <span class="font-semibold text-xl tracking-tight">{{ $static.metadata.siteName }}</span>
+      <div class="block flex-grow flex items-center w-auto mx-4 divide-x divide-gray-400">
+        <div class="block flex items-center w-auto mx-6">
+          <div class="flex items-center flex-shrink-0 mr-3">
+            <span class="font-semibold text-xl tracking-tight">{{ $static.metadata.siteName }}</span>
+          </div>
+          <div class="h-auto">
+            <g-image src="~/assets/images/logo.png" height="40em" width="40em"></g-image>
+          </div>
         </div>
-        <div class="flex-grow">
+        <div class="flex-grow pl-3">
           <ul class="list-none flex justify-left">
             <li v-for="navItem in $static.metadata.headerNavigation" :key="navItem.name" class="px-4 py-1">
               <g-link
@@ -55,40 +60,14 @@
               </v-popover>
               </ClientOnly>
             </li>
-            <!-- <li class="px-4 py-1">
-              <a role="button" 
-                @click.prevent="toggleSubNavigation()" 
-                class="block px-4 py-1" 
-                aria-label="Open Subnavigation"
-                title="Open Subnavigation" 
-                v-bind:class="{
-                  'text-blue-600' : showSubNavigation,
-                  '' : !showSubNavigation
-                }">
-               <font-awesome :icon="['fas', 'ellipsis-h']" size="lg"></font-awesome>
-              </a>
-
-              <div v-click-outside="onClickOutside"
-                class="py-4 mega-menu mb-16 border-t border-gray-200 shadow-xl bg-white dark:bg-black dark:border-gray-900" 
-                v-bind:class="{
-                  '' : showSubNavigation,
-                  'hidden' : !showSubNavigation
-              }">
-
-                <div>
-                <subnavigation/>
-                </div>
-              </div>
-               
-            </li> -->
           </ul>
         </div>
 
         <div class="inline-block">
           <ul class="list-none flex justify-center md:justify-end">
-            <li class="mr-6">
+            <!-- <li class="mr-6">
               <search-button v-on="$listeners"></search-button>
-            </li>
+            </li> -->
             <li>
               <theme-switcher v-on="$listeners" :theme="theme" />
             </li>
@@ -101,12 +80,10 @@
 <script>
 import ThemeSwitcher from "~/components/Navbar/ThemeSwitcher.vue";
 import SearchButton from "~/components/Navbar/SearchButton.vue";
-import Subnavigation from "~/components/Navbar/NavbarSubNavigation.vue";
 
 export default {
   data: function() {
     return {
-      showSubNavigation: false,
       vcoConfig: {
         events: ["dblclick", "click"],
         isActive: true
@@ -116,7 +93,6 @@ export default {
   components: {
     ThemeSwitcher,
     SearchButton,
-    Subnavigation  
   },
   props: {
     theme: {
@@ -124,29 +100,6 @@ export default {
     },
     hideSubnav: {
       type: Boolean
-    }
-  },
-  methods: {
-    toggleSubNavigation() {
-      this.showSubNavigation = !this.showSubNavigation;
-    },
-    onClickOutside(event) {
-      if (!event.defaultPrevented && this.showSubNavigation == true) {
-        this.toggleSubNavigation();
-      }
-    },
-    hideSubNavigation() {
-      this.showSubNavigation = false;
-    }
-  },
-  watch: {
-    hideSubnav() {
-      if( this.hideSubnav ) {
-        this.hideSubNavigation()
-      }
-    },
-    $route (to, from){
-      this.hideSubNavigation();
     }
   },
   

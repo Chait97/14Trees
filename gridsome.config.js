@@ -38,33 +38,15 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'Author',
-        path: './content/author/*.md'
+        typeName: 'ContentSections',
+        path: './content/sections/**/*.md',
       }
     },
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'ContentSections',
-        path: './content/sections/**/*.md',
-      }
-    },
-     {
-      use: '@gridsome/source-filesystem',
-      options: {
-        typeName: 'Blog',
-        path: './content/blog/**/*.md',
-        refs: {
-          author: 'Author',
-          tags: {
-            typeName: 'Tag',
-            create: true
-          },
-          category: {
-            typeName: 'Category',
-            create: true
-          }
-        }
+        typeName: 'Campaign',
+        path: './content/_campaigns/*.md'
       }
     },
     {
@@ -74,17 +56,6 @@ module.exports = {
         path: './content/pages/*.md'
       }
     },
-    {
-      use: 'gridsome-plugin-flexsearch',
-      options: {
-        searchFields: ['title', 'content'],
-        collections: [{
-          typeName: 'Blog',
-          indexName: 'Blog',
-          fields: ['title', 'category', 'excerpt', 'content']
-        }]
-      }
-    }
   ],
   transformers: {
     remark: {
@@ -103,25 +74,14 @@ module.exports = {
     }
   },
   templates: {
-    Blog: [{
-      path: '/posts/:title'
+    Campaign: [{
+      path: '/campaigns/:title',
+      component: '~/templates/Campaign.vue'
     }],
     CustomPage: [{
       path: '/:title',
       component: '~/templates/CustomPage.vue'
     }],
-    Category: [{
-      path: '/category/:title',
-      component: '~/templates/Category.vue'
-    }],
-    Author: [{
-      path: '/author/:name',
-      component: '~/templates/Author.vue'
-    }],
-    Tag: [{
-      path: '/tags/:title',
-      component: '~/templates/Tag.vue'
-    }]
   },
   chainWebpack: config => {
       config.resolve.alias.set('@pageImage', '@/assets/images');

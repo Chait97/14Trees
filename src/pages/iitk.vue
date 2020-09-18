@@ -51,8 +51,6 @@ query {
 }
 </page-query>
 <script>
-import CardItem from "~/components/Content/CardItem.vue";
-import FeaturedCard from "~/components/Content/FeaturedCard.vue";
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 
 
@@ -61,8 +59,6 @@ export default {
     title: "Home"
   },
   components: {
-    CardItem,
-    FeaturedCard,
     ContentHeader
   }
 };
