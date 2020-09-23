@@ -1,6 +1,6 @@
 <template>
     <div v-if="hasVideo" class="flex items-center justify-center">
-        <div class="mt-20 mb-20 grid lg:grid-cols-4 grid-cols-1 gap-4 w-3/4">
+        <div class="mt-4 mb-4 grid lg:grid-cols-4 grid-cols-1 gap-4 w-3/4">
             <div class="col-span-1 self-center">
                 <h2 class="lg:text-5xl xl:text-7xl font-bold tracking-tight text-green-400 text-6xl leading-none">
                     {{ title }}
@@ -10,7 +10,7 @@
                 </h2>
             </div>
 
-            <div class="col-span-1 self-center w-3/4 lg:place-self-end lg:col-span-3">
+            <div class="col-span-1 md:self-center md:w-5/6 md:place-self-end md:col-span-3 w-full">
                 <div class="video-container">
                     <iframe id="player" type="text/html" width="100%" height="100%" :src="getVideoUrl" frameborder="0"></iframe>
                 </div>

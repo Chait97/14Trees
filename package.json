@@ -8,6 +8,8 @@
     "prod": "python3 -m http.server --directory dist/"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^14.1.1",
+    "@gridsome/source-contentful": "^0.6.0",
     "@gridsome/source-filesystem": "^0.6.2",
     "@gridsome/transformer-remark": "^0.6.2",
     "gridsome": "^0.7.20",
@@ -18,7 +20,6 @@
     "hooper": "^0.3.4",
     "medium-zoom": "^1.0.6",
     "minimist": "^1.2.5",
-    "netlify-cms": "^2.10.58",
     "node-sass": "^4.14.1",
     "pluralize": "^8.0.0",
     "prism-themes": "^1.4.0",

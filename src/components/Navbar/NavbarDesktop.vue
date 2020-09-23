@@ -2,7 +2,7 @@
     <nav
       class="hidden md:block lg:block xl:block flex items-center justify-between flex-wrap container mx-auto py-3 z-20 dark:text-gray-400"
     >
-      <div class="block flex-grow flex items-center w-auto mx-4 divide-x divide-gray-400">
+      <div class="block flex-grow flex items-center w-auto mx-4">
         <div class="block flex items-center w-auto mx-6">
           <div class="flex items-center flex-shrink-0 mr-3">
             <span class="font-semibold text-xl tracking-tight">{{ $static.metadata.siteName }}</span>
@@ -11,8 +11,8 @@
             <g-image src="~/assets/images/logo.png" height="40em" width="40em"></g-image>
           </div>
         </div>
-        <div class="flex-grow pl-3">
-          <ul class="list-none flex justify-left">
+        <div class="flex-grow pl-3 md:border-l md:border-gray-400">
+          <ul class="list-none flex justify-left ">
             <li v-for="navItem in $static.metadata.headerNavigation" :key="navItem.name" class="px-4 py-1">
               <g-link
                 class="block py-1"

@@ -63,9 +63,6 @@
         </ul>
       </div>
     </div>
-    <div class="mobileSubnav pl-2 dark:text-gray-400">
-      <subnavigation />
-    </div>
   </div>
 </template>
 

@@ -9,6 +9,16 @@ module.exports = {
   siteDescription: "Sustainable carbon neutral ecosystems through reforestation (A non profit section-8 company)",
   plugins: [
     {
+      use: '@gridsome/source-contentful',
+      options: {
+        space: process.env.CONTENTFUL_SPACE_ID, // required
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,// required
+        host: 'cdn.contentful.com',
+        environment: process.env.CONTENTFUL_SOURCE_ENV,
+        typeName: 'Contentful'
+      }
+    },
+    {
       use: `gridsome-plugin-netlify-cms`,
       options: {
         publicPath: `/admin`
@@ -75,8 +85,12 @@ module.exports = {
   },
   templates: {
     Campaign: [{
-      path: '/campaigns/:title',
+      path: '/static-campaigns/:title',
       component: '~/templates/Campaign.vue'
+    }],
+    ContentfulCampaign: [{
+      path: '/campaigns/:title',
+      component: '~/templates/ContentfulCampaign'
     }],
     CustomPage: [{
       path: '/:title',
