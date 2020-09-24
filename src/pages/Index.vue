@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div class="my-12">
+        <div class="my-32">
           <content-header 
           :title="$static.metadata.siteName" 
           :sub="$static.metadata.siteDescription"

@@ -18,9 +18,10 @@
 
     </headroom>
 
-    <modal :showModal="this.showSearchModal" @close="closeSearchModal">
+    <!-- Disabled for now. TODO: Implement Search-->
+    <!-- <modal :showModal="this.showSearchModal" @close="closeSearchModal">
       <search-modal></search-modal>
-    </modal>
+    </modal> -->
 
     <modal :showModal="this.showNavbarModal" @close="closeNavbarModal">
       <navbar-modal></navbar-modal>
@@ -60,13 +61,13 @@ export default {
   },
   methods: {
     openSearchModal() {
-      this.showSearchModal = false;
+      this.showSearchModal = false;   // disabled for now
     },
     closeSearchModal() {
       this.showSearchModal = false;
     },
     openNavbarModal() {
-      this.showNavbarModal = false;
+      this.showNavbarModal = true;
     },
     closeNavbarModal() {
       this.showNavbarModal = false;
