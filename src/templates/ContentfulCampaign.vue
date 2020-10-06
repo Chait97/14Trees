@@ -1,11 +1,11 @@
 <template>
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-            <div class="md:mx-32 mx-16 px-4 pt-20">
+            <div class="md:mx-32 mx-8 px-4 md:pt-16">
                 <content-header :title="$page.campaign.title" :sub="$page.campaign.subtitle"></content-header>
                 <div v-if="imgSrc" class="flex items-center justify-center pb-4">
                     <div class="self-center w-full">
-                        <g-image :src="imgSrc" class="self-center" />
+                        <g-image :src="imgSrc" class="self-center w-full" />
                     </div>
                 </div>
                 <section class="post-content container mx-auto relative dark:text-gray-400 my-10">
@@ -13,7 +13,6 @@
                 </section>
                 <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
                     <p v-html="richtextToHTML(tm.content)"></p>
-                    {{tm.person.name}}
                     <testimonial v-bind="tm"/>
                 </div>
             </div>
