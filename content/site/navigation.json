@@ -11,11 +11,6 @@
       "external": false
     },
     {
-      "name": "Contribute",
-      "link": "/contribute",
-      "external": false
-    },
-    {
       "name": "Campaigns",
       "link": "#",
       "children": [
