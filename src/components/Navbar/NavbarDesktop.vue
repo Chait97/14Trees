@@ -12,7 +12,7 @@
 			</div>
 			<div class="flex-grow pl-3 md:border-l md:border-gray-400">
 				<ul class="list-none flex justify-left ">
-					<li v-for="navItem in $static.metadata.headerNavigation" :key="navItem.name" class="px-4 py-1">
+					<li v-for="navItem in getNavItems" :key="navItem.name" class="px-4 py-1">
 						<g-link class="block py-1" :to="navItem.link" :title="navItem.name"
 							v-if="navItem.external!=true && navItem.children.length <=0">{{ navItem.name}}</g-link>
 						<a class="block" :href="navItem.link" target="_blank" :title="navItem.name"
@@ -57,35 +57,6 @@
 	</nav>
 </template>
 
-<script>
-import ThemeSwitcher from "~/components/Navbar/ThemeSwitcher.vue";
-import SearchButton from "~/components/Navbar/SearchButton.vue";
-
-export default {
-  data: function() {
-    return {
-      vcoConfig: {
-        events: ["dblclick", "click"],
-        isActive: true
-      }
-    };
-  },
-  components: {
-    ThemeSwitcher,
-    SearchButton,
-  },
-  props: {
-    theme: {
-      type: String
-    },
-    hideSubnav: {
-      type: Boolean
-    }
-  },
-  
-};
-</script>
-
 <static-query>
 query {
   metadata {
@@ -101,5 +72,57 @@ query {
       }
     }
   }
+  campaigns: allContentfulCampaign {
+    edges {
+      node {
+        title
+        heading
+      }
+    }
+  }
 }
 </static-query>
+
+<script>
+import ThemeSwitcher from "~/components/Navbar/ThemeSwitcher.vue";
+import SearchButton from "~/components/Navbar/SearchButton.vue";
+
+export default {
+  data: function() {
+    return {
+      vcoConfig: {
+        events: ["dblclick", "click"],
+        isActive: true
+	  },
+    };
+  },
+  components: {
+    ThemeSwitcher,
+    SearchButton,
+  },
+  props: {
+    theme: {
+      type: String
+    },
+    hideSubnav: {
+      type: Boolean
+    }
+  },
+  computed:{
+	  getNavItems() {
+			const navItems = this.$static.metadata.headerNavigation;
+			const campaigns = this.$static.campaigns.edges.map(edge=> {
+				return {
+					name: edge.node.heading,
+					link: "/Campaigns/" + edge.node.title,
+					external: false
+				}
+			})
+			let ind = navItems.findIndex(it => it.name === "Campaigns");
+			navItems[ind].children = campaigns;
+			return navItems;
+	  }
+	}
+};
+</script>
+

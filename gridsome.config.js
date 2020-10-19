@@ -83,7 +83,7 @@ module.exports = {
       component: '~/templates/Campaign.vue'
     }],
     ContentfulCampaign: [{
-      path: '/campaigns/:identifier',
+      path: '/campaigns/:title',
       component: '~/templates/ContentfulCampaign'
     }],
     CustomPage: [{

@@ -13,13 +13,7 @@
     {
       "name": "Campaigns",
       "link": "#",
-      "children": [
-        {
-          "name": "IIT-Kanpur",
-          "link": "/iitk",
-          "external": false 
-        }
-      ]
+      "children": []
     },
     {
       "name": "Testimonials",
