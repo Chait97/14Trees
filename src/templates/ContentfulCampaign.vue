@@ -2,20 +2,17 @@
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="md:mx-32 mx-8 px-4 md:pt-16">
-                <content-header :title="$page.campaign.title" :sub="$page.campaign.subtitle"></content-header>
+                <content-header :title="$page.campaign.heading" :sub="$page.campaign.subtitle"></content-header>
                 <div v-if="imgSrc" class="flex items-center justify-center pb-4">
                     <div class="self-center w-full">
                         <g-image :src="imgSrc" class="self-center w-full" />
+                        <section class="post-content container mt-24 md:mx-12 relative dark:text-gray-400">
+                            <div v-html="$page.campaign.content"></div>
+                        </section>
                     </div>
                 </div>
-                <section class="post-content container mx-auto relative dark:text-gray-400 my-10">
-                    <div v-html="richtextToHTML($page.campaign.content)"></div>
-                </section>
-                <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
-                    <p v-html="richtextToHTML(tm.content)"></p>
-                    <testimonial v-bind="tm"/>
-                </div>
             </div>
+            <div v-for="tm in $page.campaign.testimonials" :key="tm.id"> <testimonial v-bind="tm"/></div>
         </div>
     </Layout>
 </template>
@@ -24,10 +21,11 @@
     query($id: ID!) {
         campaign: contentfulCampaign(id: $id) {
             title
+            heading
             subtitle
             fromDate
             toDate
-            content
+            content(html: true)
             image: headerMedia {
                 title
                 file { url }
@@ -39,6 +37,16 @@
                 person {
                     name
                     title
+                    image {
+                      file {
+                        url
+                      }
+                    }
+                }
+                pictures {
+                  file {
+                    url
+                  }
                 }
             }
         }
@@ -70,16 +78,5 @@ export default {
       return this.$page.campaign.image ? "https:" + this.$page.campaign.image.file.url : false;
     }
   },
-  methods: {
-    richtextToHTML (content) {
-      return documentToHtmlString(content, {
-        renderNode: {
-          [BLOCKS.EMBEDDED_ASSET]: (node) => {
-            return `<img src="${node.data.target.fields.file.url}" alt="${node.data.target.fields.title}" />`
-          }
-        }
-      })
-    }
-  }
 };
 </script>
