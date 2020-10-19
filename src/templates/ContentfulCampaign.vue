@@ -8,11 +8,7 @@
                         <g-image :src="imgSrc" class="self-center w-full" />
                     </div>
                 </div>
-                <section class="post-content container mx-auto relative dark:text-gray-400 my-10">
-                    <div v-html="richtextToHTML($page.campaign.content)"></div>
-                </section>
                 <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
-                    <p v-html="richtextToHTML(tm.content)"></p>
                     <testimonial v-bind="tm"/>
                 </div>
             </div>
@@ -39,6 +35,16 @@
                 person {
                     name
                     title
+                    image {
+                      file {
+                        url
+                      }
+                    }
+                }
+                pictures {
+                  file {
+                    url
+                  }
                 }
             }
         }
@@ -70,16 +76,5 @@ export default {
       return this.$page.campaign.image ? "https:" + this.$page.campaign.image.file.url : false;
     }
   },
-  methods: {
-    richtextToHTML (content) {
-      return documentToHtmlString(content, {
-        renderNode: {
-          [BLOCKS.EMBEDDED_ASSET]: (node) => {
-            return `<img src="${node.data.target.fields.file.url}" alt="${node.data.target.fields.title}" />`
-          }
-        }
-      })
-    }
-  }
 };
 </script>

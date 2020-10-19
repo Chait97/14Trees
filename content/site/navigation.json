@@ -22,6 +22,11 @@
       ]
     },
     {
+      "name": "Testimonials",
+      "link": "/testimonials",
+      "external": false
+    },
+    {
       "name": "About",
       "link": "/about-us",
       "external": false

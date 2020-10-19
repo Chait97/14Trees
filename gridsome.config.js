@@ -19,12 +19,6 @@ module.exports = {
       }
     },
     {
-      use: `gridsome-plugin-netlify-cms`,
-      options: {
-        publicPath: `/admin`
-      }
-    },
-    {
       use: 'gridsome-plugin-tailwindcss',
       options: {
         tailwindConfig: './tailwind.config.js',
@@ -89,7 +83,7 @@ module.exports = {
       component: '~/templates/Campaign.vue'
     }],
     ContentfulCampaign: [{
-      path: '/campaigns/:title',
+      path: '/campaigns/:identifier',
       component: '~/templates/ContentfulCampaign'
     }],
     CustomPage: [{
