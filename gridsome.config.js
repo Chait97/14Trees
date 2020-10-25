@@ -6,7 +6,7 @@
 
 module.exports = {
   siteName: '14 Trees Foundation',
-  siteDescription: "Sustainable carbon neutral ecosystems through reforestation (A non profit section-8 company)",
+  siteDescription: "14 Trees Foundation is a charitable organization dedicated to building sustainable, carbon-footprint-neutral eco-systems through re-forestation",
   plugins: [
     {
       use: '@gridsome/source-contentful',
@@ -42,20 +42,6 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'ContentSections',
-        path: './content/sections/**/*.md',
-      }
-    },
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
-        typeName: 'Campaign',
-        path: './content/_campaigns/*.md'
-      }
-    },
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
         typeName: 'CustomPage',
         path: './content/pages/*.md'
       }
@@ -78,10 +64,6 @@ module.exports = {
     }
   },
   templates: {
-    Campaign: [{
-      path: '/static-campaigns/:title',
-      component: '~/templates/Campaign.vue'
-    }],
     ContentfulCampaign: [{
       path: '/projects/:title',
       component: '~/templates/ContentfulCampaign'

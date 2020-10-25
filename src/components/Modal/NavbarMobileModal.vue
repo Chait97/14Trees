@@ -5,7 +5,7 @@
       <div class="menu-links">
         <ul>
           <li
-            v-for="navItem in $static.metadata.headerNavigation"
+            v-for="navItem in getNavItems"
             :key="navItem.name"
             class="py-1"
           >
@@ -82,11 +82,34 @@ query {
       }
     }
   }
+  campaigns: allContentfulCampaign {
+    edges {
+      node {
+        title
+        heading
+      }
+    }
+  }
 }
 </static-query>
 <script>
 
 export default {
+  computed:{
+	  getNavItems() {
+			const navItems = this.$static.metadata.headerNavigation;
+			const campaigns = this.$static.campaigns.edges.map(edge=> {
+				return {
+					name: edge.node.heading,
+					link: "/Projects/" + edge.node.title,
+					external: false
+				}
+			})
+			let ind = navItems.findIndex(it => it.name === "Projects");
+			navItems[ind].children = campaigns;
+			return navItems;
+	  }
+	}
 };
 </script>
 

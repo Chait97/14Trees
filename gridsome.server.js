@@ -19,12 +19,5 @@ module.exports = function (api) {
       options.imgSrc = options.imgSrc || '';
       options.videoUrl = options.videoUrl|| '';
     }
-    if( options.internal.typeName === 'ContentSections') {
-      options.pageName = options.pageName || '';
-      options.subtitle = options.subtitle || '';
-    }
-    if( options.internal.typeName === 'Campaign') {
-      options.subtitle = options.subtitle || '';
-    }
   })
 }

@@ -111,7 +111,7 @@ export default {
     };
   },
   data: function (){
-    return {showFloatingButton: false}
+    return { showFloatingButton: false }
   },
   mounted() {
     mediumZoom(".post-content img");

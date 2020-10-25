@@ -6,26 +6,25 @@
 			</content-header>
 		</div>
 
-		<div class="container my-40 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
+		<div class="container md:my-40 my-6 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
 				<div class="self-center post-content">
 				<p class="text-2xl">Ongoing Projects</p>
 				<ul>
-					<li><g-link class=" block py-2 text-black text-3xl" to="/Projects/iitk-djc" title="Project 40000 Trees">
+					<li><g-link class=" block py-2 text-black md:text-3xl" to="/Projects/iitk-djc" title="Project 40000 Trees">
 						Project 40000 Trees for IIT-Kanpur Diamond Jubilee Celebration</g-link></li>
-					<li><g-link class="block py-2 text-black text-3xl" to="/Projects/reforestation-vetale" title="Vetale Reforestation">
+					<li><g-link class="block py-2 text-black md:text-3xl" to="/Projects/reforestation-vetale" title="Vetale Reforestation">
 						Vetale Reforestation</g-link></li>
 				</ul>
 				</div>
 		</div>
 
-		<!-- <div class="container mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
+		<div class="container mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
 			<div class="flex items-center justify-center py-10">
-				<div class="self-center">
-					<span class="md:text-6xl text-2xl" v-html="info.title"></span>
-				</div>
 			</div>
+			<div v-if="info.sections">
 			<InfoSections :sections="info.sections"/>
-		</div> -->
+			</div>
+		</div>
 
 		<div class="flex items-center justify-center py-10">
 			<div class="self-center">
