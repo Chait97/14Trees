@@ -1,18 +1,47 @@
 <template>
     <Layout>
+        <div  class="fixed w-full h-full">
+            <div v-if="showFloatingButton" class="absolute bottom-0 right-0 pb-20 pr-5">
+                <button  class="flex items-center mt-auto bg-gray-500 border-0 py-2 px-4 md:w-32 xl:w-40 focus:outline-none hover:bg-gray-600 rounded">
+                  <a :href="$page.campaign.action" class="text-gray-800">Contribute</a>
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+            </div>
+        </div>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="md:mx-32 mx-8 px-4 md:pt-16">
                 <content-header :title="$page.campaign.heading" :sub="$page.campaign.subtitle"></content-header>
-                <div v-if="imgSrc" class="flex items-center justify-center pb-4">
                     <div class="self-center w-full">
-                        <g-image :src="imgSrc" class="self-center w-full" />
-                        <section class="post-content container mt-24 md:mx-12 relative dark:text-gray-400">
+                        <div v-if="$page.campaign.videoUrl">
+                            <div class="md:self-center md:place-self-end w-full">
+                                <div class="video-container">
+                                    <iframe id="player" type="text/html" width="100%" height="100%" :src="getVideoUrl($page.campaign.videoUrl)" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="$page.campaign.action" class="mt-12 flex flex-col text-center">
+                                <button class="self-center flex items-center mt-auto bg-gray-500 border-0 py-2 px-4 md:w-32 xl:w-40 focus:outline-none hover:bg-gray-600 rounded">
+                                  <a :href="$page.campaign.action" class="text-gray-800">Contribute</a>
+                                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                  </svg>
+                                </button>
+                        </div>
+
+                        <section class="post-content container mt-12 md:mx-12 relative dark:text-gray-400">
                             <div v-html="$page.campaign.content"></div>
                         </section>
                     </div>
-                </div>
             </div>
-            <div v-for="tm in $page.campaign.testimonials" :key="tm.id"> <testimonial v-bind="tm"/></div>
+            <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
+                <testimonial v-bind="tm" />
+            </div>
+            <section class="post-content container mt-24 md:mx-12 relative dark:text-gray-400">
+                            <div v-html="$page.campaign.footerContent"></div>
+            </section>
         </div>
     </Layout>
 </template>
@@ -23,13 +52,12 @@
             title
             heading
             subtitle
+            videoUrl
+            action
             fromDate
             toDate
             content(html: true)
-            image: headerMedia {
-                title
-                file { url }
-            }
+            footerContent(html: true)
             location { lat lon }
             testimonials {
                 id
@@ -42,6 +70,7 @@
                         url
                       }
                     }
+                    linkedIn
                 }
                 pictures {
                   file {
@@ -70,13 +99,27 @@ export default {
       title: this.$page.campaign.title
     };
   },
+  data: function (){
+    return {showFloatingButton: false}
+  },
   mounted() {
     mediumZoom(".post-content img");
+    window.addEventListener('scroll', this.updateScroll);
   },
   computed: {
     imgSrc() {
       return this.$page.campaign.image ? "https:" + this.$page.campaign.image.file.url : false;
-    }
+    },
   },
+  methods : {
+    getVideoUrl(url) {
+        return url + "?enablejsapi=1&origin=https://14trees.org";
+    },
+    updateScroll() {
+      if (this.$page.campaign.action) {
+        this.showFloatingButton = window.scrollY > 1200;
+      }
+    },
+  }
 };
 </script>
