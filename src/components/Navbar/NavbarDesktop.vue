@@ -13,14 +13,14 @@
 			<div class="flex-grow pl-3 md:border-l md:border-gray-400">
 				<ul class="list-none flex justify-left ">
 					<li v-for="navItem in getNavItems" :key="navItem.name" class="px-4 py-1">
-						<g-link class="block py-1" :to="navItem.link" :title="navItem.name"
+						<g-link class="block py-1 text-black" :to="navItem.link" :title="navItem.name"
 							v-if="navItem.external!=true && navItem.children.length <=0">{{ navItem.name}}</g-link>
-						<a class="block" :href="navItem.link" target="_blank" :title="navItem.name"
+						<a class="block text-black" :href="navItem.link" target="_blank" :title="navItem.name"
 							v-if="navItem.external==true && navItem.children.length <=0">{{ navItem.name}}</a>
 						<ClientOnly>
 							<v-popover placement="top" popoverClass="navbar-popover" offset="16"
 								v-if="navItem.children.length > 0">
-								<a class="block py-1" style="cursor:pointer;">
+								<a class="block py-1 text-black" style="cursor:pointer;">
 									{{ navItem.name }}
 									<font-awesome :icon="['fas', 'angle-down']"></font-awesome>
 								</a>
@@ -29,10 +29,10 @@
 									<ul>
 										<li v-for="subItem in navItem.children" :key="subItem.name"
 											class="px-4 py-2 submenu-item hover:text-white">
-											<g-link class="block" :to="subItem.link" :title="subItem.name"
+											<g-link class="block text-gray-400" :to="subItem.link" :title="subItem.name"
 												v-if="subItem.external!=true">
 												{{ subItem.name}}</g-link>
-											<a class="block" :href="subItem.link" target="_blank" :title="subItem.name"
+											<a class="block text-gray-400" :href="subItem.link" target="_blank" :title="subItem.name"
 												v-if="subItem.external==true">{{ subItem.name}}</a>
 										</li>
 									</ul>
@@ -114,11 +114,11 @@ export default {
 			const campaigns = this.$static.campaigns.edges.map(edge=> {
 				return {
 					name: edge.node.heading,
-					link: "/Campaigns/" + edge.node.title,
+					link: "/Projects/" + edge.node.title,
 					external: false
 				}
 			})
-			let ind = navItems.findIndex(it => it.name === "Campaigns");
+			let ind = navItems.findIndex(it => it.name === "Projects");
 			navItems[ind].children = campaigns;
 			return navItems;
 	  }

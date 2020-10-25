@@ -20,7 +20,7 @@
     </div>
     <div v-else class="items-center">
         <div class="my-20 object-center">
-            <h2 class="text-center lg:text-7xl font-bold tracking-tight text-green-400 text-6xl leading-10">
+            <h2 class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12">
                 <span>{{ title }}</span>
             </h2>
             <h3 class="text-center text-xl text-grey-600">

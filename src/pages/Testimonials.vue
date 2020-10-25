@@ -1,8 +1,9 @@
 <template>
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-            <div class="md:mx-8 mx-8  md:pt-16">
+            <div class="mx-4 md:pt-16">
                 <div v-for="tm in $page.testimonials.edges" :key="tm.id">
+                  
                     <testimonial v-bind="tm.node"/>
                 </div>
             </div>
@@ -25,6 +26,7 @@
                 url
               }
             }
+            linkedIn
         }
         pictures {
           file {
@@ -47,7 +49,7 @@ import { BLOCKS } from '@contentful/rich-text-types'
 export default {
   components: {
     ContentHeader,
-    Testimonial
+    Testimonial,
   },
   metaInfo() {
     return {
