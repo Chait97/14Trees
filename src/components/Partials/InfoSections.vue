@@ -16,7 +16,10 @@
     </div>
 </template>
 
+
 <script>
+import { withLineBreaks } from '~/utils';
+
 export default {
     props: {
         sections: Array,
@@ -25,9 +28,9 @@ export default {
 		imgSrc(img) {
 			return "https:" + img.file.url;
         },
-        withBreaks(content) {
-			return content.replace("\n", "<br/>");
-		}
+        withBreaks(a) {
+            return withLineBreaks(a);
+        }
 	}
 }
 </script>

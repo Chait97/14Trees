@@ -29,6 +29,14 @@
                         </div>
                     </div>
             </div>
+            <div class="flex justify-center md:mt-20 mt-20">
+                  <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
+            </div>
+            <div class="mt-20 object-center">
+              <p class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12">
+                  <span>Experiences</span>
+              </p>
+            </div>
             <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
                   <testimonial v-bind="tm" />
                 <div class="flex justify-center">
@@ -103,6 +111,7 @@ import Testimonial from "~/components/Partials/Testimonial.vue";
 import mediumZoom from "medium-zoom";
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
+import { withLineBreaks } from '~/utils';
 
 export default {
   components: {
@@ -139,9 +148,9 @@ export default {
       console.log("Click");
       window.location.href = this.$page.campaign.action;
     },
-    withBreaks(content) {
-			return content.replace("\n", "<br/>");
-		}
+    withBreaks(a) {
+        return withLineBreaks(a);
+    }
   }
 };
 </script>

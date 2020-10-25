@@ -6,9 +6,9 @@
                           tracking-tight text-green-400 text-4xl leading-normal">
                     {{ title }}
                 </h2>
-                <h2 class="text-xl text-gray-800 dark:text-gray-200">
+                <p class="md:text-xl font-medium text-gray-800 dark:text-gray-200">
                     <span>{{ sub }}</span>
-                </h2>
+                </p>
             </div>
 
             <div class="col-span-1 md:self-center md:w-5/6 md:place-self-end md:col-span-3 w-full">

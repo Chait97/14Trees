@@ -6,7 +6,11 @@
 			</content-header>
 		</div>
 
-		<div class="container mt-16 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
+		<div class="flex justify-center md:mt-20 mt-12">
+                  <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
+		</div>
+
+		<div class="container mt-16 md:mt-24 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
 			<div v-if="info.sections">
 			<InfoSections :sections="info.sections"/>
 			</div>
@@ -62,6 +66,7 @@ query {
 <script>
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
+import { withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -77,8 +82,8 @@ export default {
 		},
 	},
 	methods: {
-		withBreaks(content) {
-			return content.replace("\n", "<br/>");
+		withBreaks(a) {
+			return withLineBreaks(a);
 		}
 	}
 };

@@ -85,6 +85,7 @@ query {
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
 import person from '~/components/Partials/person';
+import { withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -102,7 +103,8 @@ export default {
     },
     methods: {
         sec(ind) {
-            return this.info.sections[ind]?.content.replace("\n", "<br/>");
+            const content = this.info.sections[ind]?.content.replace("\n", "<br/>");
+            return withLineBreaks(content);
         },
         personObject(obj) {
             return obj.edges[0].node;
