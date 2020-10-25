@@ -56,11 +56,6 @@ h6, .h6 {
   @include font-size(1.125rem);
 }
 
-a {
-  color: #0077aa;
-}
-
-
 @tailwind components;
 @tailwind utilities;
 
@@ -395,6 +390,11 @@ a {
 }
 
 .post-content {
+
+  a {
+    color: #0c608a;
+    text-decoration: underline;
+  }
 
   p,
   span:not(.token),

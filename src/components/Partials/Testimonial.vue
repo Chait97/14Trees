@@ -1,8 +1,8 @@
 <template>
     <section class="text-gray-700 body-font">
-        <div class="py-24 mx-2">
+        <div class="py-24 mx-4">
             <div class="grid grid-cols-8">
-                <div v-if="hasImgs" class="md:col-span-3 col-span-8 flex justify-end">
+                <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex justify-end">
                     <div class="ml-4 md:p-16 md:w-10/12 w-full flex content-center h-full">
                         <div class="md:hidden">
                             <VueSlickCarousel :arrows="true" :dots="true">
@@ -32,7 +32,7 @@
                     </div>
                     <span class="md:w-1 bg-green-300"></span>
                 </div>
-                <div class="col-span-8" :class="{ 'md:col-span-5' : hasImgs }">
+                <div class="col-span-8" :class="{ 'md:col-span-4' : hasImgs }">
                     <div class="md:w-3/4 md:pl-12 pb-16 flex flex-col justify-center w-full h-full text-left">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">

@@ -6,11 +6,6 @@
       "external": false
     },
     {
-      "name": "Mission",
-      "link": "/mission",
-      "external": false
-    },
-    {
       "name": "Projects",
       "link": "#",
       "children": []
