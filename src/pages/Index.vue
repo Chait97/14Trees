@@ -1,14 +1,12 @@
 <template>
 	<Layout>
-		<div class="mt-32">
+		<div class="md:mt-32 mt-12">
 			<content-header :title="$static.metadata.siteName" :sub="$static.metadata.siteDescription"
 				:videoUrl="'V-fZmDAyFVs'">
 			</content-header>
 		</div>
 
 		<div class="container mt-16 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
-			<div class="flex items-center justify-center py-10">
-			</div>
 			<div v-if="info.sections">
 			<InfoSections :sections="info.sections"/>
 			</div>

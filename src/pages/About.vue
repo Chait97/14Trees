@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <div class="info-container md:mx-12 px-4 mb-8">
-            <div class="container py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
+        <div class="info-container mt-12 px-4 mb-8">
+            <div class="container md:py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
                 <div class="flex items-center justify-center py-10">
                     <div class="self-center">
                         <span class="md:text-6xl text-2xl" v-html="info.title"></span>

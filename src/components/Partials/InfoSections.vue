@@ -1,6 +1,6 @@
 <template>
     <div class="info-container md:mx-12 px-4 mb-8">
-        <div v-for="(sec, ind) in sections" :key="sec.id" class="pb-24">
+        <div v-for="(sec, ind) in sections" :key="sec.id" class="pb-12 md:pb-24">
                 <div class="md:flex mb-4">
                     <div class="md:w-1/3 w-full px-5" :class="{'md:order-last' : ind % 2 == 0}">
                         <h2 class="text-3xl">{{sec.header}}</h2>
@@ -8,7 +8,7 @@
                             <div v-html="withBreaks(sec.content)"></div>
                         </section>
                     </div>
-                    <div class="md:w-2/3 w-full p-2">
+                    <div class="md:w-3/5 w-full p-2">
                         <g-image :src="imgSrc(sec.image)" class="self-center w-full" />
                     </div>
                 </div>
