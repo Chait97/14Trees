@@ -1,27 +1,25 @@
 <template>
-	<Layout>
-		<div class="container py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
-			<div class="flex items-center justify-center py-10">
-				<div class="self-center">
-					<span class="md:text-6xl text-2xl" v-html="info.title"></span>
-				</div>
-			</div>
-            <section class="post-content container mx-auto relative dark:text-gray-400">
-                <person :person="personObject($page.pravin)" variant="large"/>
-                <div class="mt-5" v-html="sec(0)"></div>
-            </section>
-            <section class="mt-24 post-content container mx-auto relative dark:text-gray-400">
-                <person :person="personObject($page.kiran)" variant="large"/>
-                <div class="mt-5" v-html="sec(1)"></div>
-            </section>
-		</div>
-
-		<!-- <div class="flex items-center justify-center py-10">
-			<div class="self-center">
-				<g-image src="~/assets/images/logo-animated.gif" class="self-center"></g-image>
-			</div>
-		</div>  -->
-	</Layout>
+    <Layout>
+        <div class="info-container md:mx-12 px-4 mb-8">
+            <div class="container py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
+                <div class="flex items-center justify-center py-10">
+                    <div class="self-center">
+                        <span class="md:text-6xl text-2xl" v-html="info.title"></span>
+                    </div>
+                </div>
+                <div class="container md:px-32">
+                    <div class="post-content container mx-auto relative dark:text-gray-400">
+                        <person :person="personObject($page.pravin)" variant="large" />
+                        <div class="mt-5" v-html="sec(0)"></div>
+                    </div>
+                    <div class="mt-24 post-content container mx-auto relative dark:text-gray-400">
+                        <person :person="personObject($page.kiran)" variant="large" />
+                        <div class="mt-5" v-html="sec(1)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Layout>
 </template>
 
 <static-query>

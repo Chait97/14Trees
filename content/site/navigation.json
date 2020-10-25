@@ -8,12 +8,7 @@
     {
       "name": "Projects",
       "link": "#",
-      "children": []
-    },
-    {
-      "name": "Testimonials",
-      "link": "/testimonials",
-      "external": false
+      "sub": []
     },
     {
       "name": "About",
@@ -21,9 +16,9 @@
       "external": false
     },
     {
-      "name": "More",
+      "name": "Dummy",
       "link": "#",
-      "children": [
+      "sub": [
         {
           "name": "Theme",
           "link": "https://www.github.com/jammeryhq/gridsome-starter-liebling",

@@ -75,7 +75,7 @@ query {
       name
       link
       external
-      children {
+      children : sub {
         name
         link
         external
@@ -97,7 +97,11 @@ query {
 export default {
   computed:{
 	  getNavItems() {
-			const navItems = this.$static.metadata.headerNavigation;
+      const navItems = this.$static.metadata.headerNavigation;
+      const dummy = navItems.findIndex(it => it.name === "Dummy");
+			if (dummy != -1) {
+				navItems.splice(dummy, 1);
+      }
 			const campaigns = this.$static.campaigns.edges.map(edge=> {
 				return {
 					name: edge.node.heading,
