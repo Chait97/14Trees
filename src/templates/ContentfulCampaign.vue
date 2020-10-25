@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <section class="post-content container mt-12 md:mx-12 relative dark:text-gray-400">
-                            <div v-html="$page.campaign.content"></div>
+                            <div v-html="withBreaks($page.campaign.content)"></div>
                         </section>
                         <div v-if="$page.campaign.action" class="mt-12 flex flex-col text-center">
                                 <button @click="goToAction" class="self-center flex items-center mt-auto bg-gray-500 border-0 py-2 px-4 md:w-32 xl:w-40 focus:outline-none hover:bg-gray-600 rounded">
@@ -30,8 +30,12 @@
                     </div>
             </div>
             <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
-                <testimonial v-bind="tm" />
+                  <testimonial v-bind="tm" />
+                <div class="flex justify-center">
+                  <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
+                </div>
             </div>
+
             <section class="post-content container mt-24 md:mx-32 mx-8 px-4 md:pt-16 dark:text-gray-400">
                             <div v-html="$page.campaign.footerContent"></div>
             </section>
@@ -134,7 +138,10 @@ export default {
     goToAction() {
       console.log("Click");
       window.location.href = this.$page.campaign.action;
-    }
+    },
+    withBreaks(content) {
+			return content.replace("\n", "<br/>");
+		}
   }
 };
 </script>

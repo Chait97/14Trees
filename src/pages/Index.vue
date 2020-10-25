@@ -16,12 +16,12 @@
 
 		<div class="container md:my-40 my-6 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
 			<div class="self-center post-content">
-			<p class="text-2xl">Ongoing Projects</p>
+			<p>Ongoing Projects</p>
 			<ul>
-				<li><g-link class=" block py-2 text-black md:text-2xl" to="/Projects/iitk-djc" title="Project 40000 Trees">
-					Project 40000 Trees for IIT-Kanpur Diamond Jubilee Celebration</g-link></li>
-				<li><g-link class="block py-2 text-black md:text-2xl" to="/Projects/reforestation-vetale" title="Vetale Reforestation">
+				<li><g-link class="block py-2 text-black" to="/Projects/reforestation-vetale" title="Vetale Reforestation">
 					Vetale Reforestation</g-link></li>
+				<li><g-link class=" block py-2 text-black" to="/Projects/iitk-djc" title="Project 40000 Trees">
+					Project 40000 Trees for IIT-Kanpur DJC</g-link></li>
 			</ul>
 			</div>
 		</div>
@@ -77,6 +77,11 @@ export default {
 		info() {
 			return this.$page.contentfulPageInfo.edges[0].node;
 		},
+	},
+	methods: {
+		withBreaks(content) {
+			return content.replace("\n", "<br/>");
+		}
 	}
 };
 </script>

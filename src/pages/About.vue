@@ -102,7 +102,7 @@ export default {
     },
     methods: {
         sec(ind) {
-            return this.info.sections[ind]?.content
+            return this.info.sections[ind]?.content.replace("\n", "<br/>");
         },
         personObject(obj) {
             return obj.edges[0].node;

@@ -115,7 +115,6 @@ export default {
 			if (dummy != -1) {
 				navItems.splice(dummy, 1);
 			}
-			console.log(dummy, navItems)
 			const campaigns = this.$static.campaigns.edges.map(edge=> {
 				return {
 					name: edge.node.heading,

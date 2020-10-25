@@ -1,6 +1,6 @@
 <template>
     <section class="text-gray-700 body-font">
-        <div class="md:py-24 py-6 mx-4">
+        <div class="md:py-24 pt-16 mx-4">
             <div class="grid grid-cols-8">
                 <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex md:justify-end">
                     <div class="md:ml-4 md:p-16 md:w-10/12 w-full flex content-center h-full">
@@ -33,7 +33,7 @@
                     <span class="md:w-1 bg-green-300"></span>
                 </div>
                 <div class="col-span-8" :class="{ 'md:col-span-4' : hasImgs }">
-                    <div class="md:w-3/4 md:pl-12 md:pb-16 pb-12 flex flex-col justify-center w-full h-full text-left">
+                    <div class="md:w-3/4 md:pl-12 pb-4 flex flex-col justify-center w-full h-full text-left">
                         <div class="md:contents hidden">
                             <svg  xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">
