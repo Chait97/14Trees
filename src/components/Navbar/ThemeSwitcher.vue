@@ -38,7 +38,12 @@ export default {
   },
   async mounted() {
     // set default
-    if (typeof window.__theme !== 'undefined') this.$emit('setTheme', window.__theme)
+    window.__setPreferredTheme('light');
+    if (typeof window.__theme !== 'undefined') this.$emit('setTheme', window.__theme);
+    if (window.__theme === 'dark') {
+      window.__setPreferredTheme('light');
+      this.$emit('setTheme', 'light');
+    }
   }
 }
 </script>
