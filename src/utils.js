@@ -1,3 +1,4 @@
 export function withLineBreaks(content) {
-    return content.replace("<p></p>", "<br/>");
+    let ret = content.replaceAll("<p></p>", "<br/>");
+    return ret.replaceAll("<a", "<a target=\"_blank\" rel=\"noopener noreferrer\"");
 }
