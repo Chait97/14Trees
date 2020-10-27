@@ -37,9 +37,6 @@ export default {
         person: Object,
         variant: String
     },
-    metaInfo: {
-        title: "Person"
-    },
     methods: {
         imgSrc(img) {
 			return "https:" + img.file.url;

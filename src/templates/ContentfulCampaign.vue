@@ -120,7 +120,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$page.campaign.title
+      title: this.$page.campaign.heading
     };
   },
   data: function (){

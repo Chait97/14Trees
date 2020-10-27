@@ -11,12 +11,12 @@
 		</div>
 
 		<div class="container mt-16 md:mt-24 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
-			<div v-if="info.sections">
-			<InfoSections :sections="info.sections"/>
+			<div v-if="info">
+			<InfoSections :sections="info"/>
 			</div>
 		</div>
 
-		<div class="container md:my-40 my-6 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
+		<!-- <div class="container md:my-40 my-6 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
 			<div class="self-center post-content">
 			<p>Ongoing Projects</p>
 			<ul>
@@ -26,7 +26,7 @@
 					Project 40000 Trees for IIT-Kanpur DJC</g-link></li>
 			</ul>
 			</div>
-		</div>
+		</div> -->
 	</Layout>
 </template>
 
@@ -42,7 +42,7 @@ query {
 <page-query>
 query {
   contentfulPageInfo: allContentfulContentPage(
-    filter: { title: { eq: "Home" }}
+    filter: { title: { eq: "14 Trees Foundation" }}
   ) {
     edges {
       node {
@@ -78,7 +78,7 @@ export default {
 	},
 	computed: {
 		info() {
-			return this.$page.contentfulPageInfo.edges[0].node;
+			return this.$page.contentfulPageInfo?.edges[0]?.node?.sections;
 		},
 	},
 	methods: {

@@ -34,7 +34,7 @@ query {
 <page-query>
 query {
   contentfulPageInfo: allContentfulContentPage(
-    filter: { title: { eq: "About" }}
+    filter: { title: { eq: "Team" }}
   ) {
     edges {
       node {
@@ -89,7 +89,7 @@ import { withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
-		title: "Home"
+		title: "Team"
 	},
 	components: {
 		ContentHeader,

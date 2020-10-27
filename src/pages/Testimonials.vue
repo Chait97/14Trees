@@ -1,10 +1,17 @@
 <template>
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
+            <div class="mt-20 object-center">
+              <p class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12">
+                  <span>Experiences</span>
+              </p>
+            </div>
             <div class="mx-4 md:pt-16">
                 <div v-for="tm in $page.testimonials.edges" :key="tm.id">
-                  
                     <testimonial v-bind="tm.node"/>
+                    <div class="flex justify-center">
+                      <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
+                    </div>
                 </div>
             </div>
         </div>
