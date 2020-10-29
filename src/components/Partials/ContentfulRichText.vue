@@ -43,7 +43,6 @@ export default {
 	},
     mounted() {
         this.groups = composeTemplate(this.content, MARKS, BLOCKS, documentToHtmlString);
-        console.log(this.groups)
     }
 }
 </script>
