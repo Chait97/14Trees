@@ -43,10 +43,11 @@
                   <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
                 </div>
             </div>
-
-            <section class="post-content container mt-24 md:mx-32 mx-8 px-4 md:pt-16 dark:text-gray-400">
-                            <div v-html="$page.campaign.footerContent"></div>
-            </section>
+        </div>
+        <div class="container w-full sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
+          <section class="post-content mt-24 mx-8 px-4 md:pt-16 dark:text-gray-400">
+              <ContentfulRichText :content="$page.campaign.footerContent"/>
+          </section>
         </div>
         <div class="fixed bottom-0 right-0 h-16 w-32 md:w-40">
             <div v-if="showFloatingButton" class="absolute">
@@ -63,6 +64,55 @@
     </Layout>
 </template>
 
+<script>
+import ContentHeader from "~/components/Partials/ContentHeader.vue";
+import ContentfulRichText from "~/components/Partials/ContentfulRichText.vue";
+import Testimonial from "~/components/Partials/Testimonial.vue";
+import mediumZoom from "medium-zoom";
+import { withLineBreaks, videoUrl } from '~/utils';
+
+export default {
+  components: {
+    ContentHeader,
+    ContentfulRichText,
+    Testimonial
+  },
+  metaInfo() {
+    return {
+      title: this.$page.campaign.heading
+    };
+  },
+  data: function (){
+    return { showFloatingButton: false }
+  },
+  mounted() {
+    mediumZoom(".post-content img");
+    window.addEventListener('scroll', this.updateScroll);
+  },
+  computed: {
+    imgSrc() {
+      return this.$page.campaign.headerMedia ? "https:" + this.$page.campaign.headerMedia.file.url : false;
+    },
+  },
+  methods : {
+    getVideoUrl(url) {
+        return videoUrl(url) ;
+    },
+    updateScroll() {
+      if (this.$page.campaign.action) {
+        this.showFloatingButton = window.scrollY > 1200;
+      }
+    },
+    goToAction() {
+      window.location.href = this.$page.campaign.action;
+    },
+    withBreaks(a) {
+        return withLineBreaks(a);
+    }
+  }
+};
+</script>
+
 <page-query>
     query($id: ID!) {
         campaign: contentfulCampaign(id: $id) {
@@ -73,14 +123,8 @@
             action
             fromDate
             toDate
-            headerMedia {
-              title
-              file {
-                url
-              }
-            }
             content(html: true)
-            footerContent(html: true)
+            footerContent
             location { lat lon }
             testimonials {
                 id
@@ -104,53 +148,3 @@
         }
     }
 </page-query>
-
-<script>
-import ContentHeader from "~/components/Partials/ContentHeader.vue";
-import Testimonial from "~/components/Partials/Testimonial.vue";
-import mediumZoom from "medium-zoom";
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
-import { withLineBreaks } from '~/utils';
-
-export default {
-  components: {
-    ContentHeader,
-    Testimonial
-  },
-  metaInfo() {
-    return {
-      title: this.$page.campaign.heading
-    };
-  },
-  data: function (){
-    return { showFloatingButton: false }
-  },
-  mounted() {
-    mediumZoom(".post-content img");
-    window.addEventListener('scroll', this.updateScroll);
-  },
-  computed: {
-    imgSrc() {
-      return this.$page.campaign.headerMedia ? "https:" + this.$page.campaign.headerMedia.file.url : false;
-    },
-  },
-  methods : {
-    getVideoUrl(url) {
-        return url + "?enablejsapi=1&origin=https://14trees.org";
-    },
-    updateScroll() {
-      if (this.$page.campaign.action) {
-        this.showFloatingButton = window.scrollY > 1200;
-      }
-    },
-    goToAction() {
-      console.log("Click");
-      window.location.href = this.$page.campaign.action;
-    },
-    withBreaks(a) {
-        return withLineBreaks(a);
-    }
-  }
-};
-</script>

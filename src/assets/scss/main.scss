@@ -377,7 +377,7 @@ h6, .h6 {
 
 .mode-dark {
   .post-content {
-    p,
+    p:not(.nested),
     span:not(.token),
     li {
       @apply tracking-wider;
@@ -389,14 +389,14 @@ h6, .h6 {
   }
 }
 
-.post-content {
+.post-content{
 
   a {
     color: #0c608a;
     text-decoration: underline;
   }
 
-  p,
+  p:not(.nested),
   span:not(.token),
   li {
     @apply tracking-wider;

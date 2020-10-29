@@ -1,24 +1,25 @@
 <template>
     <Layout>
-        <div class="info-container mt-12 px-4 mb-8">
-            <div class="container md:py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
-                <div class="flex items-center justify-center py-10">
-                    <div class="self-center">
-                        <span class="md:text-6xl text-2xl" v-html="info.title"></span>
-                    </div>
-                </div>
-                <div class="container md:px-32">
-                    <div class="post-content container mx-auto relative dark:text-gray-400">
-                        <person :person="personObject($page.pravin)" variant="large" />
-                        <div class="mt-5" v-html="sec(0)"></div>
-                    </div>
-                    <div class="mt-24 post-content container mx-auto relative dark:text-gray-400">
-                        <person :person="personObject($page.kiran)" variant="large" />
-                        <div class="mt-5" v-html="sec(1)"></div>
-                    </div>
-                </div>
-            </div>
+      <div>
+        <div v-for="section in info.sections" :key="section.header">
+          <div :id="section.header" class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
+            <div class="mt-20 object-center">
+                <p class="text-center md:text-6xl text-2xl">
+                  <span class="md:text-6xl text-2xl" v-html="section.header"></span>
+                </p>
+              </div>
+          </div>
+          <div class="info-container mt-12 px-4 mb-8">
+              <div class="container md:py-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
+                  <div class="container md:px-32">
+                      <div class="post-content container mx-auto relative dark:text-gray-400">
+                        <ContentfulRichText :content="section.content"/>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
+      </div>
     </Layout>
 </template>
 
@@ -41,39 +42,7 @@ query {
         title
         sections {
           header
-          content(html: true)
-        }
-      }
-    }
-  }
-  pravin: allContentfulPerson(
-    filter: { name: { eq: "Pravin Bhagwat" }}
-  ) {
-    edges {
-      node {
-        name
-        title
-        linkedIn
-        image {
-          file {
-            url
-          }
-        }
-      }
-    }
-  }
-  kiran: allContentfulPerson(
-    filter: { name: { eq: "Kiran Deshpande" }}
-  ) {
-    edges {
-      node {
-        name
-        title
-        linkedIn
-        image {
-          file {
-            url
-          }
+          content
         }
       }
     }
@@ -84,31 +53,22 @@ query {
 <script>
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
-import person from '~/components/Partials/person';
+import ContentfulRichText from "~/components/Partials/ContentfulRichText.vue";
 import { withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
-		title: "Team"
+		title: "Team | Founders"
 	},
 	components: {
-		ContentHeader,
-        InfoSections,
-        person
+      ContentHeader,
+      InfoSections,
+      ContentfulRichText
 	},
 	computed: {
-		info() {
-			return this.$page.contentfulPageInfo.edges[0].node;
-        },
+    info() {
+      return this.$page.contentfulPageInfo?.edges[0]?.node;
     },
-    methods: {
-        sec(ind) {
-            const content = this.info.sections[ind]?.content.replace("\n", "<br/>");
-            return withLineBreaks(content);
-        },
-        personObject(obj) {
-            return obj.edges[0].node;
-        }
 	}
 };
 </script>

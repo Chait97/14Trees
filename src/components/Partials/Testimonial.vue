@@ -52,7 +52,7 @@
                         <div class="flex justify-center">
                         <span class="text-center inline-block h-1 w-10 rounded bg-green-500 mt-8 mb-6"></span>
                         </div>
-                        <person :person="person"/>
+                        <Person :image="person.image" :name="person.name" :linkedIn="person.linkedIn" :title="person.title" variant="small"/>
                     </div>
                 </div>
             </div>
@@ -63,10 +63,10 @@
 <script>
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-import person from './person';
+import Person from './Person';
 
 export default {
-    components: { VueSlickCarousel, person},
+    components: { VueSlickCarousel, Person},
     props: {
         title: String,
         person: Object,

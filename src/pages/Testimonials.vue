@@ -1,8 +1,8 @@
 <template>
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-            <div class="mt-20 object-center">
-              <p class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12">
+          <div class="mt-20 object-center">
+              <p class="text-center md:text-6xl text-2xl">
                   <span>Experiences</span>
               </p>
             </div>

@@ -18,7 +18,13 @@
     {
       "name": "Team",
       "link": "/team",
-      "external": false
+      "external": false,
+      "sub": [ {
+          "name": "Founders",
+          "link": "/team#founders",
+          "external": false 
+        } 
+      ]
     },
     {
       "name": "Dummy",
