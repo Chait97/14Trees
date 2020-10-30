@@ -3,7 +3,6 @@
 var _ = require('lodash')
 var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
-
 module.exports = {
   purge: {
     content:["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
@@ -23,6 +22,10 @@ module.exports = {
       height: {
         '128': '32rem',
         'half-screen': '50vh'
+      },
+      scale: {
+        '101': '1.01',
+        '102': '1.02'
       },
       backgroundOpacity: {
         '0': '0',

@@ -3,7 +3,7 @@
         <div class="md:py-24 pt-16 mx-4">
             <div class="grid grid-cols-8">
                 <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex md:justify-end">
-                    <div class="md:ml-4 md:p-16 md:w-10/12 w-full flex content-center h-full">
+                    <div class="md:ml-4 md:p-8 md:w-10/12 w-full flex content-center h-full">
                         <!-- <div class="md:hidden">
                             <VueSlickCarousel :arrows="true" :dots="true">
                                 <div v-for="(pic, index) in picturesToDisplay" :key="index">
@@ -13,26 +13,32 @@
                         </div> -->
                         <div class="contents">
                             <div class="md:flex md:flex-wrap content-center">
-                                <div class="md:p-2 mb-4 md:mb-1 w-full">
+                                <div class="md:hidden md:p-2 mb-4 md:mb-1 w-full">
                                     <div v-if="imgSrcInd(0)">
                                         <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
                                 </div>
-                                <div class="md:contents hidden md:p-2 p-1 w-full" v-if="imgSrcInd(1) && !imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(1)" class="object-contain w-full object-right" />
+                                <div class="md:contents hidden md:p-2 mb-4 md:mb-1 w-full">
+                                    <div v-if="imgSrcInd(0) && !imgSrcInd(1)">
+                                        <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
+                                    </div>
                                 </div>
-                                <div class="md:contents hidden md:p-2 p-1 w-1/2" v-if="imgSrcInd(1) && imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(1)" class="object-contain w-full object-right" />
+                                <div class="md:contents hidden m-4" v-if="imgSrcInd(1) && !imgSrcInd(2)">
+                                        <g-image :src="imgSrcInd(0)" class="object-contain md:p-2 p-4 w-full object-right" />
+                                        <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-4 w-full object-right" />
                                 </div>
-                                <div class="md:contents hidden md:p-2 p-1 w-1/2" v-if="imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(2)" class="object-contain w-full object-right" />
+                                <div class="md:contents hidden" v-if="imgSrcInd(1) && imgSrcInd(2)">
+                                        <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
+                                </div>
+                                <div class="md:contents hidden" v-if="imgSrcInd(2)">
+                                        <g-image :src="imgSrcInd(2)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <span class="md:w-1 bg-green-300"></span>
                 </div>
-                <div class="col-span-8" :class="{ 'md:col-span-4' : hasImgs }">
+                <div class="col-span-8" :class="{ 'md:col-span-4 w-full' : hasImgs, 'md:col-span-7 md:col-start-2' : !hasImgs}">
                     <div class="md:w-3/4 md:pl-12 pb-4 flex flex-col justify-center w-full h-full text-left">
                         <div class="md:contents hidden">
                             <svg  xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -46,7 +52,7 @@
                         <div class="flex justify-center">
                         <span class="text-center inline-block h-1 w-10 rounded bg-green-500 mt-8 mb-6"></span>
                         </div>
-                        <person :person="person"/>
+                        <Person :image="person.image" :name="person.name" :linkedIn="person.linkedIn" :title="person.title" variant="small"/>
                     </div>
                 </div>
             </div>
@@ -57,18 +63,15 @@
 <script>
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-import person from './person';
+import Person from './Person';
 
 export default {
-    components: { VueSlickCarousel, person},
+    components: { VueSlickCarousel, Person},
     props: {
         title: String,
         person: Object,
         content: String,
         pictures: Array
-    },
-    metaInfo: {
-        title: "Home"
     },
     methods : {
 		imgSrc(img) {

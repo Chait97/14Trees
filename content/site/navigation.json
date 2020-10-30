@@ -11,9 +11,20 @@
       "sub": []
     },
     {
-      "name": "About",
-      "link": "/about",
+      "name": "Testimonials",
+      "link": "/testimonials",
       "external": false
+    },
+    {
+      "name": "Team",
+      "link": "/team",
+      "external": false,
+      "sub": [ {
+          "name": "Founders",
+          "link": "/team#founders",
+          "external": false 
+        } 
+      ]
     },
     {
       "name": "Dummy",
