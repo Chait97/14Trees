@@ -55,16 +55,27 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="md:hidden leading-relaxed text-md" v-html="truncated(content, 400)"></p>
-                        <p class="hidden md:contents leading-relaxed text-md" v-html="truncated(content, 900)"></p>
-                        <div v-if="viewMore" class="flex justify-center mt-2">
-                            <button class="border-2 border-gray-600 text-gray-700 
-                                            active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
-                                            hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
-                                    type="button" style="transition: all .15s ease" 
-                                    v-on:click="openFullTestimonial()">
-                                Read 
-                            </button>
+                        <p class="md:hidden leading-relaxed text-md" v-html="truncatedSmall"></p>
+                        <p class="hidden md:contents leading-relaxed text-md" v-html="truncatedLarge"></p>
+                        <div class="flex justify-center mt-4">
+                            <div v-if="viewMoreSmall" class="contents md:hidden">
+                                <button class="border-2 border-gray-600 text-gray-700 
+                                                active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
+                                                hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
+                                        type="button" style="transition: all .15s ease" 
+                                        v-on:click="openFullTestimonial()">
+                                    Read 
+                                </button>
+                            </div>
+                            <div v-if="viewMoreLarge" class="hidden md:contents">
+                                <button class="border-2 border-gray-600 text-gray-700 
+                                                active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
+                                                hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
+                                        type="button" style="transition: all .15s ease" 
+                                        v-on:click="openFullTestimonial()">
+                                    Read 
+                                </button>
+                            </div>
                         </div>
                         <LargeModal ref="modal">
                             <FullTestimonial :title="title" :person="person" :content="content" :pictures="picturesToDisplay"/>
@@ -102,7 +113,6 @@ export default {
     },
     data: function() {
         return {
-            viewMore : false,
             picturesToDisplay : []
         }
     },
@@ -122,10 +132,6 @@ export default {
             }
             return null;
         },
-        truncated(text, size = 400) {
-            this.viewMore = text.length > size;
-            return text.slice(0, size) + (this.viewMore ? "..." : "");
-        },
         openFullTestimonial() {
             this.$refs.modal.toggleModal();
         }
@@ -133,6 +139,22 @@ export default {
     computed : {
         hasImgs() {
             return this.picturesToDisplay.length > 0 || false; 
+        },
+        truncatedLarge() {
+            const size = 900;
+            const viewMore = this.content.length > size;
+            return this.content.slice(0, size) + (viewMore ? "..." : "");
+        },
+        truncatedSmall() {
+            const size = 400;
+            const viewMore = this.content.length > size;
+            return this.content.slice(0, size) + (viewMore ? "..." : "");
+        },
+        viewMoreSmall() {
+            return this.content?.length > 400;
+        },
+        viewMoreLarge() {
+            return this.content?.length > 900;
         },
 	}
 };
