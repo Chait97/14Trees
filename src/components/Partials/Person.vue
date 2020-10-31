@@ -14,6 +14,27 @@
         </div>
         </div>
     </div>
+    
+    <!-- Profile Variant -->
+    <div v-else-if="variant == 'profile'">
+        <div class="flex flex-wrap justify-center">
+            <div class="w-full lg:w-1/2 px-4 flex justify-center">
+                <g-image :src="imgSrc(image)"
+                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                    style="max-width: 150px;" />
+                <div class="text-center mt-24">
+                    <h3 class="md:text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                        {{name}}
+                    </h3>
+                    <div class="mb-2 text-gray-700">
+                        {{title}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Default Small Variant -->
     <div v-else>
         <div class="flex items-center pl-4">
         <g-image :src="imgSrc(image)" class="object-contain h-16 content-right" />

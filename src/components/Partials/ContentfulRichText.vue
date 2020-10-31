@@ -1,16 +1,15 @@
 <template>
-    <div class="grid md:grid-cols-3 grid-cols-1">
+    <div class="flex flex-wrap align-center justify-center w-full">
         <template v-for="group in groups" >
-            <div :key="group.key + 'split'" v-if="group.split" class="md:col-span-3 col-span-1 mt-6">
+            <div :key="group.key + 'split'" v-if="group.split" class="w-full my-12 px-24">
                 <div v-html="withBreaks(group.split)"></div>
             </div>
-            <div :key="group.key + 'comp'" v-if="group.component" class="col-span-1">
+            <div :key="group.key + 'comp'" v-if="group.component" class="max-w-sm flex-grow">
                 <component :is="group.component.type" v-bind="group.component.fields"></component>
             </div>
         </template>
     </div>
 </template>
-
 
 <script>
 import { withLineBreaks, composeTemplate } from '~/utils';

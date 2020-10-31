@@ -57,3 +57,7 @@ export function composeTemplate(content, MARKS, BLOCKS, documentToHtmlString) {
     }
     return groups;
 }
+
+export function toId(text) {
+    return text.toLowerCase().replace(/\s/ig, "-");
+}

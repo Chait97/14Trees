@@ -13,25 +13,32 @@
                         </div> -->
                         <div class="contents">
                             <div class="md:flex md:flex-wrap content-center">
+                                <!-- First image, to be shown in mobile-->
                                 <div class="md:hidden md:p-2 mb-4 md:mb-1 w-full">
                                     <div v-if="imgSrcInd(0)">
                                         <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
                                 </div>
+                                <!-- First image in desktop, when only 1 image -->
                                 <div class="md:contents hidden md:p-2 mb-4 md:mb-1 w-full">
                                     <div v-if="imgSrcInd(0) && !imgSrcInd(1)">
                                         <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
                                 </div>
+                                <!-- When only two images, then 1 and 2 are stacked vertically-->
                                 <div class="md:contents hidden m-4" v-if="imgSrcInd(1) && !imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(0)" class="object-contain md:p-2 p-4 w-full object-right" />
-                                        <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-4 w-full object-right" />
+                                    <g-image :src="imgSrcInd(0)" class="object-contain md:p-2 p-4 w-full object-right" />
+                                    <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-4 w-full object-right" />
                                 </div>
-                                <div class="md:contents hidden" v-if="imgSrcInd(1) && imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
+                                <!-- When three images, then 1 is full and 2 & 3 are stacked horizontally -->
+                                <div class="md:contents hidden" v-if="imgSrcInd(0) && imgSrcInd(1) && imgSrcInd(2)">
+                                    <div class="md:p-2 mb-4 md:mb-1 w-full">
+                                        <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
+                                    </div>
+                                    <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
                                 </div>
                                 <div class="md:contents hidden" v-if="imgSrcInd(2)">
-                                        <g-image :src="imgSrcInd(2)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
+                                    <g-image :src="imgSrcInd(2)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
                                 </div>
                             </div>
                         </div>
@@ -48,7 +55,31 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="leading-relaxed text-md" v-html="content"></p>
+                        <p class="md:hidden leading-relaxed text-md" v-html="truncatedSmall"></p>
+                        <p class="hidden md:contents leading-relaxed text-md" v-html="truncatedLarge"></p>
+                        <div class="flex justify-center mt-4">
+                            <div v-if="viewMoreSmall" class="contents md:hidden">
+                                <button class="border-2 border-gray-600 text-gray-700 
+                                                active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
+                                                hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
+                                        type="button" style="transition: all .15s ease" 
+                                        v-on:click="openFullTestimonial()">
+                                    Read 
+                                </button>
+                            </div>
+                            <div v-if="viewMoreLarge" class="hidden md:contents">
+                                <button class="border-2 border-gray-600 text-gray-700 
+                                                active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
+                                                hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
+                                        type="button" style="transition: all .15s ease" 
+                                        v-on:click="openFullTestimonial()">
+                                    Read 
+                                </button>
+                            </div>
+                        </div>
+                        <LargeModal ref="modal">
+                            <FullTestimonial :title="title" :person="person" :content="content" :pictures="picturesToDisplay"/>
+                        </LargeModal>
                         <div class="flex justify-center">
                         <span class="text-center inline-block h-1 w-10 rounded bg-green-500 mt-8 mb-6"></span>
                         </div>
@@ -64,35 +95,66 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Person from './Person';
+import LargeModal from './LargeModal';
+import FullTestimonial from './FullTestimonial';
 
 export default {
-    components: { VueSlickCarousel, Person},
+    components: { 
+        VueSlickCarousel,
+        Person,
+        LargeModal,
+        FullTestimonial
+    },
     props: {
         title: String,
         person: Object,
         content: String,
         pictures: Array
     },
+    data: function() {
+        return {
+            picturesToDisplay : []
+        }
+    },
+    created: function() {
+        this.picturesToDisplay = []
+        if (this.pictures?.length >= 0) {
+            this.picturesToDisplay.push(...this.pictures);
+        }
+    },
     methods : {
 		imgSrc(img) {
 			return "https:" + img.file.url;
         },
         imgSrcInd(ind) {
-            if (ind < this.picturesToDisplay.length)
+            if (ind < this.picturesToDisplay.length) {
                 return "https:" + this.picturesToDisplay[ind]?.file?.url;
+            }
             return null;
+        },
+        openFullTestimonial() {
+            this.$refs.modal.toggleModal();
         }
     },
     computed : {
-        picturesToDisplay() {
-            let pics = [];
-            if (this.pictures?.length >= 0) {
-                pics.push(...this.pictures);
-            }
-            return pics;
-        },
         hasImgs() {
             return this.picturesToDisplay.length > 0 || false; 
+        },
+        truncatedLarge() {
+            const size = 900;
+            const viewMore = this.content.length > size;
+            return this.content.slice(0, size) + (viewMore ? "..." : "");
+        },
+        truncatedSmall() {
+            const size = 400;
+            const viewMore = this.content.length > size;
+            return this.content.slice(0, size) + (viewMore ? "..." : "");
+        },
+        viewMoreSmall() {
+            return this.content?.length > 400;
+        },
+        viewMoreLarge() {
+            return this.content?.length > 900;
         },
 	}
 };

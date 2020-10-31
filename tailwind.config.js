@@ -23,9 +23,19 @@ module.exports = {
         '128': '32rem',
         'half-screen': '50vh'
       },
+      maxHeight: {
+        '0': '0',
+        '1/4-screen': '25vh',
+        '1/2-screen': '50vh',
+        '3/4-screen': '75vh',
+      },
       scale: {
         '101': '1.01',
         '102': '1.02'
+      },
+      inset: {
+        '0': 0,
+        '1/2': '50%',
       },
       backgroundOpacity: {
         '0': '0',
