@@ -18,7 +18,6 @@
             <a
               class="block"
               :href="navItem.link"
-              target="_blank"
               :title="navItem.name"
               v-if="navItem.external==true && navItem.children.length <=0"
             >{{ navItem.name}}</a>
@@ -50,7 +49,6 @@
                       <a
                         class="block"
                         :href="subItem.link"
-                        target="_blank"
                         :title="subItem.name"
                         v-if="subItem.external==true"
                       >{{ subItem.name}}</a>

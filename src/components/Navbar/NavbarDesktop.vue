@@ -15,7 +15,7 @@
 					<li v-for="navItem in getNavItems" :key="navItem.name" class="px-4 py-1">
 						<g-link class="block py-1 text-black" :to="navItem.link" :title="navItem.name"
 							v-if="navItem.external!=true && navItem.children.length <=0">{{ navItem.name}}</g-link>
-						<a class="block text-black" :href="navItem.link" target="_blank" :title="navItem.name"
+						<a class="block text-black" :href="navItem.link" :title="navItem.name"
 							v-if="navItem.external==true && navItem.children.length <=0">{{ navItem.name}}</a>
 						<ClientOnly>
 							<v-popover placement="top" popoverClass="navbar-popover" offset="16"
@@ -32,7 +32,7 @@
 											<g-link class="block text-gray-400" :to="subItem.link" :title="subItem.name"
 												v-if="subItem.external!=true">
 												{{ subItem.name}}</g-link>
-											<a class="block text-gray-400" :href="subItem.link" target="_blank" :title="subItem.name"
+											<a class="block text-gray-400" :href="subItem.link" :title="subItem.name"
 												v-if="subItem.external==true">{{ subItem.name}}</a>
 										</li>
 									</ul>
