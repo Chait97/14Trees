@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-            <div class="md:mx-32 mx-8 px-4 md:pt-16">
+            <div class="md:mx-32 mx-6 md:px-4 md:pt-16">
                 <content-header :title="$page.campaign.heading" :sub="$page.campaign.subtitle"></content-header>
                     <div class="self-center w-full">
                         <div v-if="$page.campaign.videoUrl">

@@ -1,10 +1,10 @@
 <template>
     <div class="flex flex-wrap align-center justify-center w-full">
         <template v-for="group in groups" >
-            <div :key="group.key + 'split'" v-if="group.split" class="w-full my-12 px-24">
+            <div :key="group.key + 'split'" v-if="group.split" class="w-full mt-12 md:px-24">
                 <div v-html="withBreaks(group.split)"></div>
             </div>
-            <div :key="group.key + 'comp'" v-if="group.component" class="max-w-sm flex-grow">
+            <div :key="group.key + 'comp'" v-if="group.component" class="max-w-sm flex-grow mt-6">
                 <component :is="group.component.type" v-bind="group.component.fields"></component>
             </div>
         </template>

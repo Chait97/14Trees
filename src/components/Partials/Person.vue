@@ -1,9 +1,10 @@
 <template>
 <section>
+    <!-- Large Variant -->
     <div v-if="variant == 'large'">
-        <div class="flex items-center pl-4">
+        <div class="flex items-center md:ml-4">
             <g-image :src="imgSrc(image)" class="object-contain h-32 content-right" />
-        <div class="pl-6 md:w-full">
+        <div class="ml-6 md:w-full">
             <div class="inline flex w-full justify-start">
             <p class="text-gray-900 text-6xl mr-1">{{name}}</p>
             <div v-if="linkedIn" class="flex items-center">
@@ -36,7 +37,7 @@
 
     <!-- Default Small Variant -->
     <div v-else>
-        <div class="flex items-center pl-4">
+        <div class="flex items-center md:pl-4">
         <g-image :src="imgSrc(image)" class="object-contain h-16 content-right" />
         <div class="pl-6">
         <div class="inline flex w-full justify-start">

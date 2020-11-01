@@ -1,6 +1,6 @@
 <template>
 <section>
-    <div class="nested my-10 p-4 md:m-8 border border-gray-600 rounded-lg 
+    <div class="nested p-4 md:m-8 border border-gray-600 rounded-lg 
         transition duration-200 ease-out transform hover:scale-101 cursor-pointer" @click="goToAction()">
         <div v-if="previewImage" class="rounded-lg overflow-hidden md:h-64 md:w-full h-48">
           <g-image alt="content" class="object-cover object-center h-full w-full" :src="imgSrc(previewImage)"/>
@@ -9,7 +9,7 @@
             <h2 class="title-font text-2xl font-medium text-gray-900 dark:text-gray-300 mt-6 mb-3 text-center">{{headline}}</h2>
             <section><div class="md:contents hidden font-light font-sans text-xs" v-html="textFromObj(previewContent)"></div></section>
         </div>
-        <Person class="p-4" v-bind="getAuthor"/>
+        <Person class="md:p-4" v-bind="getAuthor"/>
     </div>
 </section>
 </template>
