@@ -1,23 +1,20 @@
 <template>
     <Layout>
-      <div class="pb-32">
-        <div v-for="section in info.sections" :key="section.header">
-          <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-            <div class="mt-20 object-center">
-                <h1 :id="toId(section.header)" class="text-center md:text-6xl text-2xl" v-html="section.header"></h1>
+        <div :id="toId(section.header)" class="container mb-32 sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400 object-center" 
+            v-for="section in info.sections" :key="section.header">
+            <p class="text-center mt-20 md:text-6xl text-2xl">
+                <span>{{section.header}}</span>
+            </p>
+            <div class="info-container mt-12 px-4 mb-8">
+                <div class="md:mx-12 mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
+                    <div class="container">
+                        <div class="post-content container mx-auto relative dark:text-gray-400">
+                            <ContentfulRichText :content="section.content" />
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="info-container mt-12 px-4 mb-8">
-              <div class="container md:pt-32 px-12 px-6 md:mx-auto mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
-                  <div class="container">
-                      <div class="post-content container mx-auto relative dark:text-gray-400">
-                        <ContentfulRichText :content="section.content"/>
-                      </div>
-                  </div>
-              </div>
-          </div>
         </div>
-      </div>
     </Layout>
 </template>
 
