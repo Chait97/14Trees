@@ -15,30 +15,30 @@
                             <div class="md:flex md:flex-wrap content-center">
                                 <!-- First image, to be shown in mobile-->
                                 <div class="md:hidden md:p-2 mb-4 md:mb-1 w-full">
-                                    <div v-if="imgSrcInd(0)">
-                                        <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
+                                    <div v-if="imgSrcInd(0)" v-lazy-container="{ selector: 'img' }">
+                                        <img :data-src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
                                 </div>
                                 <!-- First image in desktop, when only 1 image -->
                                 <div class="md:contents hidden md:p-2 mb-4 md:mb-1 w-full">
-                                    <div v-if="imgSrcInd(0) && !imgSrcInd(1)">
-                                        <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
+                                    <div v-if="imgSrcInd(0) && !imgSrcInd(1)" v-lazy-container="{ selector: 'img' }">
+                                        <img :data-src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
                                 </div>
                                 <!-- When only two images, then 1 and 2 are stacked vertically-->
-                                <div class="md:contents hidden m-4" v-if="imgSrcInd(1) && !imgSrcInd(2)">
-                                    <g-image :src="imgSrcInd(0)" class="object-contain md:p-2 p-4 w-full object-right" />
-                                    <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-4 w-full object-right" />
+                                <div class="md:contents hidden m-4" v-if="imgSrcInd(1) && !imgSrcInd(2)" v-lazy-container="{ selector: 'img' }">
+                                    <img :data-src="imgSrcInd(0)" class="object-contain md:p-2 p-4 w-full object-right" />
+                                    <img :data-src="imgSrcInd(1)" class="object-contain md:p-2 p-4 w-full object-right" />
                                 </div>
                                 <!-- When three images, then 1 is full and 2 & 3 are stacked horizontally -->
-                                <div class="md:contents hidden" v-if="imgSrcInd(0) && imgSrcInd(1) && imgSrcInd(2)">
+                                <div class="md:contents hidden" v-if="imgSrcInd(0) && imgSrcInd(1) && imgSrcInd(2)" v-lazy-container="{ selector: 'img' }">
                                     <div class="md:p-2 mb-4 md:mb-1 w-full">
-                                        <g-image :src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
+                                        <img :data-src="imgSrcInd(0)" class="object-contain w-full md:object-right object-center" />
                                     </div>
-                                    <g-image :src="imgSrcInd(1)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
+                                    <img :data-src="imgSrcInd(1)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
                                 </div>
-                                <div class="md:contents hidden" v-if="imgSrcInd(2)">
-                                    <g-image :src="imgSrcInd(2)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
+                                <div class="md:contents hidden" v-if="imgSrcInd(2)" v-lazy-container="{ selector: 'img' }">
+                                    <img :data-src="imgSrcInd(2)" class="object-contain md:p-2 p-1 w-1/2 object-right" />
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ export default {
             return this.picturesToDisplay.length > 0 || false; 
         },
         truncatedLarge() {
-            const size = 900;
+            const size = 1200;
             const viewMore = this.content.length > size;
             return this.content.slice(0, size) + (viewMore ? "..." : "");
         },

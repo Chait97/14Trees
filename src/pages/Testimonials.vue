@@ -3,7 +3,7 @@
         <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
           <div class="mt-20 object-center">
               <p class="text-center md:text-6xl text-2xl">
-                  <span>Experiences</span>
+                  <span>Testimonials</span>
               </p>
             </div>
             <div class="mx-4 md:pt-16">

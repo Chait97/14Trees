@@ -11,9 +11,22 @@
       "sub": []
     },
     {
-      "name": "Testimonials",
-      "link": "/testimonials",
-      "external": false
+      "name": "Visitor's Corner",
+      "link": "/corner",
+      "external": false,
+      "sub": [{
+        "name": "Blogs/Articles",
+        "link": "/blogs",
+        "external": false
+      },{
+        "name": "Gallery",
+        "link": "/gallery",
+        "external": false
+      },{
+        "name": "Testimonials",
+        "link": "/testimonials",
+        "external": false
+      }]
     },
     {
       "name": "Team",
@@ -27,7 +40,11 @@
           "name": "Board of Directions",
           "link": "/team#board-of-directors",
           "external": true 
-        } 
+        },{
+          "name": "Volunteers",
+          "link": "/team#volunteers",
+          "external": true 
+        }  
       ]
     },
     {

@@ -31,6 +31,7 @@ import {
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ClickOutside from 'v-click-outside'
 import InfiniteLoading from 'vue-infinite-loading'
+import VueLazyload from 'vue-lazyload'
 
 
 config.autoAddCss = false;
@@ -44,7 +45,6 @@ export default function (Vue, {
 }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
-
   Vue.component('font-awesome', FontAwesomeIcon)
 
   Vue.use(ClickOutside)
@@ -58,5 +58,6 @@ export default function (Vue, {
     Vue.directive('close-popover', VClosePopover)
     Vue.component('v-popover', VPopover)
     Vue.use(InfiniteLoading)
+    Vue.use(VueLazyload)
   }
 }

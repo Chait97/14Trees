@@ -22,7 +22,7 @@
                             <Person :image="person.image" :name="person.name" :linkedIn="person.linkedIn" :title="person.title" variant="profile"/>
                         </div>
                     </div>
-                    <div class="md:py-10 text-center">
+                    <div class="md:py-10">
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full lg:w-9/12 px-4">
                                 <p class="mb-4 text-sm md:text-lg leading-relaxed text-gray-800" v-html="content"></p>

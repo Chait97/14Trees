@@ -4,8 +4,8 @@
             <div :key="group.key + 'split'" v-if="group.split" class="w-full mt-12 md:px-24">
                 <div v-html="withBreaks(group.split)"></div>
             </div>
-            <div :key="group.key + 'comp'" v-if="group.component" class="max-w-sm flex-grow mt-6">
-                <component :is="group.component.type" v-bind="group.component.fields"></component>
+            <div :key="group.key + 'comp'" v-if="group.component" class="max-w-sm flex-grow">
+                <component class="mt-16" :is="group.component.type" v-bind="group.component.fields"></component>
             </div>
         </template>
     </div>
