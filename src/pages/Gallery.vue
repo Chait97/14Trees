@@ -3,19 +3,15 @@
 		<SEO :title="$static.metadata.siteName" :description="$static.metadata.siteDescription"/>
 		<div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="md:mx-32 mx-4 md:pt-16">
-			<content-header :title="$static.metadata.siteName" :sub="$static.metadata.siteDescription">
-			</content-header>
+                <p class="text-center md:text-6xl text-2xl">
+                    <span>{{info.title}}</span>
+                </p>
 			<div v-if="info.images">
 				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full">
 					<img v-lazy="imgSrc(img)" class="self-center w-full">
-					<!-- <g-image :src="imgSrc(img)" class="self-center w-full" /> -->
 				</div>
 			</div>
 		</div>
-		</div>
-
-		<div class="flex justify-center md:mt-20 mt-12">
-			<span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
 		</div>
 
 		<div class="container mt-16 md:mt-24 mx-auto overflow-x-hidden text-gray-800 dark:text-gray-400">
@@ -49,7 +45,7 @@ query {
 <page-query>
 query {
   contentfulPageInfo: allContentfulContentPage(
-    filter: { title: { eq: "14 Trees Foundation" }}
+    filter: { title: { eq: "Gallery" }}
   ) {
     edges {
       node {
@@ -84,9 +80,9 @@ import { withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
-		title: "Home",
+		title: "Gallery",
 		image: "Home",
-		descrition: "Home",
+		descrition: "Pictures from 14-Trees site visits",
 	},
 	components: {
 		ContentHeader,
@@ -104,9 +100,9 @@ export default {
 		},
 		imgSrc(img) {
             if (img.file) 
-                return "https:" + img.file?.url;
+                return "https:" + img?.file?.url;
             if (img.fields?.file) 
-                return "https:" + img.fields?.file?.url;
+                return "https:" + img?.fields?.file?.url;
         },
 	}
 };

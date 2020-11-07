@@ -5,7 +5,7 @@
             <p class="text-center mt-20 md:text-6xl text-2xl">
                 <span>{{section.header}}</span>
             </p>
-            <div class="info-container mt-12 px-4 mb-8">
+            <div class="info-container px-4 mb-8">
                 <div class="md:mx-12 mx-4 overflow-x-hidden text-gray-800 dark:text-gray-400">
                     <div class="container">
                         <div class="post-content container mx-auto relative dark:text-gray-400">

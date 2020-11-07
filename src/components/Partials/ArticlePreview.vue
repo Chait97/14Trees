@@ -31,14 +31,17 @@ export default {
     },
     computed: {
         getAuthor() {
-            const author = this.author.fields;
+            const author = this.author?.fields ? this.author.fields : this.author;
             author.variant = 'small';
             return author; 
         }
     },
     methods: {
         imgSrc(img) {
-			return "https:" + img.fields.file.url;
+            if(img?.fields)
+                return "https:" + img?.fields?.file.url;
+            if(img?.file)
+                return "https:" + img?.file.url;
         },
         goToAction() {
             window.location.href = this.link;

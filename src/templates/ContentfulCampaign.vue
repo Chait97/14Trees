@@ -33,9 +33,9 @@
                   <span class="w-1/3 pb-4 mb-4 border-b-2 border-gray-300"></span>
             </div>
             <div class="mt-20 object-center">
-              <p class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12">
-                  <span>Experiences</span>
-              </p>
+              <!-- <p class="text-center lg:text-5xl font-bold tracking-tight text-4xl leading-12"> -->
+                  <!-- <span>Experiences</span> -->
+              <!-- </p> -->
             </div>
             <div v-for="tm in $page.campaign.testimonials" :key="tm.id">
                   <testimonial v-bind="tm" />
