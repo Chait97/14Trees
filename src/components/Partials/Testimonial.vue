@@ -154,7 +154,7 @@ export default {
             return this.content?.length > 400;
         },
         viewMoreLarge() {
-            return this.content?.length > 900;
+            return this.content?.length > 1200;
         },
 	}
 };
