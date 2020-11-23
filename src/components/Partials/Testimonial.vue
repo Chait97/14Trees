@@ -4,13 +4,6 @@
             <div class="grid grid-cols-8">
                 <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex md:justify-end">
                     <div class="md:ml-4 md:p-8 md:w-10/12 w-full flex content-center h-full">
-                        <!-- <div class="md:hidden">
-                            <VueSlickCarousel :arrows="true" :dots="true">
-                                <div v-for="(pic, index) in picturesToDisplay" :key="index">
-                                    <g-image :src="imgSrc(pic)" class="object-contain w-full object-right" />
-                                </div>
-                            </VueSlickCarousel>
-                        </div> -->
                         <div class="contents">
                             <div class="md:flex md:flex-wrap content-center">
                                 <!-- First image, to be shown in mobile-->
@@ -92,15 +85,12 @@
 </template>
 
 <script>
-import VueSlickCarousel from 'vue-slick-carousel'
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Person from './Person';
 import LargeModal from './LargeModal';
 import FullTestimonial from './FullTestimonial';
 
 export default {
     components: { 
-        VueSlickCarousel,
         Person,
         LargeModal,
         FullTestimonial
