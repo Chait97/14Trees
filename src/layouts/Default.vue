@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="dark:bg-black">
+  <div id="app" class="dark:bg-dark-grey">
     <navbar @setTheme="setTheme" :theme="this.theme"></navbar>
 
     <slot />

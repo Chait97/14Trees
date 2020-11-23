@@ -30,8 +30,7 @@
     "v-tooltip": "^2.0.3",
     "vue-headroom": "^0.10.1",
     "vue-infinite-loading": "^2.4.5",
-    "vue-lazyload": "^1.3.3",
-    "vue-slick-carousel": "^1.0.6"
+    "vue-lazyload": "^1.3.3"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",

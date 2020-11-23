@@ -4,6 +4,10 @@ var _ = require('lodash')
 var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
 module.exports = {
+  future: {
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true,
+  },
   purge: {
     content:["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
     options: {
@@ -19,9 +23,18 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        'dark-grey': '#1b1f23'
+      },
       height: {
         '128': '32rem',
         'half-screen': '50vh'
+      },
+      minHeight: {
+        '0': '0',
+        '1/4-screen': '25vh',
+        '1/2-screen': '50vh',
+        '3/4-screen': '75vh',
       },
       maxHeight: {
         '0': '0',
