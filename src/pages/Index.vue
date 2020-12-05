@@ -8,7 +8,6 @@
 			<div v-if="info.images">
 				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full">
 					<img v-lazy="imgSrc(img)" class="self-center w-full">
-					<!-- <g-image :src="imgSrc(img)" class="self-center w-full" /> -->
 				</div>
 			</div>
 		</div>
@@ -103,7 +102,7 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-			imgSrc(img, 600);
+			return imgSrc(img, 600);
         },
 	}
 };
