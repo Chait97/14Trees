@@ -78,7 +78,7 @@ query {
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
 import SEO from "~/components/Partials/SEO.vue";
-import { withLineBreaks } from '~/utils';
+import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -101,10 +101,7 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-            if (img.file) 
-                return "https:" + img?.file?.url;
-            if (img.fields?.file) 
-                return "https:" + img?.fields?.file?.url;
+			imgSrc(img, 600)
         },
 	}
 };

@@ -40,10 +40,10 @@ export default {
     // set default
     window.__setPreferredTheme('light');
     if (typeof window.__theme !== 'undefined') this.$emit('setTheme', window.__theme);
-    if (window.__theme === 'dark') {
-      window.__setPreferredTheme('light');
-      this.$emit('setTheme', 'light');
-    }
+    // if (window.__theme === 'dark') {
+      // window.__setPreferredTheme('light');
+      // this.$emit('setTheme', 'light');
+    // }
   }
 }
 </script>

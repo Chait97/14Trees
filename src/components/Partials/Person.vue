@@ -6,7 +6,7 @@
             <g-image :src="imgSrc(image)" class="object-contain h-32 content-right" />
             <div class="ml-6 md:w-full">
                 <div class="inline flex w-full justify-start">
-                    <p class="text-gray-900 dark:text-gray-200 text-6xl mr-1">{{name}}</p>
+                    <p class="text-gray-900 dark:text-gray-200 text-xl mr-1">{{name}}</p>
                     <div v-if="linkedIn" class="flex items-center">
                         <a :href="linkedIn" target="_blank" rel="noopener noreferrer"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
@@ -15,7 +15,7 @@
                                 </svg></a>
                     </div>
                 </div>
-                <div class="text-gray-500 text-6xl" v-html="toMultiLine(title)"></div>
+                <div class="text-gray-500 text-md" v-html="toMultiLine(title)"></div>
             </div>
         </div>
     </div>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import {imgSrc} from "~/utils";
+
 export default {
     props: {
         image: Object,
@@ -71,10 +73,7 @@ export default {
     },
     methods: {
         imgSrc(img) {
-            if (img.file) 
-                return "https:" + img.file?.url;
-            if (img.fields?.file) 
-                return "https:" + img.fields?.file?.url;
+            return imgSrc(img, 128);
         },
         toMultiLine(txt) {
             const split = txt.replace(';', "<br/>");

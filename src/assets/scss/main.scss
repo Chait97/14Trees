@@ -678,4 +678,29 @@ figure {
   .card:hover {
     @apply scale-101;
   }
+
+  @keyframes pulseBackground {
+    from {
+      opacity: 0.3;
+    }
+    to {
+      opacity: 0.8;
+    }
+  }
+  @keyframes translateBackground {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  img[lazy=loading] {
+    @apply animate-pulse;
+    background: url('leaves-loading.gif') center center repeat;
+    background-size: 8rem;
+    
+    animation: pulseBackground 0.4s ease-in-out infinite alternate, translateBackground 20s ease-in-out infinite alternate;
+  }
 }

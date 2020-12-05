@@ -22,6 +22,7 @@
 <script>
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import Person from './Person';
+import { imgSrc } from '@/utils';
 
 export default {
     props: {
@@ -44,10 +45,7 @@ export default {
     },
     methods: {
         imgSrc(img) {
-            if(img?.fields)
-                return "https:" + img?.fields?.file.url;
-            if(img?.file)
-                return "https:" + img?.file.url;
+            return imgSrc(img, 500);
         },
         goToAction() {
             window.location.href = this.link;

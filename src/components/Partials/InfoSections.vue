@@ -26,7 +26,7 @@
 
 
 <script>
-import { withLineBreaks } from '~/utils';
+import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
     props: {
@@ -34,7 +34,7 @@ export default {
     },
 	methods : {
 		imgSrc(img) {
-			return "https:" + img?.file?.url;
+            return imgSrc(img, 1024);
         },
         withBreaks(a) {
             return withLineBreaks(a);

@@ -25,7 +25,7 @@
 <script>
 import SEO from "~/components/Partials/SEO.vue";
 import ArticlePreview from "~/components/Partials/ArticlePreview.vue";
-import { withLineBreaks } from '~/utils';
+import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -50,11 +50,8 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-            if (img.file) 
-                return "https:" + img.file?.url;
-            if (img.fields?.file) 
-                return "https:" + img.fields?.file?.url;
-        },
+      return imgSrc(img, 200);
+    },
 	}
 };
 </script>

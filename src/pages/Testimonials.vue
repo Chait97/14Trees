@@ -65,11 +65,6 @@ export default {
   },
   mounted() {
     mediumZoom(".post-content img");
-  },
-  computed: {
-    imgSrc() {
-      return this.$page.campaign.image ? "https:" + this.$page.campaign.image.file.url : false;
-    }
-  },
+  }
 };
 </script>
