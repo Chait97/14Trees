@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { withLineBreaks, composeTemplate } from '~/utils';
+import { withLineBreaks, composeTemplate, imgSrc } from '~/utils';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import Person from "~/components/Partials/Person.vue";
@@ -34,7 +34,7 @@ export default {
     },
 	methods : {
 		imgSrc(img) {
-			return "https:" + img.file.url;
+            return imgSrc(img, 600);
         },
         withBreaks(a) {
             return withLineBreaks(a);

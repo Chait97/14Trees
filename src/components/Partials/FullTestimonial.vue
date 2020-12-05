@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { imgSrc } from '@/utils';
 import Person from './Person';
 
 export default {
@@ -50,11 +51,11 @@ export default {
     },
     methods: {
         imgSrc(img) {
-            return "https:" + img.file.url;
+            return imgSrc(img, 600);
         },
         imgSrcInd(ind) {
             if (ind < this.pictures.length) {
-                return "https:" + this.pictures[ind]?.file?.url;
+                return imgSrc(this.pictures[ind], 600);
             }
             return null;
         },

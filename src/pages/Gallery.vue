@@ -1,6 +1,7 @@
 <template>
 	<Layout>
 		<SEO :title="$static.metadata.siteName" :description="$static.metadata.siteDescription"/>
+		<main class="min-h-3/4-screen">
 		<div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="md:mx-32 mx-4 md:pt-16">
                 <p class="text-center md:text-6xl text-2xl">
@@ -30,6 +31,7 @@
 			</ul>
 			</div>
 		</div> -->
+		</main>
 	</Layout>
 </template>
 
@@ -76,7 +78,7 @@ query {
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
 import SEO from "~/components/Partials/SEO.vue";
-import { withLineBreaks } from '~/utils';
+import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -99,10 +101,7 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-            if (img.file) 
-                return "https:" + img?.file?.url;
-            if (img.fields?.file) 
-                return "https:" + img?.fields?.file?.url;
+			imgSrc(img, 600)
         },
 	}
 };

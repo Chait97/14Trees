@@ -59,7 +59,6 @@ h6, .h6 {
 @tailwind components;
 @tailwind utilities;
 
-@import 'node_modules/vue-slick-carousel/dist/vue-slick-carousel';
 
 .container {
   @apply max-w-screen-xl;
@@ -307,7 +306,7 @@ h6, .h6 {
 
   &.navbar-popover {
 
-    @apply bg-black;
+    @apply bg-gray-900;
     @apply text-xs;
     @apply px-2;
     @apply leading-normal;
@@ -376,8 +375,7 @@ h6, .h6 {
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .mode-dark {
-  .post-content {
-    p:not(.nested),
+  .post-content :not(.nested) {
     span:not(.token),
     li {
       @apply tracking-wider;
@@ -389,14 +387,13 @@ h6, .h6 {
   }
 }
 
-.post-content{
+.post-content :not(.nested){
 
   a {
     color: #0c608a;
     text-decoration: underline;
   }
 
-  p:not(.nested),
   span:not(.token),
   li {
     @apply tracking-wider;
@@ -500,7 +497,7 @@ pre[class*="language-"] {
   pre[class*="language-"]::mozselection,
   code[class*="language-"]::mozselection {
     text-shadow: none;
-    @apply bg-gray-800;
+    @apply bg-gray-700;
   }
 
   pre[class*="language-"],
@@ -635,7 +632,7 @@ pre[class*="language-"]>code[class*="language-"] {
 
 .mode-dark {
   .medium-zoom-overlay {
-    background-color: #000 !important;
+    background-color: rgb(46, 46, 46) !important;
   }
 }
 
@@ -654,5 +651,56 @@ figure {
 
   figcaption {
     @apply text-center;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+
+  .btn-gray {
+    @apply bg-gray-400 text-gray-800;
+  }
+  .btn-gray:hover {
+    @apply bg-gray-500;
+  }
+  .card {
+    @apply border border-gray-200 bg-white rounded-lg shadow-lg transition duration-200 ease-out transform cursor-pointer;
+  }
+  .card:hover {
+    @apply scale-101;
+  }
+
+  @keyframes pulseBackground {
+    from {
+      opacity: 0.3;
+    }
+    to {
+      opacity: 0.8;
+    }
+  }
+  @keyframes translateBackground {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  img[lazy=loading] {
+    @apply animate-pulse;
+    background: url('leaves-loading.gif') center center repeat;
+    background-size: 8rem;
+    
+    animation: pulseBackground 0.4s ease-in-out infinite alternate, translateBackground 20s ease-in-out infinite alternate;
   }
 }

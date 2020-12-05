@@ -58,20 +58,13 @@ module.exports = {
         }],
         require('./packages/gridsome-plugin-remark-figure')
       ],
-      
       processImages: false
-      
     }
   },
   templates: {
-    ContentfulCampaign: [{
-      path: '/projects/:title',
-      component: '~/templates/ContentfulCampaign'
-    }],
-    CustomPage: [{
-      path: '/:title',
-      component: '~/templates/CustomPage.vue'
-    }],
+    ContentfulCampaign: '/projects/:title',
+    CustomPage: '/:title',
+    ContentfulBlogPost: '/blogs/:slug',
   },
   chainWebpack: config => {
       config.resolve.alias.set('@pageImage', '@/assets/images');

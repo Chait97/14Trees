@@ -58,6 +58,8 @@ export default function (Vue, {
     Vue.directive('close-popover', VClosePopover)
     Vue.component('v-popover', VPopover)
     Vue.use(InfiniteLoading)
-    Vue.use(VueLazyload)
+    Vue.use(VueLazyload, {
+      observer: true,
+    })
   }
 }

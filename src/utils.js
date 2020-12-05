@@ -61,3 +61,11 @@ export function composeTemplate(content, MARKS, BLOCKS, documentToHtmlString) {
 export function toId(text) {
     return text.toLowerCase().replace(/\s/ig, "-");
 }
+
+export function imgSrc(img, width) {
+    if (img?.file) 
+        return `https:${img.file?.url}?w=${width}`;
+    if (img?.fields?.file) 
+        return `https:${img.fields?.file?.url}?w=${width}`;
+    return null
+}

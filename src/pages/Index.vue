@@ -8,7 +8,6 @@
 			<div v-if="info.images">
 				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full">
 					<img v-lazy="imgSrc(img)" class="self-center w-full">
-					<!-- <g-image :src="imgSrc(img)" class="self-center w-full" /> -->
 				</div>
 			</div>
 		</div>
@@ -80,7 +79,7 @@ query {
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
 import SEO from "~/components/Partials/SEO.vue";
-import { withLineBreaks } from '~/utils';
+import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
 	metaInfo: {
@@ -103,10 +102,7 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-            if (img.file) 
-                return "https:" + img.file?.url;
-            if (img.fields?.file) 
-                return "https:" + img.fields?.file?.url;
+			return imgSrc(img, 600);
         },
 	}
 };

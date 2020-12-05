@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="container w-full sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-          <section class="post-content mt-24 mx-8 px-4 md:pt-16 dark:text-gray-400">
+          <section class="post-content mx-8 px-4 md:pt-16 dark:text-gray-400">
               <ContentfulRichText :content="$page.campaign.footerContent"/>
           </section>
         </div>
@@ -69,7 +69,7 @@ import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import ContentfulRichText from "~/components/Partials/ContentfulRichText.vue";
 import Testimonial from "~/components/Partials/Testimonial.vue";
 import mediumZoom from "medium-zoom";
-import { withLineBreaks, videoUrl } from '~/utils';
+import { withLineBreaks, videoUrl, imgSrc } from '~/utils';
 
 export default {
   components: {
@@ -91,7 +91,7 @@ export default {
   },
   computed: {
     imgSrc() {
-      return this.$page.campaign.headerMedia ? "https:" + this.$page.campaign.headerMedia.file.url : false;
+      return this.$page.campaign.headerMedia ? imgSrc(this.$page.campaign.headerMedia, 1024) : false;
     },
   },
   methods : {

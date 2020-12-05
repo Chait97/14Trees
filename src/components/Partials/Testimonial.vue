@@ -4,15 +4,8 @@
             <div class="grid grid-cols-8">
                 <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex md:justify-end">
                     <div class="md:ml-4 md:p-8 md:w-10/12 w-full flex content-center h-full">
-                        <!-- <div class="md:hidden">
-                            <VueSlickCarousel :arrows="true" :dots="true">
-                                <div v-for="(pic, index) in picturesToDisplay" :key="index">
-                                    <g-image :src="imgSrc(pic)" class="object-contain w-full object-right" />
-                                </div>
-                            </VueSlickCarousel>
-                        </div> -->
                         <div class="contents">
-                            <div class="md:flex md:flex-wrap content-center">
+                            <div class="md:flex md:flex-wrap content-center w-full">
                                 <!-- First image, to be shown in mobile-->
                                 <div class="md:hidden md:p-2 mb-4 md:mb-1 w-full">
                                     <div v-if="imgSrcInd(0)" v-lazy-container="{ selector: 'img' }">
@@ -55,8 +48,8 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="md:hidden leading-relaxed text-md" v-html="truncatedSmall"></p>
-                        <p class="hidden md:contents leading-relaxed text-md" v-html="truncatedLarge"></p>
+                        <p class="md:hidden dark:text-gray-400 leading-relaxed text-md" v-html="truncatedSmall"></p>
+                        <p class="hidden dark:text-gray-400 md:contents leading-relaxed text-md" v-html="truncatedLarge"></p>
                         <div class="flex justify-center mt-4">
                             <div v-if="viewMoreSmall" class="contents md:hidden">
                                 <button class="border-2 border-gray-600 text-gray-700 
@@ -92,15 +85,13 @@
 </template>
 
 <script>
-import VueSlickCarousel from 'vue-slick-carousel'
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import Person from './Person';
 import LargeModal from './LargeModal';
 import FullTestimonial from './FullTestimonial';
+import { imgSrc } from '@/utils';
 
 export default {
     components: { 
-        VueSlickCarousel,
         Person,
         LargeModal,
         FullTestimonial
@@ -124,11 +115,11 @@ export default {
     },
     methods : {
 		imgSrc(img) {
-			return "https:" + img.file.url;
+            imgSrc(img, 500);
         },
         imgSrcInd(ind) {
             if (ind < this.picturesToDisplay.length) {
-                return "https:" + this.picturesToDisplay[ind]?.file?.url;
+                return imgSrc(this.picturesToDisplay[ind], 500);
             }
             return null;
         },
