@@ -4,7 +4,7 @@
             <slot name="inline"/>
         </div>
         <div v-if="showFloatScroll" class="absolute z-50">
-            <div class="fixed md:bottom-4 md:right-6 flex flex-wrap content-center transition-height h-12 duration-500 ease-out shadow-2xl rounded-lg" :class='expandClass'>
+            <div v-click-outside="close" class="fixed md:bottom-4 md:right-6 flex flex-wrap content-center transition-height h-12 duration-500 ease-out shadow-2xl rounded-lg" :class='expandClass'>
                     <div v-if="expandModal" :class="modalHeight" class="inline-flex align-bottom">
                         <slot name="expand"/>
                     </div>

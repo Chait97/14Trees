@@ -43,21 +43,25 @@ export default {
         }
     },
     created() {
-        let options = {root: document.getElementById('scroll-page'), threshold:1.0}
-        if (this.waitForScroll)
-            this.observer = new IntersectionObserver(this.onObserved, options)
+        if (process.isClient) {
+            let options = {root: document.getElementById('scroll-page'), threshold:1.0}
+            if (this.waitForScroll)
+                this.observer = new IntersectionObserver(this.onObserved, options)
+        }
     },
     async mounted() {
-        if (this.waitForScroll)
-            this.observer.observe(this.$refs.infoElement)
-        try {
-            const response = await fetch(this.spreadsheetSrc, {cache: 'force-cache'} )
-            this.dataMap = parseTSV(await response.text())
-            if(this.observed || !this.waitForScroll) {
-                this.countAnimate()
+        if (process.isClient) {
+            if (this.waitForScroll)
+                this.observer.observe(this.$refs.infoElement)
+            try {
+                const response = await fetch(this.spreadsheetSrc, {cache: 'force-cache'} )
+                this.dataMap = parseTSV(await response.text())
+                if(this.observed || !this.waitForScroll) {
+                    this.countAnimate()
+                }
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
         }
     },
     beforeDestroy() {
@@ -65,14 +69,16 @@ export default {
     },
 	methods : {
         onObserved(entries) {
-            entries.forEach( ({target, isIntersecting}) => {
-               if (!isIntersecting) {
-                    return;
-                }
-                this.observed = true
-                this.observer.unobserve(target);
-                this.countAnimate()
-            });
+            if(process.isClient) {
+                entries.forEach( ({target, isIntersecting, intersectionRatio}) => {
+                   if (!isIntersecting || intersectionRatio == 0) {
+                        return;
+                    }
+                    this.observed = true
+                    this.observer.unobserve(target);
+                    this.countAnimate()
+                });
+            }
         },
         countAnimate() {
             this.donors = parseInt(this.dataMap?.get("Donors"))

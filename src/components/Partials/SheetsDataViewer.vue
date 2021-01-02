@@ -50,7 +50,6 @@ export default {
             }
             try {
                 await gapi.client.init(gsettings)
-                console.log("Client init")
             } catch (e) {
                 console.log(e)
             }
@@ -64,7 +63,6 @@ export default {
                 })
                 this.res = response.result;
                 let numRows = result.values ? result.values.length : 0;
-                console.log(`${numRows} rows retrieved.`);
             } catch (e) {console.log(e)}
         }
 	}

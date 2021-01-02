@@ -26,7 +26,7 @@
                 <SlideShow :headline="presentation.headline" :slides="presentation.slides" :showHeadline="true" class="h-full"/>
             </div>
             <div v-if="$page.campaign.action" class="my-12">
-                <ActionModal :link="$page.campaign.action" :showFloat="true" :modalHeight="'md:h-80 h-96'" :scrollPosition="3500" ref="actionModal"> 
+                <ActionModal :link="$page.campaign.action" :showFloat="true" :modalHeight="'md:h-80 h-96'" :scrollPosition="3100" ref="actionModal"> 
                     <template #inline>
                         <progress-track :waitForScroll='true' class="md:pt-24 pt-12"/>
                         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-12 lg:px-8 lg:flex lg:items-center lg:justify-between">

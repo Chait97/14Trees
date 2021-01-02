@@ -100,7 +100,6 @@ export default {
 		},
 		imgSrc(img) {
 			imgSrc(img, 600);
-			console.log(imgSrc(img, 600));
         },
 	}
 };
