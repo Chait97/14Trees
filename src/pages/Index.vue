@@ -3,11 +3,12 @@
 		<SEO :title="$static.metadata.siteName" :description="$static.metadata.siteDescription"/>
 		<div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
             <div class="md:mx-32 mx-4 md:pt-16">
-			<content-header :title="$static.metadata.siteName" :sub="$static.metadata.siteDescription">
-			</content-header>
+			<content-header :title="$static.metadata.siteName" :sub="$static.metadata.siteDescription"> </content-header>
 			<div v-if="info.images">
-				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full" v-lazy-container="{ selector: 'img' }">
-					<img :data-src="imgSrc(img)" class="self-center w-full">
+				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full" >
+					<div v-if="imgSrc(img)" v-lazy-container="{ selector: 'img' }" class="w-full">
+						<img :data-src="imgSrc(img)" class="self-center object-contain w-full">
+					</div>
 				</div>
 			</div>
 			<div class="flex flex-wrap justify-center items-center">
@@ -99,7 +100,7 @@ export default {
 			return withLineBreaks(a);
 		},
 		imgSrc(img) {
-			imgSrc(img, 600);
+			return imgSrc(img, 600);
         },
 	}
 };

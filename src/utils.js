@@ -22,6 +22,7 @@ function whichCompoent(node) {
             break;
         case 'articlePreview':
             type = "ArticlePreview";
+            small = true
             break;
         case 'presentation':
             type = "SlideShow"
