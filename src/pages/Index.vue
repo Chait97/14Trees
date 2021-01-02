@@ -6,10 +6,15 @@
 			<content-header :title="$static.metadata.siteName" :sub="$static.metadata.siteDescription">
 			</content-header>
 			<div v-if="info.images">
-				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full">
-					<img v-lazy="imgSrc(img)" class="self-center w-full">
-					<!-- <g-image :src="imgSrc(img)" class="self-center w-full" /> -->
+				<div v-for="(img, index) in info.images" :key="index" class="flex items-center justify-center pb-4 self-center w-full" v-lazy-container="{ selector: 'img' }">
+					<img :data-src="imgSrc(img)" class="self-center w-full">
 				</div>
+			</div>
+			<div class="flex flex-wrap justify-center items-center">
+				<progress-track :waitForScroll='true' class="pt-4 md:w-5/6 w-full"/>
+				<g-link :to="'/contribute'" tag="button" class="btn-action h-12 text-white bg-green-500 dark:bg-green-600 dark:hover:bg-green-500 hover:bg-green-600 duration-500">
+					Contribute 
+				</g-link>
 			</div>
 		</div>
 		</div>
@@ -23,17 +28,6 @@
 				<InfoSections :sections="info.sections"/>
 			</div>
 		</div>
-		<!-- <div class="container md:my-40 my-6 mx-16 overflow-x-hidden text-gray-800 dark:text-gray-400 flex justify-center">
-			<div class="self-center post-content">
-			<p>Ongoing Projects</p>
-			<ul>
-				<li><g-link class="block py-2 text-black" to="/Projects/reforestation-vetale" title="Vetale Reforestation">
-					Vetale Reforestation</g-link></li>
-				<li><g-link class=" block py-2 text-black" to="/Projects/iitk-djc" title="Project 40000 Trees">
-					Project 40000 Trees for IIT-Kanpur DJC</g-link></li>
-			</ul>
-			</div>
-		</div> -->
 	</Layout>
 </template>
 
@@ -80,6 +74,7 @@ query {
 import ContentHeader from "~/components/Partials/ContentHeader.vue";
 import InfoSections from "~/components/Partials/InfoSections.vue";
 import SEO from "~/components/Partials/SEO.vue";
+import ProgressTrack from "~/components/Partials/ProgressTrack.vue";
 import { imgSrc, withLineBreaks } from '~/utils';
 
 export default {
@@ -91,6 +86,7 @@ export default {
 	components: {
 		ContentHeader,
 		InfoSections,
+		ProgressTrack,
 		SEO
 	},
 	computed: {
@@ -104,6 +100,7 @@ export default {
 		},
 		imgSrc(img) {
 			imgSrc(img, 600);
+			console.log(imgSrc(img, 600));
         },
 	}
 };

@@ -28,8 +28,8 @@ module.exports = {
         },
         presetEnvConfig: {},
         shouldPurge: false,
-        shouldImport: true,
-        shouldTimeTravel: true,
+        shouldImport: false,
+        shouldTimeTravel: false,
         shouldPurgeUnusedKeyframes: true,
       }
     },
@@ -40,30 +40,20 @@ module.exports = {
       }
     },
     {
-      use: '@gridsome/source-filesystem',
+      use: 'gridsome-plugin-flexsearch',
       options: {
-        typeName: 'CustomPage',
-        path: './content/pages/*.md'
+        searchFields: ['title', 'content'],
+        collections: [{
+          typeName: 'ContentfulCampaign',
+          indexName: 'Campaign',
+          fields: ['title', 'heading', 'subtitle', 'content']
+        }]
       }
-    },
-  ],
-  transformers: {
-    remark: {
-      plugins: [
-        'remark-autolink-headings',
-        'remark-attr',
-        ['gridsome-plugin-remark-prismjs-all', {
-          noInlineHighlight: false,
-          showLineNumbers: false,
-        }],
-        require('./packages/gridsome-plugin-remark-figure')
-      ],
-      processImages: false
     }
-  },
+  ],
   templates: {
     ContentfulCampaign: '/projects/:title',
-    CustomPage: '/:title',
+    ContentfulContentPage: '/:title',
     ContentfulBlogPost: '/blogs/:slug',
   },
   chainWebpack: config => {

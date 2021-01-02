@@ -59,10 +59,20 @@ h6, .h6 {
 @tailwind components;
 @tailwind utilities;
 
+.nocontainer {
+  position: absolute;
+  width: 100vw;
+  margin-left: -50vw;
+  left: 50%;
+}
 
 .container {
   @apply max-w-screen-xl;
   @apply px-0;
+}
+
+.full-page-generic {
+  @apply mx-auto lg:mt-48 mt-16 min-h-screen sm:px-0;
 }
 
 .fade-enter-active,
@@ -374,14 +384,14 @@ h6, .h6 {
     Content
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-.mode-dark {
+.dark {
   .post-content :not(.nested) {
     span:not(.token),
     li {
       @apply tracking-wider;
       @apply leading-relaxed;
       @apply font-normal;
-      @apply text-gray-500;
+      @apply text-gray-300;
       @include font-size(1.1rem);
     }
   }
@@ -491,7 +501,7 @@ pre[class*="language-"] {
   @apply bg-gray-200;
 }
 
-.mode-dark {
+.dark {
   pre[class*="language-"]::selection,
   code[class*="language-"]::selection,
   pre[class*="language-"]::mozselection,
@@ -630,7 +640,7 @@ pre[class*="language-"]>code[class*="language-"] {
   white-space: pre;
 }
 
-.mode-dark {
+.dark {
   .medium-zoom-overlay {
     background-color: rgb(46, 46, 46) !important;
   }
@@ -655,8 +665,21 @@ figure {
 }
 
 @layer components {
+  .green-text {
+    @apply text-green-500;
+  }
+
+  .title-text {
+    @apply text-center text-7xl font-light;
+    @apply text-gray-800 dark:text-gray-400;
+  }
+
   .btn {
     @apply font-bold py-2 px-4 rounded;
+  }
+
+  .btn-action {
+    @apply inline-flex items-center justify-center md:px-5 md:py-4 px-2 py-2 border border-transparent text-base font-medium rounded-md hover:shadow-md;
   }
 
   .btn-blue {
@@ -666,6 +689,10 @@ figure {
     @apply bg-blue-700;
   }
 
+  .btn-animate {
+    @apply transition ease-in-out transition-colors;
+  }
+
   .btn-gray {
     @apply bg-gray-400 text-gray-800;
   }
@@ -673,7 +700,7 @@ figure {
     @apply bg-gray-500;
   }
   .card {
-    @apply border border-gray-200 bg-white rounded-lg shadow-lg transition duration-200 ease-out transform cursor-pointer;
+    @apply border border-gray-200 dark:border-gray-600 bg-white dark:bg-dark-grey rounded-lg shadow-lg transition duration-200 ease-out transform cursor-pointer;
   }
   .card:hover {
     @apply scale-101;

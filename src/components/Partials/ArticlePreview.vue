@@ -1,9 +1,6 @@
 <template>
     <section>
-        <g-link
-            :to="link"
-            :title="headline">
-        <div class="card card-hover p-4">
+        <div class="card card-hover p-4 dark:text-gray-300 text-gray-700" @click="goToAction">
             <div v-if="previewImage" class="rounded overflow-hidden md:h-64 md:w-full h-48 mb-3">
                 <g-image alt="content" class="object-cover object-center h-full w-full" :src="imgSrc(previewImage)"/>
             </div>
@@ -15,7 +12,6 @@
                 <Person class="md:py-1" v-bind="getAuthor"/>
             </div>
         </div>
-        </g-link>
     </section>
 </template>
 

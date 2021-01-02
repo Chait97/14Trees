@@ -1,6 +1,6 @@
 <template>
-  <div class="h-16 dark:bg-black bg-white">
-    <headroom :classes="{'initial' : 'headroom bg-white dark:bg-black border-b dark:border-gray-900'}" :downTolerance="10" :upTolerance="20" :offset="15" @unpin="navbarUnpinned=true" @pin="navbarUnpinned=false">
+  <div class="h-16 dark:bg-gray-900 bg-white dark:bg-dark-grey">
+    <headroom :classes="{'initial' : 'headroom bg-white dark:bg-dark-grey border-black dark:border-gray-900'}" :downTolerance="10" :upTolerance="20" :offset="15" @unpin="navbarUnpinned=true" @pin="navbarUnpinned=false">
       <navbar-desktop
         v-on="$listeners" 
         @openSearchModal="openSearchModal"
@@ -40,7 +40,7 @@ import { headroom } from "vue-headroom";
 export default {
   props: {
     theme : {
-      type: String
+      type: Number 
     }
   },
   data: function() {

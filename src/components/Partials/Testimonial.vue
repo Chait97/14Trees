@@ -1,6 +1,6 @@
 <template>
     <section class="text-gray-700 body-font">
-        <div class="md:py-24 pt-16 mx-4">
+        <div class="md:py-24 py-16 mx-4">
             <div class="grid grid-cols-8">
                 <div v-if="hasImgs" class="md:col-span-4 col-span-8 flex md:justify-end">
                     <div class="md:ml-4 md:p-8 md:w-10/12 w-full flex content-center h-full">
@@ -52,7 +52,7 @@
                         <p class="hidden dark:text-gray-400 md:contents leading-relaxed text-md" v-html="truncatedLarge"></p>
                         <div class="flex justify-center mt-4">
                             <div v-if="viewMoreSmall" class="contents md:hidden">
-                                <button class="border-2 border-gray-600 text-gray-700 
+                                <button class="border-2 border-gray-600 text-gray-700 dark:text-gray-300
                                                 active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
                                                 hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
                                         type="button" style="transition: all .15s ease" 
@@ -61,7 +61,7 @@
                                 </button>
                             </div>
                             <div v-if="viewMoreLarge" class="hidden md:contents">
-                                <button class="border-2 border-gray-600 text-gray-700 
+                                <button class="border-2 border-gray-600 text-gray-700  dark:text-gray-300
                                                 active:bg-gray-600 text-xs px-6 py-1 rounded shadow 
                                                 hover:shadow-md outline-none focus:outline-none mr-1 mb-1" 
                                         type="button" style="transition: all .15s ease" 

@@ -1,11 +1,7 @@
 <template>
     <Layout>
-        <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-400">
-          <div class="mt-20 object-center">
-              <p class="text-center md:text-6xl text-2xl">
-                  <span>Testimonials</span>
-              </p>
-            </div>
+        <div class="container full-page-generic">
+              <h1 class="title-text"> Testimonials </h1>
             <div class="mx-4 md:pt-16">
                 <div v-for="tm in $page.testimonials.edges" :key="tm.id">
                     <testimonial v-bind="tm.node"/>

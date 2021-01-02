@@ -1,25 +1,21 @@
 <template>
-    <Layout>
-        <div class="container sm:pxi-0 mx-auto my-10 text-gray-800 dark:text-gray-400">
-            <div class="mt-20 object-center">
-              <p class="text-center md:text-6xl text-2xl">
-                  <span>Blogs</span>
-              </p>
-            </div>
-            <div class="flex items-center flex-wrap w-full sm:pxi-0 mx-auto my-2 ">
-                <template v-for="ext in extArticles">
-                    <section :key="ext.node.title" class="md:w-1/2 w-full mt-2 px-8 md:pt-16">
-                        <ArticlePreview v-bind="ext.node"/>
-                    </section>
-                </template>
-                <template v-for="post in blogPosts">
-                    <section :key="post.node.title" class="md:w-1/2 w-full mt-2 px-8 md:pt-16">
-                        <ArticlePreview v-bind="post.node"/>
-                    </section>
-                </template>
-            </div>
-        </div>
-    </Layout>
+  <Layout>
+    <section class="container full-page-generic">
+      <h1 class="title-text">Blogs</h1>
+      <div class="flex items-center flex-wrap w-full sm:pxi-0 mx-auto my-2 ">
+        <template v-for="ext in extArticles">
+          <section :key="ext.node.title" class="md:w-1/2 w-full mt-2 px-8 md:pt-16">
+            <ArticlePreview v-bind="ext.node" />
+          </section>
+        </template>
+        <template v-for="post in blogPosts">
+          <section :key="post.node.title" class="md:w-1/2 w-full mt-2 px-8 md:pt-16">
+            <ArticlePreview v-bind="post.node" />
+          </section>
+        </template>
+      </div>
+    </section>
+  </Layout>
 </template>
 
 <script>

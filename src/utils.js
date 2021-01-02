@@ -14,19 +14,25 @@ export function videoUrl(url) {
 
 function whichCompoent(node) {
     let type = null;
+    let small = false;
     switch(node?.data?.target?.sys?.contentType?.sys?.id) {
         case 'person':
             type = "person";
+            small = true
             break;
         case 'articlePreview':
             type = "ArticlePreview";
+            break;
+        case 'presentation':
+            type = "SlideShow"
             break;
         default:
             undefined;
     }
     return {
         type,
-        fields: (node?.data?.target?.fields)
+        fields: (node?.data?.target?.fields),
+        small
     }
 }
 
@@ -68,4 +74,20 @@ export function imgSrc(img, width) {
     if (img?.fields?.file) 
         return `https:${img.fields?.file?.url}?w=${width}`;
     return null
+}
+
+export function parseTSV(tsv, full = false) {
+    let dataMap = tsv.split('\n').map(row => row.split('\t'))
+    let keys = dataMap.shift()
+    dataMap = dataMap.map(row => {
+        let returnMap = new Map()
+        row.forEach((col, i) => returnMap.set(keys[i], col))
+        return returnMap
+    })
+    if(full) {
+        return dataMap
+    }
+    let shortMap = new Map()
+    dataMap.forEach(row => shortMap.set(row.get("KeyA"), row.get("Value")))
+    return shortMap
 }

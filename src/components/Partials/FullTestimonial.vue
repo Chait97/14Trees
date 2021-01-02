@@ -14,10 +14,10 @@
                     </svg>
                 </div>
             </section>
-            <section class="relative bg-white">
+            <section class="relative bg-white dark:bg-gray-800">
                 <div class="container mx-auto px-4">
                     <div
-                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 -mt-64">
+                        class="relative flex flex-col min-w-0 break-words w-full mb-6 -mt-64">
                         <div class="px-6">
                             <Person :image="person.image" :name="person.name" :linkedIn="person.linkedIn" :title="person.title" variant="profile"/>
                         </div>
@@ -25,7 +25,7 @@
                     <div class="md:py-10">
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full lg:w-9/12 px-4">
-                                <p class="mb-4 text-sm md:text-lg leading-relaxed text-gray-800" v-html="content"></p>
+                                <p class="mb-4 text-sm md:text-lg leading-relaxed text-gray-800 dark:text-gray-300" v-html="content"></p>
                             </div>
                         </div>
                     </div>

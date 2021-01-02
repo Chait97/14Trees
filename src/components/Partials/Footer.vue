@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-blue-900 dark:bg-gray-900 text-white dark:text-gray-400 text-center text-sm">
+  <div class="bg-gray-800 dark:bg-gray-900 text-white dark:text-gray-400 text-center text-sm">
     <div class="container mx-auto py-16">
       <div class="mb-4">
         <p>
