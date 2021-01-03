@@ -1,6 +1,5 @@
 <template>
     <Layout>
-        <div id="scroll-page">
             <div class="container sm:pxi-0 mx-auto my-10 overflow-x-hidden text-gray-800 dark:text-gray-300">
                 <div class="md:mx-32 mx-6 md:px-4 md:pt-16">
                     <content-header :title="$page.campaign.heading" :sub="$page.campaign.subtitle"></content-header>
@@ -118,7 +117,6 @@
                     <ContentfulRichText :content="$page.campaign.footerContent" />
                 </section>
             </div>
-        </div>
     </Layout>
 </template>
 

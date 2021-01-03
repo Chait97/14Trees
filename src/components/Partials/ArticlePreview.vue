@@ -2,7 +2,9 @@
     <section>
         <div class="card card-hover p-4 dark:text-gray-300 text-gray-700" @click="goToAction">
             <div v-if="previewImage" class="rounded overflow-hidden md:h-64 md:w-full h-48 mb-3">
-                <g-image alt="content" class="object-cover object-center h-full w-full" :src="imgSrc(previewImage)"/>
+                <div v-if="previewImage" v-lazy-container="{ selector: 'img' }">
+                    <img alt="content" class="object-cover object-center h-full w-full" :data-src="imgSrc(previewImage)"/>
+                </div>
             </div>
             <div class="md:h-48 overflow-y-hidden px-4">
                 <h2 class="text-2xl font-light text-gray-700 dark:text-gray-300 my-1 md:my-3 text-center">{{headline}}</h2>

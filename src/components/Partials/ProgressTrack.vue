@@ -13,6 +13,7 @@
 <script>
 import { parseTSV } from "~/utils"
 import ICountUp from 'vue-countup-v2'
+import axios from 'axios'
 
 export default {  
     props: {
@@ -42,20 +43,21 @@ export default {
             }
         }
     },
-    created() {
+    beforeMount() {
         if (process.isClient) {
-            let options = {root: document.getElementById('scroll-page'), threshold:1.0}
+            let options = {root: null, threshold:1.0}
             if (this.waitForScroll)
                 this.observer = new IntersectionObserver(this.onObserved, options)
         }
     },
     async mounted() {
         if (process.isClient) {
-            if (this.waitForScroll)
+            if (this.waitForScroll) {
                 this.observer.observe(this.$refs.infoElement)
+            }
             try {
-                const response = await fetch(this.spreadsheetSrc, {cache: 'force-cache'} )
-                this.dataMap = parseTSV(await response.text())
+                const response = await axios.get(this.spreadsheetSrc, {})
+                this.dataMap = parseTSV(response.data)
                 if(this.observed || !this.waitForScroll) {
                     this.countAnimate()
                 }
@@ -69,16 +71,14 @@ export default {
     },
 	methods : {
         onObserved(entries) {
-            if(process.isClient) {
-                entries.forEach( ({target, isIntersecting, intersectionRatio}) => {
-                   if (!isIntersecting || intersectionRatio == 0) {
-                        return;
-                    }
-                    this.observed = true
-                    this.observer.unobserve(target);
-                    this.countAnimate()
-                });
-            }
+            entries.forEach( ({target, isIntersecting, intersectionRatio}) => {
+                if (!isIntersecting || intersectionRatio == 0) {
+                    return;
+                }
+                this.observed = true
+                this.observer.unobserve(target);
+                this.countAnimate()
+            });
         },
         countAnimate() {
             this.donors = parseInt(this.dataMap?.get("Donors"))
