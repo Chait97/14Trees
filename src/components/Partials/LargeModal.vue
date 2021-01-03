@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex ">
       <div class="relative w-auto my-2 mx-auto max-w-6xl">
         <!--content-->
-        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-700 outline-none focus:outline-none">
           <!--header-->
           <div v-if="title" class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
             <h3 class="text-3xl font-semibold">
@@ -22,12 +22,11 @@
               </div>
           </div>
           <!--footer-->
-          <div class="flex items-center justify-end p-1 md:p-2 border-t border-solid border-gray-300 rounded-b">
+          <div class="flex items-center justify-end p-1 md:p-2 dark:bg-gray-600 bg-gray-100 rounded-b">
             <p v-if="footerContent" class="my-4 text-gray-600 text-lg leading-relaxed">
                 {{footerContent}}
             </p>
-            <button class="text-red-500 bg-transparent border border-solid border-red-500 
-                            hover:bg-red-500 hover:text-white active:bg-red-600 font-bold 
+            <button class="bg-red-400 dark:bg-red-500 bg-transparent text-white hover:bg-red-500 dark:hover:bg-red-400 hover:text-white 
                             uppercase text-sm px-3 py-1 md:py-2 rounded outline-none focus:outline-none mr-1 mb-1" 
                     type="button" style="transition: all .15s ease" v-on:click="toggleModal()">
               Close

@@ -2,12 +2,10 @@
 //https://github.com/tailwindcss/tailwindcss/pull/560#issuecomment-503222143
 var _ = require('lodash')
 var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
+const colors = require('tailwindcss/colors')
 
 module.exports = {
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-  },
+  darkMode: 'class',
   purge: {
     content:["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
     options: {
@@ -17,14 +15,33 @@ module.exports = {
         'bg-opacity-50',
         'bg-opacity-75',
         'bg-opacity-100',
-        'mode-dark'
       ]
     }
   },
   theme: {
     extend: {
+      variants: {
+        height: ['hover', 'focus']
+      },
       colors: {
-        'dark-grey': '#1b1f23'
+        'dark-grey': '#1b1f23',
+        'darker-grey': '#181d21',
+        'darkish-grey': '#16191c',
+        'primary-green': {
+          1 : '#1b1f23',
+          2 : '#9acd9a',
+        }
+      },
+      spacing: {
+        '1/2' : '50%',
+        '1/3' : '33.333333%',
+        '2/3' : '66.666667%',
+        '3/4' : '75%',
+        '9/16' : '56.25%',
+        'full' : '100%'
+      },
+      transitionProperty: {
+        'height': 'height'
       },
       height: {
         '128': '32rem',
@@ -41,6 +58,12 @@ module.exports = {
         '1/4-screen': '25vh',
         '1/2-screen': '50vh',
         '3/4-screen': '75vh',
+      },
+      margin: {
+        '-1/2-hscreen': '-50vh',
+        '1/2-hscreen': '50vh',
+        '-1/2-wscreen': '-50vw',
+        '1/2-wscreen': '50vw',
       },
       scale: {
         '101': '1.01',
@@ -110,40 +133,6 @@ module.exports = {
       'none': 'none',
     }
   },
-  variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'dark', 'dark-hover', 'dark-focus'],
-    textColor: ['responsive', 'hover', 'focus', 'dark', 'dark-hover', 'dark-focus'],
-    borderColor: ['responsive', 'hover', 'focus', 'dark', 'dark-hover', 'dark-focus']
-  },
-  plugins: [
-      require('tailwindcss-dark-mode')(),
-    function ({
-      addUtilities,
-      e,
-      theme,
-      variants
-    }) {
-      const colors = flattenColorPalette(theme('borderColor'))
-
-      const utilities = _.flatMap(_.omit(colors, 'default'), (value, modifier) => ({
-
-        [`.${e(`border-t-${modifier}`)}`]: {
-          borderTopColor: `${value}`
-        },
-        [`.${e(`border-r-${modifier}`)}`]: {
-          borderRightColor: `${value}`
-        },
-        [`.${e(`border-b-${modifier}`)}`]: {
-          borderBottomColor: `${value}`
-        },
-        [`.${e(`border-l-${modifier}`)}`]: {
-          borderLeftColor: `${value}`
-        },
-      }))
-
-      addUtilities(utilities, variants('borderColor'))
-    },
-  ],
   corePlugins: {
     container: false
   },

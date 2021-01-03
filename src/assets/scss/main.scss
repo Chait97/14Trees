@@ -1,6 +1,10 @@
 @import "~rfs/scss";
 
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
 
 blockquote {
   @apply p-4;
@@ -55,14 +59,114 @@ h6, .h6 {
   @apply font-medium;
   @include font-size(1.125rem);
 }
+}
 
-@tailwind components;
-@tailwind utilities;
+@layer utilities {
 
+  @keyframes pulseBackground {
+    from {
+      opacity: 0.3;
+    }
+    to {
+      opacity: 0.8;
+    }
+  }
+  @keyframes translateBackground {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
+/* ––––––––––––––––––––––––––––––––––––––––––––––––––
+    Content
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.dark {
+  .post-content :not(.nested) {
+    span:not(.token),
+    li {
+      @apply tracking-wider;
+      @apply leading-relaxed;
+      @apply font-normal;
+      @apply text-gray-300;
+      @include font-size(1.1rem);
+    }
+  }
+}
+
+.post-content :not(.nested){
+
+  a {
+    color: #0c608a;
+    text-decoration: underline;
+  }
+
+  span:not(.token),
+  li {
+    @apply tracking-wider;
+    @apply leading-relaxed;
+    @apply font-normal;
+    @apply text-gray-800;
+    @include font-size(1.1rem);
+  }
+
+  ol {
+    @apply list-decimal;
+    @apply ml-5;
+    @apply mt-5;
+  }
+
+  ul {
+    @apply list-disc;
+    @apply ml-5;
+    @apply mt-5;
+  }
+
+  li > ul {
+    @apply mt-0;
+  }
+
+  blockquote > h2 {
+    @apply text-4xl;
+    @apply font-thin;
+    @apply pl-12;
+  }
+
+}
+
+.post-authors a::after {
+  content: ", ";
+}
+
+.post-authors a:last-child::after {
+  content: "";
+}
+
+/* Generated with http://k88hudson.github.io/syntax-highlighting-theme-generator/www */
+/* http://k88hudson.github.io/react-markdocs */
+/**
+ * @author k88hudson
+ *
+ * Based on prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+.nocontainer {
+  position: absolute;
+  width: 100vw;
+  margin-left: -50vw;
+  left: 50%;
+}
 
 .container {
   @apply max-w-screen-xl;
   @apply px-0;
+}
+
+.full-page-generic {
+  @apply mx-auto lg:mt-48 mt-16 min-h-screen sm:px-0;
 }
 
 .fade-enter-active,
@@ -75,6 +179,51 @@ h6, .h6 {
 .fade-leave-to {
   opacity: 0;
 }
+
+}
+
+@layer components {
+
+  .green-text {
+    @apply text-green-500;
+  }
+
+  .title-text {
+    @apply text-center text-7xl font-light;
+    @apply text-gray-800 dark:text-gray-400;
+  }
+
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+
+  .btn-action {
+    @apply inline-flex items-center justify-center md:px-5 md:py-4 px-2 py-2 border border-transparent text-base font-medium rounded-md hover:shadow-md;
+  }
+
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+
+  .btn-animate {
+    @apply transition ease-in-out transition-colors;
+  }
+
+  .btn-gray {
+    @apply bg-gray-400 text-gray-800;
+  }
+  .btn-gray:hover {
+    @apply bg-gray-500;
+  }
+  .card {
+    @apply border border-gray-200 dark:border-gray-600 bg-white dark:bg-dark-grey rounded-lg shadow-lg transition duration-200 ease-out transform cursor-pointer;
+  }
+  .card:hover {
+    @apply scale-101;
+  }
 
 .featured-post-card {
 
@@ -226,24 +375,6 @@ h6, .h6 {
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––––––
-    Based on: https://codepen.io/nickelse/pen/YGPJQG
-    Influenced by: https://sproutsocial.com/
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-
-/* #Mega Menu Styles
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.mega-menu {
-  left: 0;
-  top: 0;
-  @apply mt-16;
-  @apply w-full;
-  @apply absolute;
-  @apply text-left;
-}
-
-/* ––––––––––––––––––––––––––––––––––––––––––––––––––
     Tooltip and Popover 
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -370,165 +501,6 @@ h6, .h6 {
 
 }
 
-/* ––––––––––––––––––––––––––––––––––––––––––––––––––
-    Content
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.mode-dark {
-  .post-content :not(.nested) {
-    span:not(.token),
-    li {
-      @apply tracking-wider;
-      @apply leading-relaxed;
-      @apply font-normal;
-      @apply text-gray-500;
-      @include font-size(1.1rem);
-    }
-  }
-}
-
-.post-content :not(.nested){
-
-  a {
-    color: #0c608a;
-    text-decoration: underline;
-  }
-
-  span:not(.token),
-  li {
-    @apply tracking-wider;
-    @apply leading-relaxed;
-    @apply font-normal;
-    @apply text-gray-800;
-    @include font-size(1.1rem);
-  }
-
-  ol {
-    @apply list-decimal;
-    @apply ml-5;
-    @apply mt-5;
-  }
-
-  ul {
-    @apply list-disc;
-    @apply ml-5;
-    @apply mt-5;
-  }
-
-  li > ul {
-    @apply mt-0;
-  }
-
-  blockquote > h2 {
-    @apply text-4xl;
-    @apply font-thin;
-    @apply pl-12;
-  }
-
-}
-
-.post-authors a::after {
-  content: ", ";
-}
-
-.post-authors a:last-child::after {
-  content: "";
-}
-
-/* Generated with http://k88hudson.github.io/syntax-highlighting-theme-generator/www */
-/* http://k88hudson.github.io/react-markdocs */
-/**
- * @author k88hudson
- *
- * Based on prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
- */
-/*********************************************************
-* General
-*/
-pre[class*="language-"],
-code[class*="language-"] {
-  color: #5c6e74;
-
-  text-shadow: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  @include font-size(0.9rem);
-  direction: ltr;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  line-height: 1.5;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-pre[class*="language-"]::selection,
-code[class*="language-"]::selection,
-pre[class*="language-"]::mozselection,
-code[class*="language-"]::mozselection {
-  text-shadow: none;
-  @apply bg-gray-200;
-}
-
-pre[class*="language-"] {
-  padding: 1em;
-  margin: .5em 0;
-  overflow: auto;
-  @apply bg-gray-200;
-}
-
-:not(pre)>code[class*="language-"] {
-  padding: .3em .3em;
-  border-radius: .3em;
-  color: #db4c69;
-  @apply bg-gray-200;
-}
-
-.mode-dark {
-  pre[class*="language-"]::selection,
-  code[class*="language-"]::selection,
-  pre[class*="language-"]::mozselection,
-  code[class*="language-"]::mozselection {
-    text-shadow: none;
-    @apply bg-gray-700;
-  }
-
-  pre[class*="language-"],
-  code[class*="language-"] {
-    @apply text-gray-400;
-  }
-
-  pre[class*="language-"] {
-    padding: 1em;
-    margin: .5em 0;
-    overflow: auto;
-    @apply bg-gray-800;
-  }
-
-  :not(pre)>code[class*="language-"] {
-    padding: .3em .3em;
-    border-radius: .3em;
-    color: #db4c69;
-    @apply bg-gray-800;
-  }
-}
-
-@media print {
-
-  pre[class*="language-"],
-  code[class*="language-"] {
-    text-shadow: none;
-  }
-}
-
-
 /*********************************************************
 * Tokens
 */
@@ -630,7 +602,7 @@ pre[class*="language-"]>code[class*="language-"] {
   white-space: pre;
 }
 
-.mode-dark {
+.dark {
   .medium-zoom-overlay {
     background-color: rgb(46, 46, 46) !important;
   }
@@ -644,6 +616,112 @@ pre[class*="language-"]>code[class*="language-"] {
   @apply z-1000;
 }
 
+}
+/* ––––––––––––––––––––––––––––––––––––––––––––––––––
+    Based on: https://codepen.io/nickelse/pen/YGPJQG
+    Influenced by: https://sproutsocial.com/
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+/* #Mega Menu Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.mega-menu {
+  left: 0;
+  top: 0;
+  @apply mt-16;
+  @apply w-full;
+  @apply absolute;
+  @apply text-left;
+}
+
+
+/*********************************************************
+* General
+*/
+pre[class*="language-"],
+code[class*="language-"] {
+  color: #5c6e74;
+
+  text-shadow: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  @include font-size(0.9rem);
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"]::mozselection,
+code[class*="language-"]::mozselection {
+  text-shadow: none;
+  @apply bg-gray-200;
+}
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  @apply bg-gray-200;
+}
+
+:not(pre)>code[class*="language-"] {
+  padding: .3em .3em;
+  border-radius: .3em;
+  color: #db4c69;
+  @apply bg-gray-200;
+}
+
+.dark {
+  pre[class*="language-"]::selection,
+  code[class*="language-"]::selection,
+  pre[class*="language-"]::mozselection,
+  code[class*="language-"]::mozselection {
+    text-shadow: none;
+    @apply bg-gray-700;
+  }
+
+  pre[class*="language-"],
+  code[class*="language-"] {
+    @apply text-gray-400;
+  }
+
+  pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    @apply bg-gray-800;
+  }
+
+  :not(pre)>code[class*="language-"] {
+    padding: .3em .3em;
+    border-radius: .3em;
+    color: #db4c69;
+    @apply bg-gray-800;
+  }
+}
+
+@media print {
+
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+  }
+}
+
+
+
 figure {
   @apply my-8;
   @apply -mx-16;
@@ -654,53 +732,10 @@ figure {
   }
 }
 
-@layer components {
-  .btn {
-    @apply font-bold py-2 px-4 rounded;
-  }
-
-  .btn-blue {
-    @apply bg-blue-500 text-white;
-  }
-  .btn-blue:hover {
-    @apply bg-blue-700;
-  }
-
-  .btn-gray {
-    @apply bg-gray-400 text-gray-800;
-  }
-  .btn-gray:hover {
-    @apply bg-gray-500;
-  }
-  .card {
-    @apply border border-gray-200 bg-white rounded-lg shadow-lg transition duration-200 ease-out transform cursor-pointer;
-  }
-  .card:hover {
-    @apply scale-101;
-  }
-
-  @keyframes pulseBackground {
-    from {
-      opacity: 0.3;
-    }
-    to {
-      opacity: 0.8;
-    }
-  }
-  @keyframes translateBackground {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: 100% 0;
-    }
-  }
-
-  img[lazy=loading] {
-    @apply animate-pulse;
-    background: url('leaves-loading.gif') center center repeat;
-    background-size: 8rem;
-    
-    animation: pulseBackground 0.4s ease-in-out infinite alternate, translateBackground 20s ease-in-out infinite alternate;
-  }
+img[lazy=loading] {
+  @apply animate-pulse;
+  background: url('leaves-loading.gif') center center repeat;
+  background-size: 8rem;
+  
+  animation: pulseBackground 0.4s ease-in-out infinite alternate, translateBackground 20s ease-in-out infinite alternate;
 }

@@ -22,7 +22,7 @@ import VFooter from "~/components/Partials/Footer.vue";
 export default {
   data: function() {
     return {
-      theme: "light"
+      theme: 0 
     };
   },
   components: {

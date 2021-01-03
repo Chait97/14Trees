@@ -10,9 +10,7 @@ import {
   VClosePopover
 } from 'v-tooltip'
 
-import 'prismjs/themes/prism.css'
 import '~/assets/scss/main.scss'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 import {
   FontAwesomeIcon
@@ -32,7 +30,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import ClickOutside from 'v-click-outside'
 import InfiniteLoading from 'vue-infinite-loading'
 import VueLazyload from 'vue-lazyload'
-
 
 config.autoAddCss = false;
 library.add(fas);
