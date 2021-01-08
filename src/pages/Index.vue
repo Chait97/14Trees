@@ -11,12 +11,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="flex flex-wrap justify-center items-center">
-				<progress-track :waitForScroll='true' class="pt-4 md:w-5/6 w-full"/>
-				<g-link :to="'/contribute'" tag="button" class="btn-action h-12 text-white bg-green-500 dark:bg-green-600 dark:hover:bg-green-500 hover:bg-green-600 duration-500">
-					Contribute 
-				</g-link>
-			</div>
+			<!-- <div class="flex flex-wrap justify-center items-center"> -->
+				<!-- <progress-track :showCounter='false' :waitForScroll='true' class="pt-4 md:w-5/6 w-full"/> -->
+				<!-- <g-link :to="'/contribute'" tag="button" class="btn-action h-12 text-white bg-green-500 dark:bg-green-600 dark:hover:bg-green-500 hover:bg-green-600 duration-500"> -->
+					<!-- Contribute  -->
+				<!-- </g-link> -->
+			<!-- </div> -->
 		</div>
 		</div>
 

@@ -3,12 +3,8 @@
     <div class="container mx-auto py-16">
       <div class="mb-4">
         <p>
-          Copyright {{ new Date().getFullYear() }} by {{ $static.metadata.siteName}} &middot; Powered by
-          <a
-            href="https://www.gridsome.org"
-            target="_blank"
-          >Gridsome</a>
-        </p>
+         Copyright {{ new Date().getFullYear() }} by {{ $static.metadata.siteName}} &middot; Powered by
+          <a href="https://www.gridsome.org" target="_blank" >Gridsome</a> </p> 
       </div>
       <div class="mb-4">
         <ul class="list-reset flex justify-center">

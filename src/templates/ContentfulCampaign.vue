@@ -25,9 +25,9 @@
                 <SlideShow :headline="presentation.headline" :slides="presentation.slides" :showHeadline="true" class="h-full"/>
             </div>
             <div v-if="$page.campaign.action" class="my-12">
-                <ActionModal :link="$page.campaign.action" :showFloat="true" :modalHeight="'md:h-80 h-96'" :scrollPosition="3100" ref="actionModal"> 
+                <ActionModal :link="$page.campaign.action" :showFloat="true" :modalHeight="modalClass" :scrollPosition="3100" ref="actionModal"> 
                     <template #inline>
-                        <progress-track :waitForScroll='true' class="md:pt-24 pt-12"/>
+                        <div v-if='$page.campaign.showCounter'><progress-track :waitForScroll='true' class="md:pt-24 pt-12"/></div>
                         <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:py-12 lg:px-8 lg:flex lg:items-center lg:justify-between">
                             <h2 class="text-3xl font-extrabold tracking-tight dark:text-gray-200 text-gray-900 sm:text-4xl">
                                 <!-- <span class="block">Ready to dive in?</span> -->
@@ -58,7 +58,7 @@
                         </section>
                     </template>
                     <template #expand>
-                        <section class="dark:bg-gray-600 bg-gray-200 md:h-80 h-96 w-screen md:w-full inline-block align-bottom">
+                        <section class="dark:bg-gray-600 bg-gray-200 w-screen md:w-full inline-block align-bottom" :class="modalClass">
                             <button class="w-full h-2 mx-auto text-gray-400 pt-4 text-center" @click="closeModal">
                                 <svg width="100%" height="12px"
                                     viewBox="0 0 22 12" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@
                                     </g>
                                 </svg>
                             </button>
-                            <progress-track :waitForScroll='false' class="w-full"/>
+                            <div v-if='$page.campaign.showCounter'><progress-track :waitForScroll='false' class="w-full"/></div>
                             <div class="max-w-4xl md:mx-auto px-4 py-6 lg:px-8 lg:flex lg:items-center lg:justify-between">
                                 <h2 class="text-3xl font-extrabold tracking-tight dark:text-gray-200 text-gray-900 sm:text-4xl">
                                     <span class="block text-green-500 text-3xl lg:mr-24">Pledge your contribution today.</span>
@@ -149,7 +149,7 @@ export default {
   },
   data: function() {
       return {
-          viewMore: false
+          viewMore: false,
       }
   },
   computed: {
@@ -159,6 +159,9 @@ export default {
     slides() {
       return ["test"]
     },
+    modalClass() {
+        return this.$page.campaign.showCounter ? 'md:h-80 h-96' : 'h-36'
+    }
   },
   methods : {
     closeModal() {
@@ -188,6 +191,7 @@ export default {
             subtitle
             videoUrl
             action
+            showCounter
             presentations {
                 headline
                 slides { file { url } }
