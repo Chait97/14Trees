@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="$page.contriGuide && viewMore" class="mx-auto container pb-12">
-                            <SlideShow :headline="$page.contriGuide.headline" :slides="$page.contriGuide.slides" class="h-full"/>
+                        <div v-if="$page.campaign.contriGuide && viewMore" class="mx-auto container pb-12">
+                            <SlideShow :headline="$page.campaign.contriGuide.headline" :slides="$page.campaign.contriGuide.slides" class="h-full"/>
                         </div>
                     </template>
                     <template #expandButton>
@@ -196,6 +196,10 @@ export default {
                 headline
                 slides { file { url } }
             }
+            contriGuide: guide{
+                headline
+                slides { file { url } }
+            }
             fromDate
             toDate
             content(html: true)
@@ -212,10 +216,6 @@ export default {
                 }
                 pictures { file { url } }
             }
-        }
-        contriGuide: contentfulPresentation(id: "25J6AAQV1K1XhAh7LIEGDG") {
-            headline
-            slides { file { url } }
         }
     }
 
