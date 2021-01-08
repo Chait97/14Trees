@@ -18,7 +18,7 @@ import axios from 'axios'
 export default {  
     props: {
         url: String,
-        waitForScroll: Boolean
+        waitForScroll: Boolean,
     },
     components: {
         ICountUp

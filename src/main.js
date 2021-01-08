@@ -30,6 +30,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import ClickOutside from 'v-click-outside'
 import InfiniteLoading from 'vue-infinite-loading'
 import VueLazyload from 'vue-lazyload'
+import VueGtag from "vue-gtag";
 
 config.autoAddCss = false;
 library.add(fas);
@@ -58,5 +59,8 @@ export default function (Vue, {
     Vue.use(VueLazyload, {
       observer: true,
     })
+    Vue.use(VueGtag, {
+      config: { id: process.env.GRIDSOME_ANALYTICS_PROPERTY_KEY }
+    }, router);
   }
 }
