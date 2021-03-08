@@ -189,8 +189,8 @@ h6, .h6 {
   }
 
   .title-text {
-    @apply text-center text-7xl font-light;
-    @apply text-gray-800 dark:text-gray-400;
+    @apply text-center md:text-7xl text-5xl font-light;
+    @apply text-gray-800 dark:text-gray-300;
   }
 
   .btn {

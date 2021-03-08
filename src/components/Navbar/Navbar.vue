@@ -1,14 +1,14 @@
 <template>
   <div class="h-16 dark:bg-gray-900 bg-white dark:bg-dark-grey">
     <headroom :classes="{'initial' : 'headroom bg-white dark:bg-dark-grey border-black dark:border-gray-900'}" :downTolerance="10" :upTolerance="20" :offset="15" @unpin="navbarUnpinned=true" @pin="navbarUnpinned=false">
-      <navbar-desktop
+      <navbar-desktop class="hidden md:contents"
         v-on="$listeners" 
         @openSearchModal="openSearchModal"
         :theme="theme"
         :hideSubnav="this.navbarUnpinned"
       />
 
-      <navbar-mobile
+      <navbar-mobile class="md:hidden"
         @openSearchModal="openSearchModal"
         @openNavbarModal="openNavbarModal"
         v-on="$listeners"
