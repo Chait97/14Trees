@@ -3,12 +3,11 @@
         <a @click="toggle" class="block py-1" style="cursor:pointer;">
             <slot name="link" />
         </a>
-        <nav :class="{hidden : isHidden}" @click="close">
-            <div class="absolute left-1/2 transform -translate-x-1/2 mt-3 px-2 md:w-screen w-3/4 max-w-md sm:px-0">
-                <div class="md:rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                    <div class="z-20 relative grid gap-6 bg-gray-200 md:bg-white dark:bg-darker-grey px-2 md:py-8 sm:gap-8 sm:px-4">
-                        <slot name="popover"/>
-                    </div>
+        <nav class="flex flex-wrap gap-1" :class="{hidden : isHidden}" @click="close">
+            <div class="block w-1/12 border-r-2 border-gray-600"></div>
+            <div class="rounded-sm shadow-sm overflow-hidden w-10/12">
+                <div class="z-20 pr-2">
+                    <slot name="popover"/>
                 </div>
             </div>
         </nav>

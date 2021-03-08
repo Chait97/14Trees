@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="container full-page-generic">
-              <h1 class="title-text"> Testimonials </h1>
+            <h1 class="title-text"> Testimonials </h1>
             <div class="mx-4 md:pt-16">
                 <div v-for="tm in $page.testimonials.edges" :key="tm.id">
                     <testimonial v-bind="tm.node"/>
