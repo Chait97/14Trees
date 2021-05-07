@@ -8,3 +8,7 @@ dist
 .env.*
 *.code-workspace
 .nvmrc
+rzp.csv 
+
+# Local Netlify folder
+.netlify
