@@ -129,6 +129,7 @@ import ActionModal from "~/components/Modal/ActionModal.vue";
 import ProgressTrack from "~/components/Partials/ProgressTrack.vue";
 import mediumZoom from "medium-zoom";
 import { withLineBreaks, videoUrl, imgSrc } from '~/utils';
+import db from './../components/db/firebaseInit';
 
 export default {
   components: {
@@ -174,7 +175,25 @@ export default {
         return videoUrl(url) ;
     },
     goToAction() {
-      window.location.href = this.$page.campaign.action;
+
+ let users=   [];
+      db.collection("users")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+           users.push({
+              name: doc.data().name,
+              test: doc.data().test,
+            });
+            console.log(doc.id, " => ", doc.data());
+          });
+          return users;
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
+
+     // window.location.href = this.$page.campaign.action;
     },
     withBreaks(a) {
         return withLineBreaks(a);
