@@ -43,7 +43,7 @@
                                 <div class="ml-4 inline-flex rounded-md shadow">
                                     <a href="#" class="w-32 btn-action text-green-500 bg-white hover:bg-green-50 duration-500" @click="viewMore = !viewMore">
                                         Guide 
-                                        <span class="ml-2">{{viewMore ? '&#10005' : '&#9662'}}</span> 
+                                        <span class="ml-2">{{viewMore ? '&#10005;' : '&#9662;'}}</span> 
                                     </a>
                                 </div>
                             </div>
@@ -129,8 +129,8 @@ import ActionModal from "~/components/Modal/ActionModal.vue";
 import ProgressTrack from "~/components/Partials/ProgressTrack.vue";
 import mediumZoom from "medium-zoom";
 import { withLineBreaks, videoUrl, imgSrc } from '~/utils';
-import db from './../components/db/firebaseInit';
-
+import Repository from "../repository/RepositoryFactory";
+ 
 export default {
   components: {
     ContentHeader,
@@ -175,24 +175,9 @@ export default {
         return videoUrl(url) ;
     },
     goToAction() {
-
- let users=   [];
-      db.collection("users")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-           users.push({
-              name: doc.data().name,
-              test: doc.data().test,
-            });
-            console.log(doc.id, " => ", doc.data());
-          });
-          return users;
-        })
-        .catch((error) => {
-          console.log("Error getting documents: ", error);
-        });
-
+        const userRepository = Repository.get("user");
+        userRepository.get();
+ 
      // window.location.href = this.$page.campaign.action;
     },
     withBreaks(a) {
