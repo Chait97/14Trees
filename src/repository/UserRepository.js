@@ -1,4 +1,4 @@
-import db from "./../repository/db/firebaseInit";
+import db from "~/repository/db/firebaseInit";
 
 export default {
   get() {
