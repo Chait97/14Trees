@@ -177,7 +177,8 @@ export default {
     goToAction() {
         const userRepository = Repository.get("user");
         userRepository.get();
- 
+        userRepository.add();
+        userRepository.update();
      // window.location.href = this.$page.campaign.action;
     },
     withBreaks(a) {
