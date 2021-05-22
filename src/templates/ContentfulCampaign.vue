@@ -129,7 +129,6 @@ import ActionModal from "~/components/Modal/ActionModal.vue";
 import ProgressTrack from "~/components/Partials/ProgressTrack.vue";
 import mediumZoom from "medium-zoom";
 import { withLineBreaks, videoUrl, imgSrc } from '~/utils';
-import Repository from "../repository/RepositoryFactory";
  
 export default {
   components: {
@@ -175,10 +174,7 @@ export default {
         return videoUrl(url) ;
     },
     goToAction() {
-        const userRepository = Repository.get("user");
-        userRepository.get();
- 
-     // window.location.href = this.$page.campaign.action;
+        window.location.href = this.$page.campaign.action;
     },
     withBreaks(a) {
         return withLineBreaks(a);

@@ -18,6 +18,9 @@ module.exports = {
       ]
     }
   },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
   theme: {
     extend: {
       variants: {
