@@ -8,3 +8,6 @@ dist
 .env.*
 *.code-workspace
 .nvmrc
+
+# Local Netlify folder
+.netlify
