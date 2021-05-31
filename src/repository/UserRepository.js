@@ -1,4 +1,4 @@
-import db from "../repository/db/firebaseInit";
+import db from "~/repository/db/firebaseInit";
 import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 
 function all(qSnap) {
@@ -20,13 +20,6 @@ export default {
 		const q = query(collection(db, "users"), where("email", "==", emailId));
 		const querySnapshot = await getDocs(q);
 		return all(querySnapshot);
-	},
-	async test()
-	{
-		const userRepository = Repository.get("user");
-        userRepository.get();
-        userRepository.add();
-        userRepository.update();
 	},
   get() {
     let users = [];

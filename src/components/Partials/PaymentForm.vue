@@ -6,12 +6,13 @@
        </div>
      </div>
 
-     <form action="#" method="POST" id="pledgeForm" @submit="checkForm">
-       <div id="contribution">
+    <ClientOnly>
+     <form action="#" method="POST" id="pledgeForm" @submit="checkAndSubmitForm" class="mt-24 ml-12 mb-32">
+       <div id="contribution h-full transition-height duration-500 ease-in-out">
          <!-- ******************************************************** -->
          <!-- ****************** Contribution ************************-->
          <!-- ******************************************************** -->
-         <div class="mt-10 sm:mt-0" v-if="activeSection == 'contribution'">
+         <div class="mt-10 sm:mt-0" v-if="contributionExpand">
 
            <div class="md:grid md:grid-cols-3 md:gap-6">
              <div class="md:col-span-1">
@@ -30,20 +31,40 @@
                      <div class="col-span-4">
                        <label for="first_name" class="block text-sm font-medium text-gray-700">Campaign</label>
                        <select v-model="campaign"
-                         class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                         class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                         <option v-for="(c,i) in campaignList" 
+                            :key="i" :value="c" >{{c}}</option>
+                       </select>
                      </div>
 
-                     <div class="col-span-4 sm:col-span-2">
+                     <div class="col-span-4 xl:col-span-2">
                        <label for="last_name" class="block text-sm font-medium text-gray-700">Number of Trees</label>
-                       <input type="number" v-model="trees"
-                         class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                       <div class="flex flex-row w-full h-11">
+                         <button type="button" @click="removeTree(i)"
+                            class="flex-none bg-gray-100 text-gray-600 hover:text-gray-700 
+                            hover:bg-gray-400 h-10 w-8 rounded-l cursor-pointer focus:outline-none m-1">
+                           <span class="m-auto text-2xl font-thin">−</span>
+                          </button>
+                        <input type="number" v-model.number="trees"
+                          class="flex-grow appearance-none dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                        <button  type="button" @click="addTree()"
+                            class=" flex-none bg-gray-100 text-gray-600 hover:text-gray-700 
+                            hover:bg-gray-400 h-10 w-8 rounded-r cursor-pointer focus:outline-none m-1">
+                            <span class="m-auto text-2xl font-thin">+</span>
+                         </button>
+                       </div>
                      </div>
 
-                     <div v-if="trees > 0" class="col-span-3">
-                       <input type="text" v-for="(n,i) in names" :key="i" v-model="names[i]"
-                         class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                   <div v-if="trees > 0" class="col-span-3">
+                     <div v-for="(n,i) in names" :key="i" class="flex flex-row">
+                       <input type="text" v-model="names[i]"
+                         class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 
+                         block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                       <button  type="button" @click="names.splice(i, 1)" 
+                         class="block ml-4 w-8 h-8 my-auto transition-colors bg-gray-50 
+                         rounded-lg ring-2 ring-gray-300"> X  </button>
                      </div>
-                     <button v-if="names.length < trees" @click="names.push('')" class="col-span-1">+</button>
+                    </div>
                    </div>
                  </div>
                </div>
@@ -102,9 +123,16 @@
                </div>
              </div>
            </div>
+           <button v-if="personal_infoExpand == false" class="focus:outline-none block w-24 h-12 mx-auto rounded-full" @click="checkSection">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+              </svg>
+           </button>
          </div>
-         <div v-else class="text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4">
-           Personal Info
+         <div v-else  @click="contributionExpand = true" 
+            class=" hover:bg-gray-50 transition-colors duration-500 
+            text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4 py-6 rounded-lg">
+           Your Contribution
          </div>
          <!-- Border -->
          <div class="hidden sm:block" aria-hidden="true">
@@ -118,7 +146,7 @@
          <!-- ******************************************************** -->
          <!-- ***************** Personal Info ************************ -->
          <!-- ******************************************************** -->
-         <div class="mt-10 sm:mt-0" v-if="activeSection == 'personal_info'">
+         <div class="mt-10 sm:mt-0" v-if="personal_infoExpand">
            <div class="md:grid md:grid-cols-3 md:gap-6">
              <div class="md:col-span-1">
                <div class="px-4 sm:px-0">
@@ -189,8 +217,15 @@
                </div>
              </div>
            </div>
+           <button v-if="communicationExpand == false" class="block w-24 h-12 mx-auto rounded-full" @click="checkSection">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+              </svg>
+           </button>
          </div>
-         <div v-else class="text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4">
+         <div v-else  @click="personal_infoExpand = true" 
+         class=" hover:bg-gray-50 transition-colors duration-500 
+            text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4 py-6 rounded-lg">
            Personal Info
          </div>
 
@@ -202,11 +237,11 @@
          </div>
        </div>
 
-       <div id="notifications" class="transition-height">
+       <div id="communication" class="transition-height">
          <!-- ******************************************************** -->
-         <!-- ****************** Notifications ************************-->
+         <!-- ****************** Communication ************************-->
          <!-- ******************************************************** -->
-         <div class="mt-10 sm:mt-0" v-if="activeSection == 'notifications'">
+         <div class="mt-10 sm:mt-0" v-if="communicationExpand">
            <div class="md:grid md:grid-cols-3 md:gap-6">
              <div class="md:col-span-1">
                <div class="px-4 sm:px-0">
@@ -245,25 +280,36 @@
                      </div>
                    </fieldset>
                  </div>
-                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                   <button type="submit"
-                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                     Save
-                   </button>
-                 </div>
                </div>
              </div>
            </div>
          </div>
-         <div v-else class="text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4">
-           Notifications
+         <div v-else @click="communicationExpand = true" 
+          class=" hover:bg-gray-50 transition-colors duration-500 
+            text-2xl font-extralight text-gray-800 dark:text-gray-400 pl-4 py-6 rounded-lg">
+            Communication 
          </div>
        </div>
+
+      <!-- Border -->
+      <div class="hidden sm:block" aria-hidden="true">
+        <div class="py-5">
+          <div class="border-t border-gray-200" />
+        </div>
+      </div>
+
+      <!-- Contribute Button -->
+      <button type="submit"
+          class="btn-action block mx-auto text-white bg-green-500 dark:bg-green-600
+          hover:bg-green-600 duration-500">
+          Contribute
+      </button>
+
      </form>
 
+    </ClientOnly>
+
      <form ref="payButton"> </form>
-     <!-- <button @click="pay">Contribute</button> -->
-     <!-- <button @click="getUsers">Contribute</button> -->
    </div>
 </template>
 
@@ -274,18 +320,22 @@ const PAYMENT_BUTTON_ID="pl_H7wNSNqT8XnEpN"
 export default {
     data: function() {
       return {
+        contributionExpand: true,
+        communicationExpand: false,
+        personal_infoExpand: false,
         first_name: "",
         last_name: "",
         email_address: "",
         location: "",
         campaign: "",
-        trees: "",
+        trees: 1,
         names: [""],
         csr: false,
         visit: false,
         volunteer: false,
         updates: false,
-        newsletter:false
+        newsletter:false,
+        campaignList: ['test campaign 1', 'test campaign 2']
       }
     },
     mounted() {
@@ -293,31 +343,64 @@ export default {
       paymentScript.async = true
       paymentScript.src = PAYMENT_BUTTON_URL
       paymentScript.setAttribute("data-payment_button_id", PAYMENT_BUTTON_ID)
-      this.$refs['payButton'].appendChild(paymentScript)
+      // this.$refs['payButton'].appendChild(paymentScript)
     },
     methods: {
-      pay : () => { console.log("Contribute clicked!") },
-      checkForm: function(e) {
-        console.log(
-          this.first_name,
-          this.last_name,
-          this.email_address,
-          this.location,
-          this.campaign,
-          this.trees,
-          this.names,
-          this.csr,
-          this.visit,
-          this.volunteer,
-          this.updates,
-          this.newsletter
-        )
+      removeTree: function(i) {
+        if(this.trees > 1) {
+          this.trees--
+        }
+        if (this.names.length > this.trees) {
+          this.names.pop()
+        }
+      },
+      addTree: function() {
+        this.trees++
+        this.names.push('')
+      },
+      checkAndSubmitForm: function(e) {
+        const formData = {
+          first_name: this.first_name,
+          last_name: this.last_name,
+          email_id: this.email_address,
+          location: this.location,
+          campaign: this.campaign,
+          trees : this.trees,
+          names : this.names,
+          csr: this.csr,
+          visit: this.visit,
+          volunteer: this.volunteer,
+          updates: this.updates,
+          newsletter: this.newsletter
+        }
+        console.log(formData)
         e.preventDefault()
-      }
+      },
+      checkSection: function(e) {
+        if (!process.isClient) {
+          this.contributionExpand = true;
+        } else if (this.contributionFilled && this.personalInfoFilled) {
+          this.communicationExpand = true 
+        } else if (this.contributionFilled && !this.personalInfoFilled) {
+          this.personal_infoExpand = true
+        } else {
+          // default
+          this.contributionExpand = true
+        }
+        e.preventDefault()
+      },
     },
     computed: {
-      activeSection: () => {
-        return 'contribution'
+      contributionFilled: function() {
+        return typeof this.trees === 'number' 
+          && this.trees > 0 
+          && this.names?.length > 0
+          && this.campaign.length > 0
+      },
+      personalInfoFilled: function() {
+        return this.first_name.length > 0
+          && this.last_name.length > 0
+          && this.email_address.length > 0 
       }
     }
   }

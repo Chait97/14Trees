@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es6",
+        "moduleResolution": "node",
+        "noImplicitReturns": false,
+        "outDir": "./built/",
+        "sourceMap": true,
+        "strict": false 
+    },
+    "paths": {
+        "~/*": ["./src/*"],
+        "@/*": ["./src/*"]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

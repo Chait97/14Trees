@@ -5,7 +5,7 @@
             <div class="mx-4 md:pt-16">
               <payment-form/>
             </div>
-            <span>Users: </span>{{users}}
+            <!-- <span>Users: </span>{{users}} -->
         </div>
     </Layout>
 </template>
