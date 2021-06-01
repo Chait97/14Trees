@@ -9,6 +9,5 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "razorpay": "^2.0.6"
   }
 }
