@@ -47,6 +47,27 @@
         }  
       ]
     },
+     {
+      "name": "About",
+      "link": "#",
+      "sub": [
+        {
+          "name": "Terms and Conditions",
+          "link": "https://docs.google.com/document/u/1/d/e/2PACX-1vRCEdAbIF8iwRrik54Ka_FpOCaO2DLRAgPiaLHUXlJoMVmkguOqdoc0C3rvgwG_vkixzG7XPKY3VFz1/pub#h.w3wa3of6nuhg",
+          "external": true
+        },
+        {
+          "name": "Privacy Policy",
+          "link": "https://docs.google.com/document/u/1/d/e/2PACX-1vRCEdAbIF8iwRrik54Ka_FpOCaO2DLRAgPiaLHUXlJoMVmkguOqdoc0C3rvgwG_vkixzG7XPKY3VFz1/pub#h.66xkb0x63zyn",
+          "external": true
+        },
+        {
+          "name": "Refunds / Cancellations",
+          "link": "https://docs.google.com/document/u/1/d/e/2PACX-1vRCEdAbIF8iwRrik54Ka_FpOCaO2DLRAgPiaLHUXlJoMVmkguOqdoc0C3rvgwG_vkixzG7XPKY3VFz1/pub#h.8pq86vig1yd1",
+          "external": true
+        }
+      ]
+    },
     {
       "name": "Dummy",
       "link": "#",
