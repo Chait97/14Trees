@@ -393,12 +393,10 @@ export default {
           updates: this.updates,
           newsletter: this.newsletter
         }
-        console.log(formData)
 		try {
 			let rzpEndpoint = window.location.origin + "/.netlify/functions/razorpay_test"
-			console.log(rzpEndpoint)
 			let response = await axios.post(rzpEndpoint, formData)
-			console.log(response)
+			console.log(response.data, response.status)
 		} catch(err) {
 			console.error(err)
 		}

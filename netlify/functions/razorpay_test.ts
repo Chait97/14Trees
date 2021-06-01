@@ -1,6 +1,14 @@
 import Razorpay from 'razorpay';
 import { Handler } from "@netlify/functions";
 
+// type Order = { "id": "order_DaZlswtdcn9UNV", "entity": "order", "amount": 50000, "amount_paid": 0, "amount_due": 50000, "currency": "INR", "receipt": "Receipt #20", "status": "created", "attempts": 0, "notes": [], "created_at": 1572502745 }
+
+type ResponseBody = {
+    orderId: string,
+    body: string,
+    amount: number
+}
+
 const getRZPInstance = () => { 
     return new Razorpay({
         key_id: 'rzp_test_od3yQVWQEML7Ta',
@@ -17,13 +25,15 @@ const handler: Handler = async (event, context) => {
         notes: orderNotes
     };
     const instance = getRZPInstance()
+    let responseBody: ResponseBody
     await instance.orders.create(options, function (err, order) {
         console.log(order);
+        responseBody = { orderId: order.id, body: "test string", amount: order.amount } 
     });
 
     return {
         statusCode: 200,
-        body: "OK",
+        body: JSON.stringify(responseBody),
     };
 };
 
