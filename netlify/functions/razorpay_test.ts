@@ -17,7 +17,9 @@ const getRZPInstance = () => {
 }
 
 const handler: Handler = async (event, context) => {
-    const orderNotes = JSON.parse(event.body)
+    const formData = JSON.parse(event.body)
+    const orderNotes = {email: formData.email_id, trees: formData.trees }
+
     let options = {
         amount: 50000,  // amount in the smallest currency unit
         currency: "INR",
@@ -27,10 +29,14 @@ const handler: Handler = async (event, context) => {
     const instance = getRZPInstance()
     let responseBody: ResponseBody
     await instance.orders.create(options, function (err, order) {
-        console.log(order);
-        responseBody = { orderId: order.id, body: "test string", amount: order.amount } 
+        if (err) console.log(err)
+        if (order) {
+            console.log(order)
+            responseBody = { orderId: order.id, body: "test string", amount: order.amount }
+        }
     });
 
+    // TODO: formData to firestore incl orderId
     return {
         statusCode: 200,
         body: JSON.stringify(responseBody),

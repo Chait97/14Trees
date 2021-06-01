@@ -362,9 +362,6 @@ export default {
         campaignList: ['test campaign 1', 'test campaign 2']
       }
     },
-    mounted() {
-	  	console.log("Route:", window.location.origin)
-    },
     methods: {
       removeTree: function() {
         if(this.trees > 1) {
