@@ -35,7 +35,7 @@
  											<div class="col-span-4">
  												<label for="first_name"
  													class="block text-sm font-medium text-gray-700">Campaign</label>
- 												<select v-model="campaign"
+ 												<select v-model="campaign" required
  													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
  													<option v-for="(c,i) in campaigns" :key="i" :value="c">{{c.name}}
  													</option>
@@ -52,7 +52,7 @@
                             hover:bg-gray-400 h-10 w-8 rounded-l cursor-pointer focus:outline-none m-1">
  														<span class="m-auto text-2xl font-thin">−</span>
  													</button>
- 													<input type="number" v-model.number="trees"
+ 													<input type="number" v-model.number="trees" min="1"
  														class="flex-grow appearance-none dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
  													<button type="button" @click="trees++" class=" flex-none bg-gray-100 text-gray-600 hover:text-gray-700 
                             hover:bg-gray-400 h-10 w-8 rounded-r cursor-pointer focus:outline-none m-1">
@@ -62,6 +62,8 @@
  											</div>
 
  											<div v-if="trees > 0" class="col-span-3">
+ 												<label for="names" class="block text-sm font-medium text-gray-700">
+													 Names on Trees</label>
  												<div v-for="(n,i) in names" :key="i" class="flex flex-row">
  													<input type="text" v-model="names[i]" class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 
                          block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
@@ -100,7 +102,7 @@
  															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
  													</div>
  													<div class="ml-3 text-sm">
- 														<label for="visit" class="font-medium text-gray-700">14-Trees
+ 														<label for="visit" class="font-medium text-gray-700">
  															Site Visit</label>
  														<p class="text-gray-500">Plan a visit to the project site and
  															plant trees by my own hands</p>
@@ -127,7 +129,7 @@
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="candidates"
- 															class="font-medium text-gray-700">Volunteering</label>
+ 															class="font-medium text-gray-700">Volunteer</label>
  														<p class="text-gray-500">Volunteer my time, energy and
  															expertise to grow this initiative
  															further</p>
@@ -181,7 +183,7 @@
  											<div class="col-span-6 sm:col-span-3">
  												<label for="first_name"
  													class="block text-sm font-medium text-gray-700">First name</label>
- 												<input type="text" v-model="first_name" name="first_name"
+ 												<input type="text" v-model="first_name" name="first_name" required
  													id="first_name" autocomplete="given-name"
  													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
  											</div>
@@ -190,7 +192,7 @@
  												<label for="last_name"
  													class="block text-sm font-medium text-gray-700">Last name</label>
  												<input type="text" v-model="last_name" name="last_name" id="last_name"
- 													autocomplete="family-name"
+ 													autocomplete="family-name" required
  													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
  											</div>
 
@@ -199,7 +201,15 @@
  													class="block text-sm font-medium text-gray-700">Email
  													Address</label>
  												<input type="email" v-model="email_address" name="email_address"
- 													id="email_address" autocomplete="email"
+ 													id="email_address" autocomplete="email" required
+ 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+ 											</div>
+
+ 											<div class="col-span-6 sm:col-span-3">
+ 												<label for="phone_number"
+ 													class="block text-sm font-medium text-gray-700">Phone</label>
+ 												<input type="tel" v-model.number="phone" name="phone_numbet"
+ 													id="phone_number" autocomplete="tel" required min="999999999" max="9999999999"
  													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
  											</div>
 
@@ -295,7 +305,7 @@
  															Trees Milestones</label>
  														<p class="text-gray-500">Receive regular updates on the 14
  															Trees Foundation's progress in
- 															your inbox</p>
+ 															your Inbox</p>
  													</div>
  												</div>
  												<div class="flex items-start">
@@ -349,6 +359,10 @@
 </template>
 
  <script>
+import Repository from "@/repository/RepositoryFactory";
+
+const RAZORPAY_CHECKOUT_URI="https://checkout.razorpay.com/v1/checkout.js"
+
 export default {
 	metaInfo() {
 		return {
@@ -369,9 +383,10 @@ export default {
 			location: "",
 			campaign: "",
 			trees: 1,
-			names: [],
+			names: [""],
 			csr: false,
 			visit: false,
+			phone: "",
 			volunteer: false,
 			updates: false,
 			newsletter: false,
@@ -380,16 +395,20 @@ export default {
 	},
 	mounted() {
 		this.campaigns = this.$page.campaigns.edges.map(edge=> {
-				return {
-					name: edge.node.heading,
-					description: edge.node.subtitle,
-				}
+			return {
+				name: edge.node.heading,
+				description: edge.node.subtitle,
+			}
 		})
 		if (this.fromCampaign?.length > 0) {
 			this.campaign = this.fromCampaign
 		} else {
 			this.campaign = this.campaigns[0]
 		}
+		let razorpayCheckout = document.createElement('script')
+      	razorpayCheckout.setAttribute('src', RAZORPAY_CHECKOUT_URI)
+		razorpayCheckout.async = true
+      	document.head.appendChild(razorpayCheckout)
 	},
 	watch: {
 		trees: function(newVal, oldVal) {
@@ -417,13 +436,25 @@ export default {
 		},
 	},
 	methods: {
-		checkAndSubmitForm: function (e) {
+		checkAndSubmitForm: async function (e) {
+			e.preventDefault()
+
+			console.log( this.personalInfoFilled , this.contributionFilled) 
+
+			if (! this.personalInfoFilled || ! this.contributionFilled) {
+				this.contributionExpand = true
+				this.communicationExpand = true
+				this.personal_infoExpand = true
+				return
+			}
+
 			const formData = {
 				first_name: this.first_name,
 				last_name: this.last_name,
 				email_id: this.email_address,
+				phone: this.phone,
 				location: this.location,
-				campaign: this.campaign,
+				campaign: this.campaign.name,
 				trees: this.trees,
 				names: this.names,
 				csr: this.csr,
@@ -433,7 +464,11 @@ export default {
 				newsletter: this.newsletter
 			}
 			console.log(formData)
-			e.preventDefault()
+			try {
+				Repository.donation.create(formData)
+			} catch (err) {
+				console.error(err)
+			}
 		},
 		checkSection: function (e) {
 			if (!process.isClient) {
@@ -454,11 +489,12 @@ export default {
 			return typeof this.trees === 'number' &&
 				this.trees > 0 &&
 				this.names?.length > 0 &&
-				this.campaign.length > 0
+				this.campaign.name.length > 0
 		},
 		personalInfoFilled: function () {
 			return this.first_name.length > 0 &&
 				this.last_name.length > 0 &&
+				typeof this.phone === "number"
 				this.email_address.length > 0
 		}
 	}

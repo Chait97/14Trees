@@ -16,7 +16,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: "Thank You" 
+      title: "Checkout" 
     };
   },
   mounted() {
