@@ -3,7 +3,7 @@ import {  doc, setDoc, updateDoc } from "firebase/firestore";
 import axios from "axios";
 
 const prefix = process.env.NODE_ENV === "development" ?
-	'http://localhost:8888' : window.location.origin
+	'http://localhost:8888' : ""
 
 function all(qSnap) {
 	let docs = []
@@ -27,17 +27,6 @@ function createCallbackUrl(orderId) {
 	return '/checkout:' + orderId
 }
 
-const mockData = {
-	orderId: "order_HIXLJxe1NaO1zx",
-	verifiedAmount: 50000,
-	orderName: "Test Campaign",
-	currency: "INR",
-	details: {
-		name: "Raju Bhai",
-		email: "test@example.com"
-	}
-}
-
 async function verifyPayment(orderId_orig, response) {
 	const rzpEndpoint = prefix + "/.netlify/functions/verify"
 	console.log(orderId_orig, response)
@@ -51,12 +40,20 @@ async function verifyPayment(orderId_orig, response) {
 	console.log(verifyPayload)
 
 	// Uncomment for actual
-	// let response = await axios.post(rzpEndpoint, verifyPayload)
-	// if (!response?.data?.orderId) { throw Error("Something went wrong") }
-	// const { valid, orderId } = response.data
-	let valid = true
+	let valid = false 
+
+	if (process.env.NODE_ENV === "development") {
+		valid = true
+	} else {
+		// Fire serverless function to verify payment signature
+		let response = await axios.post(rzpEndpoint, verifyPayload)
+		response = JSON.parse(response)
+		if (!response?.data) { throw Error("Something went wrong") }
+		valid = response.data.valid
+	}
 
 	if (valid) {
+		// Update paymentCaptured field for this order in our database
 		const donationRef = doc(db, "donations", orderId_orig);
 		await updateDoc(donationRef, {
   			paymentCaptured: true
@@ -64,23 +61,43 @@ async function verifyPayment(orderId_orig, response) {
 	}
 }
 
-export default {
-	async get() {
+async function createOrder() {
+	if (process.env.NODE_ENV === "development") {
+	 	return { orderId: "order_HIXLJxe1NaO1zx",
+			verifiedAmount: 50000,
+			orderName: "Test Campaign",
+			currency: "INR",
+			details: {
+			name: "Raju Bhai",
+			email: "test@example.com"
+			}
+		}
+	}
+	else {
+		let response = await axios.post(rzpEndpoint, formData)
+		response = JSON.parse(response)
+		if (!response?.data?.orderId) { 
+			throw Error("Something went wrong") 
+		}
+		// Data must have: orderId, verifiedAmount, orderName, currency, (donor) details 
+		return response.data
+	}
+}
 
-	},
+export default {
+	async get() {},
 	async create(formData) {
-		const rzpEndpoint = prefix + "/.netlify/functions/razorpay_test"
+		const rzpEndpoint = prefix + "/.netlify/functions/pay"
 		console.log(rzpEndpoint)
 
-		// Uncomment for actual
-		// let response = await axios.post(rzpEndpoint, formData)
-		// if (!response?.data?.orderId) { throw Error("Something went wrong") }
-		// const { orderId, verifiedAmount, orderName, currency, details } = response.data
+		// Create order using serverless function
+		const { orderId, verifiedAmount, orderName, currency, details } = createOrder()
 
-		const { orderId, verifiedAmount, orderName, currency, details } = mockData
+		// Mark payment as false and store data in our database even before payment
 		formData.paymentCaptured = false
 		await setDoc(doc(db, "donations", orderId), formData);
 
+		// create handler to verify payment and update paymentStatus in our database
 		const onPaymentSuccess = async (response) => { 
 			await verifyPayment(orderId, response)
 		}
@@ -94,10 +111,9 @@ export default {
 			// callback_url: createCallbackUrl(orderId),
 			handler: onPaymentSuccess,
 			prefill: { name: details.name, email: details.email, contact: details.phone},
-			theme: {
-				color: "#3399cc"
-			}
 		}
+
+		// Open razorpay global dialog to capture payment
 		new Razorpay(options).open()
 	},
 	async update() {
