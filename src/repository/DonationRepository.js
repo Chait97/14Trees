@@ -35,7 +35,7 @@ async function verifyPayment(orderId_orig, response) {
 		paymentId : response.razorpay_payment_id,
 		orderId_orig: orderId_orig,
 		orderId_checkout: response.razorpay_order_id,
-		signature : response.razorpay_signature
+		signature : respvalidonse.razorpay_signature
 	}
 	console.log(verifyPayload)
 
@@ -62,6 +62,8 @@ async function verifyPayment(orderId_orig, response) {
 }
 
 async function createOrder() {
+	const rzpEndpoint = prefix + "/.netlify/functions/pay"
+	console.log(rzpEndpoint)
 	if (process.env.NODE_ENV === "development") {
 	 	return { orderId: "order_HIXLJxe1NaO1zx",
 			verifiedAmount: 50000,
@@ -87,8 +89,6 @@ async function createOrder() {
 export default {
 	async get() {},
 	async create(formData) {
-		const rzpEndpoint = prefix + "/.netlify/functions/pay"
-		console.log(rzpEndpoint)
 
 		// Create order using serverless function
 		const { orderId, verifiedAmount, orderName, currency, details } = createOrder()
