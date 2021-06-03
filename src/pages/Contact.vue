@@ -36,12 +36,10 @@
 
 <script>
 import ActionModal from '@/components/Modal/ActionModal.vue';
-import PaymentForm from "~/components/Partials/PaymentForm.vue";
 import SEO from "~/components/Partials/SEO.vue";
 
 export default {
   components: {
-    PaymentForm,
     SEO,
     ActionModal
   },
