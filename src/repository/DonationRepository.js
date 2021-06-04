@@ -1,9 +1,9 @@
 import db from "~/repository/db/firebaseInit";
-import {  doc, setDoc, updateDoc } from "firebase/firestore";
+import {  doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import axios from "axios";
 
-const prefix = process.env.NODE_ENV === "development" ?
-	'http://localhost:8888' : ""
+const RAZORPAY_CHECKOUT_URI="https://checkout.razorpay.com/v1/checkout.js"
+const FUNCTIONS_MOCKED = false
 
 function all(qSnap) {
 	let docs = []
@@ -14,7 +14,7 @@ function all(qSnap) {
 }
 
 function getRazorpayKey() {
-	if (process.env.NODE_ENV === "development") {
+	if (FUNCTIONS_MOCKED) {
 		return 'rzp_test_od3yQVWQEML7Ta'
 	}
 
@@ -28,26 +28,22 @@ function createCallbackUrl(orderId) {
 }
 
 async function verifyPayment(orderId_orig, response) {
-	const rzpEndpoint = prefix + "/.netlify/functions/verify"
-	console.log(orderId_orig, response)
+	const rzpEndpoint = "/.netlify/functions/verify"
 
 	const verifyPayload = {
 		paymentId : response.razorpay_payment_id,
 		orderId_orig: orderId_orig,
 		orderId_checkout: response.razorpay_order_id,
-		signature : respvalidonse.razorpay_signature
+		signature : response.razorpay_signature
 	}
-	console.log(verifyPayload)
-
 	// Uncomment for actual
 	let valid = false 
 
-	if (process.env.NODE_ENV === "development") {
+	if (FUNCTIONS_MOCKED) {
 		valid = true
 	} else {
 		// Fire serverless function to verify payment signature
 		let response = await axios.post(rzpEndpoint, verifyPayload)
-		response = JSON.parse(response)
 		if (!response?.data) { throw Error("Something went wrong") }
 		valid = response.data.valid
 	}
@@ -59,62 +55,93 @@ async function verifyPayment(orderId_orig, response) {
   			paymentCaptured: true
 		});
 	}
+
+	return valid
 }
 
-async function createOrder() {
-	const rzpEndpoint = prefix + "/.netlify/functions/pay"
-	console.log(rzpEndpoint)
-	if (process.env.NODE_ENV === "development") {
-	 	return { orderId: "order_HIXLJxe1NaO1zx",
+async function createOrder(formData) {
+	const rzpEndpoint = "/.netlify/functions/order"
+	if (FUNCTIONS_MOCKED) {
+	 	return { 
+			orderId: "order_HIJ5xzCQtqR6O3",
 			verifiedAmount: 50000,
 			orderName: "Test Campaign",
 			currency: "INR",
 			details: {
-			name: "Raju Bhai",
-			email: "test@example.com"
+				name: "Raju Bhai",
+				phone: "1234567890",
+				email: "test@example.com"
 			}
 		}
 	}
 	else {
-		let response = await axios.post(rzpEndpoint, formData)
-		response = JSON.parse(response)
-		if (!response?.data?.orderId) { 
+
+		// Production create order from function
+		const order = await axios.post(rzpEndpoint, formData)
+		if (! order?.data?.orderId) { 
 			throw Error("Something went wrong") 
 		}
 		// Data must have: orderId, verifiedAmount, orderName, currency, (donor) details 
-		return response.data
+		return order.data
 	}
 }
 
 export default {
-	async get() {},
-	async create(formData) {
+	async get(orderId) {
+		const docRef = doc(db, "donations", orderId);
+		const docSnap = await getDoc(docRef);
+		if (docSnap.exists()) {
+  			return docSnap.data()
+		} else {
+			return null
+		}
+	},
+	async createOrder(formData) {
 
 		// Create order using serverless function
-		const { orderId, verifiedAmount, orderName, currency, details } = createOrder()
+		const { orderId, verifiedAmount, currency } = await createOrder(formData)
 
 		// Mark payment as false and store data in our database even before payment
 		formData.paymentCaptured = false
-		await setDoc(doc(db, "donations", orderId), formData);
+		formData.amount = verifiedAmount
+		formData.currency = currency
+		formData.date = new Date()
 
+		await setDoc(doc(db, "donations", orderId), formData);
+		return orderId
+	},
+
+	async collectPayment(paymentData, successHandler, failureHandler) {
 		// create handler to verify payment and update paymentStatus in our database
 		const onPaymentSuccess = async (response) => { 
-			await verifyPayment(orderId, response)
+			console.log("Successful payment from razorpay")
+			const verifiedPayment = await verifyPayment(paymentData.orderId, response)
+			if (verifiedPayment) 
+				successHandler()
+			else 
+				failureHandler()
 		}
 
 		const options = {
 			key: getRazorpayKey(), // Enter the Key ID generated from the Dashboard
-			amount: verifiedAmount,
-			currency: currency,
-			name: orderName,
-			order_id: orderId,
+			amount: paymentData.amount,
+			currency: paymentData.currency,
+			name: "14 Trees Foundation",
+			order_id: paymentData.orderId,
 			// callback_url: createCallbackUrl(orderId),
 			handler: onPaymentSuccess,
-			prefill: { name: details.name, email: details.email, contact: details.phone},
+			prefill: { name: paymentData.name, email: paymentData.email_id, contact: paymentData.phone},
 		}
 
 		// Open razorpay global dialog to capture payment
-		new Razorpay(options).open()
+		if (Razorpay)
+			new Razorpay(options).open()
+		else {
+			let razorpayCheckout = document.createElement('script')
+			razorpayCheckout.setAttribute('src', RAZORPAY_CHECKOUT_URI)
+			document.head.appendChild(razorpayCheckout)
+			new Razorpay(options).open()
+		}
 	},
 	async update() {
 

@@ -3,16 +3,16 @@
         <div class="container full-page-generic">
             <h1 class="title-text"> Pledge Now</h1>
             <div class="mx-4 md:pt-16">
- 	<div>
- 		<div class="hidden sm:block" aria-hidden="true">
- 			<div class="py-5">
- 				<div class="border-t border-gray-200" />
- 			</div>
- 		</div>
+ 				<div>
+ 					<div class="hidden sm:block" aria-hidden="true">
+ 						<div class="py-5">
+ 							<div class="border-t border-gray-200" />
+ 						</div>
+ 					</div>
 
  		<ClientOnly>
  			<form action="#" method="POST" id="pledgeForm" @submit="checkAndSubmitForm" class="mt-24 ml-12 mb-32">
- 				<div id="contribution h-full transition-height duration-500 ease-in-out">
+ 				<div id="contribution h-full" class="transition-height duration-500 ease-in-out">
  					<!-- ******************************************************** -->
  					<!-- ****************** Contribution ************************-->
  					<!-- ******************************************************** -->
@@ -33,29 +33,23 @@
  									<div class="px-4 py-5 bg-white dark:bg-dark-grey sm:p-6">
  										<div class="grid grid-cols-4 gap-6">
  											<div class="col-span-4">
- 												<label for="first_name"
- 													class="block text-sm font-medium text-gray-700">Campaign</label>
- 												<select v-model="campaign" required
- 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+ 												<label for="first_name" class="block text-sm font-medium text-gray-700">Campaign</label>
+ 												<select v-model="campaign" required class="input-field">
  													<option v-for="(c,i) in campaigns" :key="i" :value="c">{{c.name}}
  													</option>
  												</select>
 												 <p class="text-gray-600 text-sm font-light p-4" v-if="campaign.description">{{campaign.description}}</p>
  											</div>
 
- 											<div class="col-span-4 xl:col-span-2">
+ 											<div class="col-span-4">
  												<label for="last_name"
- 													class="block text-sm font-medium text-gray-700">Number of
- 													Trees</label>
+ 													class="block text-sm font-medium text-gray-700">Number of Trees</label>
  												<div class="flex flex-row w-full h-11">
- 													<button type="button" @click="trees--" class="flex-none bg-gray-100 text-gray-600 hover:text-gray-700 
-                            hover:bg-gray-400 h-10 w-8 rounded-l cursor-pointer focus:outline-none m-1">
+ 													<button type="button" @click="trees--" class="transition-colors duration-200 ease-in-out mr-1 flex-grow bg-gray-100 text-gray-600  hover:bg-red-400 h-full rounded-l cursor-pointer  focus:outline-none">
  														<span class="m-auto text-2xl font-thin">−</span>
  													</button>
- 													<input type="number" v-model.number="trees" min="1"
- 														class="flex-grow appearance-none dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
- 													<button type="button" @click="trees++" class=" flex-none bg-gray-100 text-gray-600 hover:text-gray-700 
-                            hover:bg-gray-400 h-10 w-8 rounded-r cursor-pointer focus:outline-none m-1">
+ 													<input type="number" v-model.number="trees" min="1" class="w-2/3 flex-grow appearance-none input-field" />
+ 													<button type="button" @click="trees++" class="transition-colors duration-200 ease-in-out  ml-1 flex-grow bg-gray-100 text-gray-600  hover:bg-green-500 h-full rounded-r cursor-pointer focus:outline-none">
  														<span class="m-auto text-2xl font-thin">+</span>
  													</button>
  												</div>
@@ -64,11 +58,10 @@
  											<div v-if="trees > 0" class="col-span-3">
  												<label for="names" class="block text-sm font-medium text-gray-700">
 													 Names on Trees</label>
- 												<div v-for="(n,i) in names" :key="i" class="flex flex-row">
- 													<input type="text" v-model="names[i]" class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 
-                         block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
- 													<button type="button" @click="names.splice(i, 1)" class="block ml-4 w-6 h-6 my-auto transition-colors bg-red-200 rounded-full ring-2
-													  ring-red-200">
+ 												<div v-for="(n,i) in names" :key="i" class="flex flex-row items-center">
+													<span class="px-4 h-full text-sm font-medium text-gray-500 align-center align-text-bottom">{{i + 1}}.</span>
+ 													<input type="text" v-model="names[i]" class="input-field my-1"/>
+ 													<button type="button" @click="names.splice(i, 1)" class="block ml-4 w-5 h-5 hover:bg-red-200 rounded-md">
 						 								<svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-gray-500" viewBox="0 0 20 20">
  															<path fill-rule="evenodd"
  																d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -98,8 +91,7 @@
  											<div class="mt-4 space-y-4">
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
- 														<input id="visit" name="visit" v-model="visit" type="checkbox"
- 															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+ 														<input id="visit" name="visit" v-model="visit" type="checkbox" class="input-checkbox" />
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="visit" class="font-medium text-gray-700">
@@ -110,8 +102,7 @@
  												</div>
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
- 														<input id="csr" name="csr" v-model="csr" type="checkbox"
- 															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+ 														<input id="csr" name="csr" v-model="csr" type="checkbox" class="input-checkbox"/>
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="csr" class="font-medium text-gray-700">CSR
@@ -124,8 +115,7 @@
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
  														<input id="volunteer" name="volunteer" v-model="volunteer"
- 															type="checkbox"
- 															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+ 															type="checkbox" class="input-checkbox"/>
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="candidates"
@@ -185,7 +175,7 @@
  													class="block text-sm font-medium text-gray-700">First name</label>
  												<input type="text" v-model="first_name" name="first_name" required
  													id="first_name" autocomplete="given-name"
- 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+ 													class="input-field" />
  											</div>
 
  											<div class="col-span-6 sm:col-span-3">
@@ -193,7 +183,7 @@
  													class="block text-sm font-medium text-gray-700">Last name</label>
  												<input type="text" v-model="last_name" name="last_name" id="last_name"
  													autocomplete="family-name" required
- 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+ 													class="input-field" />
  											</div>
 
  											<div class="col-span-6 sm:col-span-4">
@@ -202,7 +192,7 @@
  													Address</label>
  												<input type="email" v-model="email_address" name="email_address"
  													id="email_address" autocomplete="email" required
- 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+ 													class="input-field" />
  											</div>
 
  											<div class="col-span-6 sm:col-span-3">
@@ -210,7 +200,7 @@
  													class="block text-sm font-medium text-gray-700">Phone</label>
  												<input type="tel" v-model.number="phone" name="phone_numbet"
  													id="phone_number" autocomplete="tel" required min="999999999" max="9999999999"
- 													class="dark:bg-dark-grey mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+ 													class="input-field" />
  											</div>
 
  											<div class="col-span-6 sm:col-span-3">
@@ -219,7 +209,7 @@
  													Region</label>
  												<select id="country" v-model="location" name="country"
  													autocomplete="country"
- 													class="dark:bg-dark-grey mt-1 block w-full py-2 px-3 border border-gray-300 bg-white dark:bg-dark-grey rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+ 													class="input-field">
  													<option>India</option>
  													<option>United States</option>
  													<option>Other</option>
@@ -227,27 +217,25 @@
  											</div>
 
  											<!-- Street Addreess -->
- 											<div>
- 												<!-- <div class="col-span-6">
-                  <label for="street_address" class="block text-sm font-medium text-gray-700">Street address</label>
-                  <input type="text" name="street_address" id="street_address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                </div>
+											<!-- <div class="col-span-6">
+												<label for="street_address" class="block text-sm font-medium text-gray-700">Street address</label>
+												<input type="text" name="street_address" id="street_address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+												</div>
 
-                <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                  <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                  <input type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                </div>
+												<div class="col-span-6 sm:col-span-6 lg:col-span-2">
+												<label for="city" class="block text-sm font-medium text-gray-700">City</label>
+												<input type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+												</div>
 
-                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                  <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
-                  <input type="text" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                </div>
+												<div class="col-span-6 sm:col-span-3 lg:col-span-2">
+												<label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+												<input type="text" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+												</div>
 
-                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                  <label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
-                  <input type="text" name="postal_code" id="postal_code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-                </div> -->
- 											</div>
+												<div class="col-span-6 sm:col-span-3 lg:col-span-2">
+												<label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
+												<input type="text" name="postal_code" id="postal_code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+											</div> -->
  										</div>
  									</div>
  								</div>
@@ -297,8 +285,7 @@
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
  														<input id="updates" name="updates" v-model="updates"
- 															type="checkbox"
- 															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+ 															type="checkbox" class="input-checkbox" />
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="comments" class="font-medium text-gray-700">14
@@ -311,8 +298,7 @@
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
  														<input id="newsletter" name="newsletter" v-model="newsletter"
- 															type="checkbox"
- 															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+ 															type="checkbox" class="input-checkbox" />
  													</div>
  													<div class="ml-3 text-sm">
  														<label for="candidates"
@@ -341,9 +327,14 @@
  				</div>
 
  				<!-- Contribute Button -->
- 				<button type="submit" class="btn-action block mx-auto text-white bg-green-500 dark:bg-green-600
-          hover:bg-green-600 duration-500">
- 					Contribute
+ 				<button type="submit" class="block flex flex-row btn-action mx-auto text-white
+				 		bg-green-500 dark:bg-green-600 hover:bg-green-600 duration-500" :class="{'bg-green-700': processing}">
+						<svg v-if="processing" class="h-6 w-8 mr-2 animate animate-spin" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="50" cy="50" r="45" fill="transparent"
+								stroke="currentColor" stroke-width="10px" stroke-linecap='round'
+  								stroke-dasharray='170' stroke-dashoffset='120'/>
+						</svg>
+ 						<span class="text-xl">Contribute</span>
  				</button>
 
  			</form>
@@ -360,8 +351,6 @@
 
  <script>
 import Repository from "@/repository/RepositoryFactory";
-
-const RAZORPAY_CHECKOUT_URI="https://checkout.razorpay.com/v1/checkout.js"
 
 export default {
 	metaInfo() {
@@ -390,7 +379,8 @@ export default {
 			volunteer: false,
 			updates: false,
 			newsletter: false,
-			campaigns: null
+			campaigns: null,
+			processing: false
 		}
 	},
 	mounted() {
@@ -405,10 +395,6 @@ export default {
 		} else {
 			this.campaign = this.campaigns[0]
 		}
-		let razorpayCheckout = document.createElement('script')
-      	razorpayCheckout.setAttribute('src', RAZORPAY_CHECKOUT_URI)
-		razorpayCheckout.async = true
-      	document.head.appendChild(razorpayCheckout)
 	},
 	watch: {
 		trees: function(newVal, oldVal) {
@@ -439,8 +425,6 @@ export default {
 		checkAndSubmitForm: async function (e) {
 			e.preventDefault()
 
-			console.log( this.personalInfoFilled , this.contributionFilled) 
-
 			if (! this.personalInfoFilled || ! this.contributionFilled) {
 				this.contributionExpand = true
 				this.communicationExpand = true
@@ -448,6 +432,7 @@ export default {
 				return
 			}
 
+			this.processing = true
 			const formData = {
 				first_name: this.first_name,
 				last_name: this.last_name,
@@ -457,15 +442,22 @@ export default {
 				campaign: this.campaign.name,
 				trees: this.trees,
 				names: this.names,
-				csr: this.csr,
-				visit: this.visit,
-				volunteer: this.volunteer,
-				updates: this.updates,
-				newsletter: this.newsletter
+				interest: {
+					csr: this.csr,
+					visit: this.visit,
+					volunteer: this.volunteer,
+				},
+				notifications: {
+					updates: this.updates,
+					newsletter: this.newsletter
+				}
 			}
-			console.log(formData)
 			try {
-				Repository.donation.create(formData)
+				const orderId = await Repository.donation.createOrder(formData)
+				this.processing = false 
+				if (orderId !== null) {
+					this.$router.push('/checkout/' + orderId)
+				}
 			} catch (err) {
 				console.error(err)
 			}

@@ -8,8 +8,7 @@ type ResponseBody = {
     orderId: string,
     verifiedAmount: number
     currency: string,
-    orderName: string,
-    details: {
+    details?: {
         name: string,
         email: string,
         contact: string
@@ -60,13 +59,7 @@ const handler: Handler = async (event, context) => {
             responseBody = { 
                 orderId: order.id, 
                 verifiedAmount: amount, 
-                orderName: "14 Trees Foundation", 
                 currency: options.currency, 
-                details: {
-                    name: formData.first_name + " " +  formData.last_name,
-                    email: formData.email_id,
-                    contact: formData.phone
-                }
             }
         }
     });

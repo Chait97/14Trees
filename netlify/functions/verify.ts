@@ -9,21 +9,28 @@ type PaymentBody = {
     signature: string
 }
 
-const getRZPInstance = () => { 
-    return new Razorpay({
-        key_id: 'rzp_test_od3yQVWQEML7Ta',
-        key_secret: 'qUAtQnTyukmFQY6fuB1dh5iV'
-    })
+function checkValidity(payment: PaymentBody) {
+    // Only for initial testing
+    // Verify signature using sha256 hash
+    // More info here: https://razorpay.com/docs/payment-gateway/web-integration/custom/#step-5-verify-the-signature
+
+    return payment.orderId_orig === payment.orderId_checkout
 }
+
+// const getRZPInstance = () => { 
+//     return new Razorpay({
+//         key_id: 'rzp_test_od3yQVWQEML7Ta',
+//         key_secret: 'qUAtQnTyukmFQY6fuB1dh5iV'
+//     })
+// }
 
 const handler: Handler = async (event, context) => {
     const paymentResponse: PaymentBody = JSON.parse(event.body)
-
-    console.log(paymentResponse)
+    console.log("Verifyng payment for ", paymentResponse.paymentId, paymentResponse.orderId_orig)
 
     return {
         statusCode: 200,
-        body: JSON.stringify({valid: true}),
+        body: JSON.stringify({ valid: checkValidity(paymentResponse)}),
     };
 };
 
