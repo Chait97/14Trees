@@ -7,7 +7,7 @@
  		</div>
 
  		<ClientOnly>
- 			<form action="#" method="POST" id="pledgeForm" @submit="checkAndSubmitForm" class="mt-24 ml-12 mb-32">
+ 			<form id="pledgeForm"  @submit.prevent="checkAndSubmitForm" class="mt-24 ml-12 mb-32">
  				<div id="contribution h-full transition-height duration-500 ease-in-out">
  					<!-- ******************************************************** -->
  					<!-- ****************** Contribution ************************-->
@@ -204,7 +204,7 @@
  													Region</label>
  												<select id="country" v-model="location" name="country"
  													autocomplete="country"
- 													class="dark:bg-dark-grey mt-1 block w-full py-2 px-3 border border-gray-300 bg-white dark:bg-dark-grey rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+ 													class="dark:bg-dark-grey mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
  													<option>India</option>
  													<option>United States</option>
  													<option>Other</option>
@@ -281,8 +281,7 @@
  											<div class="mt-4 space-y-4">
  												<div class="flex items-start">
  													<div class="flex items-center h-5">
- 														<input id="updates" name="updates" v-model="updates"
- 															type="checkbox"
+ 														<input id="updates" name="updates" v-model="updates" type="checkbox"
  															class="dark:bg-dark-grey focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
  													</div>
  													<div class="ml-3 text-sm">
@@ -337,12 +336,11 @@
 
  		<form ref="payButton"> </form>
  	</div>
- </template>
+</template>
 
- <script>
+<script>
+import axios from 'axios'
 
-const PAYMENT_BUTTON_URL="https://checkout.razorpay.com/v1/payment-button.js"
-const PAYMENT_BUTTON_ID="pl_H7wNSNqT8XnEpN"
 export default {
     data: function() {
       return {
@@ -364,13 +362,6 @@ export default {
         campaignList: ['test campaign 1', 'test campaign 2']
       }
     },
-    mounted() {
-      let paymentScript = document.createElement('script')
-      paymentScript.async = true
-      paymentScript.src = PAYMENT_BUTTON_URL
-      paymentScript.setAttribute("data-payment_button_id", PAYMENT_BUTTON_ID)
-      // this.$refs['payButton'].appendChild(paymentScript)
-    },
     methods: {
       removeTree: function() {
         if(this.trees > 1) {
@@ -384,7 +375,7 @@ export default {
         this.trees++
         this.names.push('')
       },
-      checkAndSubmitForm: function(e) {
+      checkAndSubmitForm: async function(e) {
         const formData = {
           first_name: this.first_name,
           last_name: this.last_name,
@@ -399,7 +390,13 @@ export default {
           updates: this.updates,
           newsletter: this.newsletter
         }
-        console.log(formData)
+		try {
+			let rzpEndpoint = window.location.origin + "/.netlify/functions/razorpay_test"
+			let response = await axios.post(rzpEndpoint, formData)
+			console.log(response.data, response.status)
+		} catch(err) {
+			console.error(err)
+		}
         e.preventDefault()
       },
       checkSection: function(e) {
