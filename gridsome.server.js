@@ -20,4 +20,12 @@ module.exports = function (api) {
       options.videoUrl = options.videoUrl|| '';
     }
   })
+
+  api.afterBuild (({ redirects }) => {
+    for (const rule of redirects) {
+      rule.from = '/checkout/:orderId'
+      rule.to = '/checkout/_order_id.html'
+      rule.status = 200
+    }
+  })
 }

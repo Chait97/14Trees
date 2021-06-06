@@ -59,7 +59,7 @@ async function verifyPayment(orderId_orig, response) {
 	return valid
 }
 
-async function createOrder(formData) {
+async function createRazorpayOrder(formData) {
 	const rzpEndpoint = "/.netlify/functions/order"
 	if (FUNCTIONS_MOCKED) {
 	 	return { 
@@ -90,6 +90,7 @@ export default {
 	async get(orderId) {
 		const docRef = doc(db, "donations", orderId);
 		const docSnap = await getDoc(docRef);
+		console.log("Firebase returned, ", docSnap)
 		if (docSnap.exists()) {
   			return docSnap.data()
 		} else {
@@ -99,7 +100,7 @@ export default {
 	async createOrder(formData) {
 
 		// Create order using serverless function
-		const { orderId, verifiedAmount, currency } = await createOrder(formData)
+		const { orderId, verifiedAmount, currency } = await createRazorpayOrder(formData)
 
 		// Mark payment as false and store data in our database even before payment
 		formData.paymentCaptured = false

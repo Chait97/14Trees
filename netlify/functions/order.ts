@@ -46,7 +46,6 @@ const handler: Handler = async (event, context) => {
     let options = {
         amount: amount,  // amount in the smallest currency unit
         currency: "INR",
-        receipt: "order_rcptid_11",
         notes: orderNotes
     };
     const instance = getRZPInstance()

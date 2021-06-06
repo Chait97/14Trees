@@ -80,25 +80,7 @@ export default {
 	},
 	async mounted() {
 		this.orderId = this.$route.params.orderId
-		let orderDetails = await Repository.donation.get(this.orderId)
-
-		const {
-			first_name, last_name, phone, email_id,
-			campaign, trees, names, interest,
-			paymentCaptured, amount, location, currency
-		} = orderDetails
-
-		this.trees = trees
-		this.paymentCaptured = paymentCaptured
-		this.amount = amount
-		this.currency = currency
-
-		const name = first_name + " " + last_name
-		this.details = {
-			name, phone, email_id, campaign,
-			names, ...interest, location
-		}
-		this.loaded = true
+		await this.loadOrder()
 
 		let razorpayCheckout = document.createElement('script')
 		razorpayCheckout.setAttribute('src', RAZORPAY_CHECKOUT_URI)
@@ -106,6 +88,28 @@ export default {
 		document.head.appendChild(razorpayCheckout)
 	},
 	methods: {
+		async loadOrder() {
+			this.loaded = false
+			let orderDetails = await Repository.donation.get(this.orderId)
+
+			const {
+				first_name, last_name, phone, email_id,
+				campaign, trees, names, interest,
+				paymentCaptured, amount, location, currency
+			} = orderDetails
+
+			this.trees = trees
+			this.paymentCaptured = paymentCaptured
+			this.amount = amount
+			this.currency = currency
+
+			const name = first_name + " " + last_name
+			this.details = {
+				name, phone, email_id, campaign,
+				names, ...interest, location
+			}
+			this.loaded = true
+		},
 		sanitize: function (data) {
 			if (data instanceof Array) {
 				return data.reduce((res, cur) => res + ", " + this.sanitize(cur))
@@ -131,7 +135,7 @@ export default {
 					() => { 
 						// On Success
 						console.log("Payment Successful")
-						this.$router.go()
+						this.loadOrder()
 						this.processing = false
 					},
 					() => { 
