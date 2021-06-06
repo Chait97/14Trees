@@ -40,7 +40,7 @@ const getRZPInstance = () => {
 
 const handler: Handler = async (event, context) => {
     const formData:FormData = JSON.parse(event.body)
-    const orderNotes = {email: formData.email_id, trees: formData.trees }
+    const orderNotes = { trees: formData.trees }
 
     let amount = formData.trees * 350000
     let options = {

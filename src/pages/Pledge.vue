@@ -198,7 +198,7 @@
  											<div class="col-span-6 sm:col-span-3">
  												<label for="phone_number"
  													class="block text-sm font-medium text-gray-700">Phone</label>
- 												<input type="tel" v-model.number="phone" name="phone_numbet"
+ 												<input type="tel" v-model.number="phone" name="phone_number"
  													id="phone_number" autocomplete="tel" required min="999999999" max="9999999999"
  													class="input-field" />
  											</div>
